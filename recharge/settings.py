@@ -38,6 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+
+    # 3rd party
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.twitter',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
+
 
     # local apps
     'accounts.apps.AccountsConfig',
@@ -130,6 +140,14 @@ STATIC_URL = '/static/'
 # Custom User Model
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+SITE_ID = 1
+
+# allauth customization
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
 
 #Heroku
 django_heroku.settings(locals())
