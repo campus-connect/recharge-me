@@ -1,1 +1,1 @@
-web: gunicorn me2u.wsgi --log-file -
+web: gunicorn recharge.wsgi --log-file -
