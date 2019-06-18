@@ -5,10 +5,12 @@ dj-database-url==0.5.0
 Django==2.2.2
 django-allauth==0.39.1
 django-heroku==0.3.1
+gunicorn==19.9.0
 idna==2.8
 oauthlib==3.0.1
 Pillow==6.0.0
 psycopg2==2.8.3
+psycopg2-binary==2.8.3
 python3-openid==3.1.0
 pytz==2019.1
 requests==2.22.0
