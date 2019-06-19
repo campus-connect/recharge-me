@@ -6,7 +6,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser
+from .models import CustomUser, Peer
 
 
 @admin.register(CustomUser)
@@ -20,3 +20,14 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ['username', 'email', 'phone_number']
     
     model = CustomUser
+
+
+@admin.register(Peer)
+class PeerAdmin(admin.ModelAdmin):
+
+    list_display = ['user_from', 'user_to', 'created_at', 'expires_at']
+    list_filter = ['created_at', 'expires_at']
+    search_fields = [
+        'user_from__username', 'user_from__firstname', 'user_from__lastname',
+        'user_to__username', 'user_to__firstname', 'user_to__lastname'
+    ]
