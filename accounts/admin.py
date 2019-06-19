@@ -18,6 +18,12 @@ class CustomUserAdmin(UserAdmin):
     # list_editable = ['phone_number']
     list_filter = ['date_joined', 'last_login', 'is_active', 'is_staff']
     search_fields = ['username', 'email', 'phone_number']
+    fieldsets = UserAdmin.fieldsets + (
+        ('KYC', {'fields': ('phone_number', 'gender', 'date_of_birth')}),
+    )
+    add_fieldsets = UserAdmin.fieldsets + (
+        ('KYC', {'fields': ('phone_number', 'gender', 'date_of_birth')}),
+    )
     
     model = CustomUser
 
