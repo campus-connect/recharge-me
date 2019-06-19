@@ -6,7 +6,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser, Peer
+from .models import CustomUser, Peer, Level
 
 
 @admin.register(CustomUser)
@@ -31,3 +31,8 @@ class PeerAdmin(admin.ModelAdmin):
         'user_from__username', 'user_from__firstname', 'user_from__lastname',
         'user_to__username', 'user_to__firstname', 'user_to__lastname'
     ]
+
+@admin.register(Level)
+class LevelAdmin(admin.ModelAdmin):
+    
+    list_display = ['name', 'entry_fee', 'level_reward'] 
