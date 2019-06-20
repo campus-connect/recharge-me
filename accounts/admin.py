@@ -37,6 +37,7 @@ class PeerAdmin(admin.ModelAdmin):
         'user_from__username', 'user_from__firstname', 'user_from__lastname',
         'user_to__username', 'user_to__firstname', 'user_to__lastname'
     ]
+    raw_id_fields = ['user_from', 'user_to']
 
 @admin.register(Level)
 class LevelAdmin(admin.ModelAdmin):
