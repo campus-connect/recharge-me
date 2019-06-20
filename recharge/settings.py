@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.twitter',
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
+    'phonenumber_field',
 
 
     # local apps
@@ -149,6 +150,12 @@ ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
 
+ACCOUNT_FORMS = {
+'signup': 'accounts.forms.CustomSignupForm',
+}
+
+PHONENUMBER_DEFAULT_REGION = 'NG'
+PHONENUMBER_DB_FORMAT = 'E164'
 #Heroku
 django_heroku.settings(locals())
 #Heroku

@@ -7,6 +7,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
+from phonenumber_field.modelfields import PhoneNumberField
 
 class CustomUser(AbstractUser):
     
@@ -26,7 +27,7 @@ class CustomUser(AbstractUser):
     avatar = models.ImageField(upload_to='avatars/%Y/%m/%d/', blank=True)
     gender = models.CharField(max_length=2, choices=GENDERCHOICES)
     date_of_birth = models.DateField("date of birth", blank=True, null=True)
-    phone_number = models.CharField("phone number", max_length=20, null=True, blank=True)
+    phone_number = PhoneNumberField(verbose_name = "phone number", null=True, blank=True)
     following = models.ManyToManyField("self", through='Peer', symmetrical=False, related_name='followers')
     level = models.ForeignKey("Level", on_delete=models.SET_NULL, null=True)
     task = models.CharField(max_length=2, choices=USER_TASK_CHOICES, default=USER_TASK_DEFAULT)
