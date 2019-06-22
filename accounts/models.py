@@ -4,6 +4,7 @@
 #  * file that was distributed with this source code.
 
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
@@ -35,6 +36,32 @@ class CustomUser(AbstractUser):
     amount_received = models.DecimalField("Amount received", max_digits=8, decimal_places=2, default=0)
     karma = models.FloatField(default=10)
 
+    def update_level(self, level=None):
+
+        try:
+            level_obj = Level.objects.get(order=level)
+            self.level = level_obj.id
+            self.save()
+            return True
+
+        except ObjectDoesNotExist:
+            
+            return False
+
+    def up_lines(self):
+        """
+        Returns a list of query set containing user(s) to receive entry
+        fee
+        """
+        return self.following.all()
+    
+    def down_lines(self):
+        """
+        Returns a list of query set containing user(s) to pay entry
+        fee
+        """
+        return self.followers.all()
+
     def get_absolute_url(self):
         return reverse("user_account")
 
@@ -56,6 +83,7 @@ class Level(models.Model):
 
     name = models.CharField(max_length=50)
     description = models.TextField()
+    order = models.PositiveSmallIntegerField()
     entry_fee = models.DecimalField("Entry fee", max_digits=8, decimal_places=2, help_text="Amount user must send to eligible user")
     level_reward = models.DecimalField("Level reward", max_digits=8, decimal_places=2, help_text="Amount users will receive")
 
