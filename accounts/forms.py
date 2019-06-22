@@ -7,6 +7,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from allauth.account.forms import SignupForm, LoginForm, ResetPasswordForm, AddEmailForm
 from phonenumber_field.formfields import PhoneNumberField
+from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 from .models import CustomUser
 
 
@@ -35,6 +36,38 @@ class CustomSignupForm(SignupForm):
 
     phone_number = PhoneNumberField()
 
+    def __init__(self, *args, **kwargs):
+        super(CustomSignupForm, self).__init__(*args, **kwargs)
+        self.fields['email'].widget = forms.EmailInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'E-mail address',
+                'autofocus': 'autofocus'
+            }
+        )
+
+        self.fields['phone_number'].widget = PhoneNumberInternationalFallbackWidget(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '080xxxxxxxx'
+            }
+        )
+
+        self.fields['password1'].widget = forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Password'
+            }
+        )
+
+        self.fields['password2'].widget = forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Password (again)'
+            }
+        )
+
+
     def save(self, request):
         """
         Adds extra field data to the user instance
@@ -45,3 +78,40 @@ class CustomSignupForm(SignupForm):
         user.save()
         return user
 
+
+class CustomLoginForm(LoginForm):
+
+    def __init__(self, *args, **kwargs):
+        super(CustomLoginForm, self).__init__(*args, **kwargs)
+        self.fields['login'].widget = forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Username or e-mail',
+                'autofocus': 'autofocus'
+            }
+        )
+
+        self.fields['password'].widget = forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Password',
+            }
+        )
+
+        self.fields['remember'].widget = forms.CheckboxInput(
+            attrs={
+                'class': 'chk-remember'
+            }
+        )
+
+
+class CustomResetPasswordForm(ResetPasswordForm):
+
+    def __init__(self, *args, **kwargs):
+        super(CustomResetPasswordForm, self).__init__(*args, **kwargs)
+        self.fields['email'].widget = forms.EmailInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'E-mail address'
+            }
+        )

@@ -137,6 +137,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # Custom User Model
 
@@ -152,6 +156,8 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 7
 
 ACCOUNT_FORMS = {
 'signup': 'accounts.forms.CustomSignupForm',
+'login': 'accounts.forms.CustomLoginForm',
+'reset_password': 'accounts.forms.CustomResetPasswordForm',
 }
 
 PHONENUMBER_DEFAULT_REGION = 'NG'
