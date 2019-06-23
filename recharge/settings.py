@@ -160,6 +160,8 @@ ACCOUNT_FORMS = {
 'reset_password': 'accounts.forms.CustomResetPasswordForm',
 }
 
+ACCOUNT_ADAPTER = 'accounts.adapter.AccountAdapter'
+
 PHONENUMBER_DEFAULT_REGION = 'NG'
 PHONENUMBER_DB_FORMAT = 'E164'
 #Heroku
