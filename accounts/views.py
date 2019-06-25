@@ -5,7 +5,11 @@
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import UpdateView
+from django.http import Http404
 from allauth.account.models import EmailAddress
+from .models import CustomUser
+from .forms import EditProfileForm
 
 class Dashboard(LoginRequiredMixin, TemplateView):
     
@@ -20,3 +24,27 @@ class Dashboard(LoginRequiredMixin, TemplateView):
             context['verified_email'] = True
                 
         return context
+
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+
+    model = CustomUser
+    template_name = "dashboard/profile.html"
+    form_class = EditProfileForm
+    model = CustomUser
+
+    def get_object(self, queryset=None):
+        """
+        Returns a single user instance
+        """
+        if queryset is None:
+            queryset = self.get_queryset()
+
+        queryset = queryset.filter(username=self.kwargs['username'])
+        
+        try:
+            # Get the single item from the filtered queryset
+            obj = queryset.get()
+        except queryset.model.DoesNotExist:
+            raise Http404("No %(verbose_name)s found matching the query" %
+                        {'verbose_name': queryset.model._meta.verbose_name})
+        return obj

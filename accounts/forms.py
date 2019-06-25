@@ -115,3 +115,32 @@ class CustomResetPasswordForm(ResetPasswordForm):
                 'placeholder': 'E-mail address'
             }
         )
+
+class EditProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = CustomUser
+        fields = ('first_name', 'last_name', 'phone_number',
+                    'date_of_birth', )
+        widgets = {
+            'first_name': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'last_name': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+            'phone_number': forms.TextInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            ),
+            'date_of_birth': forms.DateInput(
+                attrs={
+                    'class': 'form-control'
+                }
+            )
+        }
