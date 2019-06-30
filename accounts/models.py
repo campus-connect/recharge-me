@@ -63,7 +63,7 @@ class CustomUser(AbstractUser):
         return self.followers.all()
 
     def get_absolute_url(self):
-        return reverse("user_account")
+        return reverse("user_profile", args=[self.username])
 
     
 class Peer(models.Model):

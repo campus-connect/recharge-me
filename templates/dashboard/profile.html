@@ -1,4 +1,4 @@
-{% extends 'base/dashboard_base.html' %}
+{% extends 'base/dashboard_base.html' %}{% load referral_link static %}
 {% block breadcrome %}
 <div class="content-header row">
     <div class="content-header-left col-md-8 col-12 mb-2 breadcrumb-new">
@@ -32,7 +32,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-md-2 col-12">
-                                <img src="../../../app-assets/images/portrait/medium/avatar-m-1.png" class="rounded-circle height-100" alt="Card image" />
+                                <img src="{{user.avatar}}" class="rounded-circle height-100" alt="Card image" />
                             </div>
                             <div class="col-md-10 col-12">
                                 <div class="row">
@@ -42,15 +42,15 @@
                                     </div>
                                     <div class="col-12 col-md-4">
                                         <p class="text-bold-700 text-uppercase mb-0">Last login</p>
-                                        <p class="mb-0">2018-04-30 16:44:04</p>
+                                        <p class="mb-0">{{user.last_login}}</p>
                                     </div>
                                     <div class="col-12 col-md-4">
                                         <p class="text-bold-700 text-uppercase mb-0">IP</p>
-                                        <p class="mb-0">43.228.229.172</p>
+                                        <p class="mb-0">{{user.ip}}</p>
                                     </div>
                                 </div>
                                 <hr/>
-                                <form class="form-horizontal form-user-profile row mt-2" action="">
+                                <form class="form-horizontal form-user-profile row mt-2" method="POST" action="{% url 'user_profile' user.username %}">
                                     <div class="col-6">
                                         <fieldset class="form-label-group">
                                             {{form.first_name}}
@@ -66,7 +66,7 @@
                                     <div class="col-6">
                                         <fieldset class="form-label-group">
                                             {{form.phone_number}}
-                                            <label for="id_user_name">User name</label>
+                                            <label for="id_user_name">Phone Number</label>
                                         </fieldset>
                                     </div>
                                     <div class="col-6">
@@ -77,16 +77,17 @@
                                     </div>
                                     <div class="col-6">
                                         <fieldset class="form-label-group">
-                                            <input type="password" class="form-control" id="old-password" placeholder="Enter Password" required="" autofocus="">
-                                            <label for="old-password">Old password</label>
+                                            <input type="text" class="form-control" value={{user.task}}  disabled autofocus="">
+                                            <label for="old-password">Task</label>
                                         </fieldset>
                                     </div>
                                     <div class="col-6">
                                         <fieldset class="form-label-group">
-                                            <input type="password" class="form-control" id="new-password" placeholder="Enter Password" required="" autofocus="">
-                                            <label for="new-password">New password</label>
+                                            <input type="text" class="form-control" value={{user.level}} disabled autofocus="">
+                                            <label for="new-password">Level</label>
                                         </fieldset>
                                     </div>
+                                    {% csrf_token %}
                                     <div class="col-12 text-right">
                                         <button type="submit" class="btn-gradient-primary my-1">Save</button>
                                     </div>
@@ -96,7 +97,7 @@
                                 <form class="form-horizontal form-referral-link row mt-2" action="">
                                     <div class="col-12">
                                         <fieldset class="form-label-group">
-                                            <input type="text" class="form-control" id="referral-link" value="https://themeforest.net/user/pixinvent/portfolio?ref=PIXINVENT" required="" autofocus="">
+                                            <input type="text" class="form-control" id="referral-link" value="{% referral_link %}" required="" autofocus="">
                                             <label for="first-name">Referral link</label>
                                         </fieldset>
                                     </div>

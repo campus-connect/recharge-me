@@ -129,21 +129,25 @@ class EditProfileForm(forms.ModelForm):
             'first_name': forms.TextInput(
                 attrs={
                     'class': 'form-control',
+                    'autofill': False
                 }
             ),
             'last_name': forms.TextInput(
                 attrs={
                     'class': 'form-control',
+                    'autofill': False
                 }
             ),
             'phone_number': forms.TextInput(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autofill': False
                 }
             ),
             'date_of_birth': forms.DateInput(
                 attrs={
-                    'class': 'form-control'
+                    'class': 'form-control',
+                    'autofill': False
                 }
             )
         }
