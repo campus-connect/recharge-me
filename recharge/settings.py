@@ -169,6 +169,11 @@ DJANGO_REFERRALS_DEFAULT_URL = 'http://localhost:8000/'                       # 
 DJANGO_REFERRALS_PREFIX = ''  
 PHONENUMBER_DEFAULT_REGION = 'NG'
 PHONENUMBER_DB_FORMAT = 'E164'
+
+# Email configurations
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
+
 #Heroku
 django_heroku.settings(locals())
 #Heroku
