@@ -3,7 +3,8 @@
 #  * For the full copyright and license information, please view the "LICENSE.md"
 #  * file that was distributed with this source code.
 
-from django.urls import path
+from django.urls import path, include
+from referrals import urls as referrals_urls
 from .views import (
     Dashboard,
     ProfileUpdateView
@@ -11,5 +12,6 @@ from .views import (
 
 urlpatterns = [
     path("", Dashboard.as_view(), name="dashboard"),
-    path("@<username>", ProfileUpdateView.as_view(), name="user_profile")
+    path("@<username>", ProfileUpdateView.as_view(), name="user_profile"),
+    path("", include(referrals_urls)),
 ]

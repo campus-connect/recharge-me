@@ -27,7 +27,7 @@
                     <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                     {% endif %}
                     {% csrf_token %}
-                    
+                    {{form.referral}}
                     <button type="submit" class="btn-gradient-primary btn-block my-1">Register</button>
                     <p class="text-center"><a href="{{ login_url }}" class="card-link">Log In</a></p>
                 </form>

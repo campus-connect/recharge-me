@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.google',
     'phonenumber_field',
+    'referrals.apps.ReferralsConfig',
 
 
     # local apps
@@ -161,7 +162,11 @@ ACCOUNT_FORMS = {
 }
 
 ACCOUNT_ADAPTER = 'accounts.adapter.AccountAdapter'
+DJANGO_REFERRALS_DEFAULT_INPUT_VALUE = '40ed41dc-d291-4358-ae4e-d3c07c2d67dc' # The token to be used by
+                                                                              # default. WARNING: Must be uuid4
 
+DJANGO_REFERRALS_DEFAULT_URL = 'http://localhost:8000/'                       # Address for referral link
+DJANGO_REFERRALS_PREFIX = ''  
 PHONENUMBER_DEFAULT_REGION = 'NG'
 PHONENUMBER_DB_FORMAT = 'E164'
 #Heroku

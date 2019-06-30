@@ -8,6 +8,8 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from allauth.account.forms import SignupForm, LoginForm, ResetPasswordForm, AddEmailForm
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
+from referrals.widgets import ReferralWidget
+from referrals.fields import ReferralField
 from .models import CustomUser
 
 
@@ -35,6 +37,7 @@ class CustomUserChangeForm(UserChangeForm):
 class CustomSignupForm(SignupForm):
 
     phone_number = PhoneNumberField()
+    referral = ReferralField(widget=ReferralWidget())
 
     def __init__(self, *args, **kwargs):
         super(CustomSignupForm, self).__init__(*args, **kwargs)
