@@ -172,7 +172,8 @@ PHONENUMBER_DB_FORMAT = 'E164'
 
 # Email configurations
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
+SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
+SENDGRID_SANDBOX_MODE_IN_DEBUG = os.environ.get("SENDGRID_SANDBOX_MODE_IN_DEBUG")
 
 #Heroku
 django_heroku.settings(locals())
