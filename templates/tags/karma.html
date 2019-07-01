@@ -1,0 +1,19 @@
+   <div class="card">
+        <div class="card-header">
+            <h6 class="card-title text-center">Karma Strength</h6>
+        </div>
+        <div class="card-content collapse show">
+            <div class="card-body">
+                <div class="font-small-3 clearfix">
+                    <span class="float-left">0KM</span>
+                    <span class="float-right">10KM</span>
+                </div>
+                <div class="progress progress-sm my-1 box-shadow-2">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: {{karma}}%" aria-valuenow="{{karma}}" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="font-small-3 clearfix">
+                    <span class="float-left">Karma <br> <strong>{{point}} KM Point{{point | pluralize}}</strong></span>
+                </div>
+            </div>
+        </div>
+    </div>
