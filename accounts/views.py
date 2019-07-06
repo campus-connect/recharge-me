@@ -19,6 +19,7 @@ class Dashboard(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["page"] = 'dashboard'
         #check user email status
         if not EmailAddress.objects.filter(user=self.request.user, verified=True).exists():
             context['verified_email'] = False
@@ -32,6 +33,11 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "dashboard/profile.html"
     form_class = EditProfileForm
     model = CustomUser
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page"] = 'profile'
+        return context
 
     def get_object(self, queryset=None):
         """
@@ -58,6 +64,7 @@ class LevelListView(LoginRequiredMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["level_list"] = Level.objects.all()
+        context["page"] = 'level'
         return context
     
 
