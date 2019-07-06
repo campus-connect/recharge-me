@@ -5,6 +5,6 @@
   -o-transform: translateY(-4px) scale(1.02);
   transform: translateY(-4px) scale(1.02);
   -webkit-box-shadow: 0 14px 24px rgba(62, 57, 107, 0.2);
-  box-shadow: 0 14px 24px rgba(62, 57, 107, 0.2);
+  box-shadow: 0 14px 24px rgba(62, 57, 107, 0.664);
   z-index: 999;
 }

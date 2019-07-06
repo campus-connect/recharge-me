@@ -1,4 +1,7 @@
 {% extends 'base/dashboard_base.html' %}{% load static karma %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+{% endblock css %}
 {% block breadcrumb %}
 {% include 'partials/breadcrumb.html' with current_page_name="Level" %}
 {% endblock breadcrumb %}
@@ -17,7 +20,7 @@
                   </div>
                 </div>
                 <div class="col-md-5 col-xl-6 col-12">
-                  <p><strong>Your Earnings:</strong></p>
+                  <p><strong>Earnings:</strong></p>
                   <h1>N{{user.amount_received}}</h1>
                   <p class="mb-0">Welcome bonus <strong>+30%</strong> expires in 21 days.</p>
                 </div>
@@ -37,7 +40,7 @@
     <p>To buy tokens, transfer ETH or BTC to your personal deposit address:</p>
     {% for level in level_list %}
     <!-- Level -->
-    <section class="card pull-up">
+    <section class="card {% if level.id == user.level.id %}level-active{% endif %}">
       <div class="card-content">
         <div class="card-body">
           <div class="col-12">
