@@ -5,12 +5,13 @@
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.core.exceptions import ObjectDoesNotExist
 from allauth.account.forms import SignupForm, LoginForm, ResetPasswordForm, AddEmailForm
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 from referrals.widgets import ReferralWidget
 from referrals.fields import ReferralField
-from .models import CustomUser
+from .models import CustomUser, Level
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -151,3 +152,60 @@ class EditProfileForm(forms.ModelForm):
                 }
             )
         }
+
+class LevelEnrollmentForm(forms.Form):
+    
+    action = forms.CharField() 
+
+    def __init__(self, *args, **kwargs):
+        # important to "pop" added kwarg before call to parent's constructor
+        self.request = kwargs.pop('request', None)
+
+        super(LevelEnrollmentForm, self).__init__(*args, **kwargs)
+        self.fields['action'].widget = forms.HiddenInput(
+            attrs={
+                'value': self.get_action()
+            }
+        )
+    def get_action(self):
+        if self.request.user.level is not None:
+            return 'un_enroll'
+        else:
+            return 'enroll'
+
+    def get_entry_level(self):
+        """
+        Entry Level should have an order of 1
+        """
+        try:
+            entry_level = Level.objects.get(order=1)
+            return entry_level
+        except Level.DoesNotExist:
+            return None
+
+    def get_next_level(self):
+        user_current_level = self.request.user.level
+        if user_current_level:
+            try:
+                next_level = Level.objects.get(order=user_current_level.order+1)
+                return next_level
+            except Level.DoesNotExist:
+                return self.get_entry_level()
+        else:
+            return self.get_entry_level()
+
+    def enroll(self):
+        try:
+            user = CustomUser.objects.get(pk=self.request.user.id)
+            user.level = self.get_entry_level()
+            user.save()
+        except CustomUser.DoesNotExist:
+            pass
+
+    def un_enroll(self):
+        try:
+            user = CustomUser.objects.get(pk=self.request.user.id)
+            user.level = None
+            user.save()
+        except CustomUser.DoesNotExist:
+            pass

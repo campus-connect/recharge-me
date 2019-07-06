@@ -1,0 +1,88 @@
+{% extends 'base/dashboard_base.html' %}{% load static karma %}
+{% block breadcrumb %}
+{% include 'partials/breadcrumb.html' with current_page_name="Level" %}
+{% endblock breadcrumb %}
+{% block content %}
+<div class="content-detached content-left">
+  <div class="content-body">
+    <section class="card pull-up">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="col-12">
+            <form action="{% url 'level' %}" method="POST">
+              <div class="row">
+                <div class="col-md-3 col-xl-2 col-12 d-none d-md-block">
+                  <div class="crypto-circle rounded-circle">
+                    <i class="icon-layers"></i>
+                  </div>
+                </div>
+                <div class="col-md-5 col-xl-6 col-12">
+                  <p><strong>Your Earnings:</strong></p>
+                  <h1>N{{user.amount_received}}</h1>
+                  <p class="mb-0">Welcome bonus <strong>+30%</strong> expires in 21 days.</p>
+                </div>
+                <div class="col-md-4 col-xl-4 col-12 d-none d-md-block text-right">
+                  <button type="submit" class="btn-gradient-secondary mt-2">{% if user.level %}Uneroll{% else %}Enroll{% endif %} <i class="la la-angle-right"></i></button>
+                </div>
+              </div>
+              {{form}}
+              {% csrf_token %}
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ CIC -->
+    <h3 class="mt-4">Packages</h3>
+    <p>To buy tokens, transfer ETH or BTC to your personal deposit address:</p>
+    {% for level in level_list %}
+    <!-- Level -->
+    <section class="card pull-up">
+      <div class="card-content">
+        <div class="card-body">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-md-3 col-xl-2 col-12 d-none d-md-block">
+                <div class="crypto-circle rounded-circle">
+                  <i class="cc BTC-alt"></i>
+                </div>
+              </div>
+              <div class="col-md-5 col-xl-7 col-12">
+                <p><strong>{{level.name}}</strong></p>
+                <h5>Entry Fee: {{level.entry_fee}}</h5>
+                <h5>Reward: {{level.level_reward}}</h5>
+              </div>
+              <div class="col-md-4 col-xl-3 col-12 d-none d-md-block">
+                <img src="https://pixinvent.com/demo/crypto-ico-admin/app-assets/images/icons/sample-qr.png">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--/ Level -->
+    {% endfor %}
+  </div>
+</div>
+<div class="sidebar-detached sidebar-right"="">
+  <div class="sidebar">
+    <div class="sidebar-content">
+     {% karma %}
+
+      <!-- token sale progress -->
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title text-center">Advertisements</h6>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
+            {% comment %} content {% endcomment %}
+          </div>
+        </div>
+      </div>
+      <!--/ token sale progress -->
+
+    </div>
+  </div>
+</div>
+{% endblock content %}

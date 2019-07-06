@@ -7,11 +7,13 @@ from django.urls import path, include
 from referrals import urls as referrals_urls
 from .views import (
     Dashboard,
-    ProfileUpdateView
+    ProfileUpdateView,
+    LevelListView,
 )
 
 urlpatterns = [
     path("", Dashboard.as_view(), name="dashboard"),
     path("@<username>", ProfileUpdateView.as_view(), name="user_profile"),
     path("", include(referrals_urls)),
+    path("levels", LevelListView.as_view(), name="level")
 ]

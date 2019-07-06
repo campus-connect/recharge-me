@@ -5,11 +5,13 @@
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView, ProcessFormView, FormMixin, FormView
+from django.views.generic.list import ListView
 from django.http import Http404
+from django.urls import reverse
 from allauth.account.models import EmailAddress
-from .models import CustomUser
-from .forms import EditProfileForm
+from .models import CustomUser, Level
+from .forms import EditProfileForm, LevelEnrollmentForm
 
 class Dashboard(LoginRequiredMixin, TemplateView):
     
@@ -27,7 +29,6 @@ class Dashboard(LoginRequiredMixin, TemplateView):
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
-    model = CustomUser
     template_name = "dashboard/profile.html"
     form_class = EditProfileForm
     model = CustomUser
@@ -48,3 +49,31 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
             raise Http404("No %(verbose_name)s found matching the query" %
                         {'verbose_name': queryset.model._meta.verbose_name})
         return obj
+
+class LevelListView(LoginRequiredMixin, FormView):
+
+    form_class = LevelEnrollmentForm
+    template_name = "dashboard/level.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["level_list"] = Level.objects.all()
+        return context
+    
+
+     # Hack to make request available in forms
+    def get_form_kwargs(self):
+        kw = super(LevelListView, self).get_form_kwargs()
+        kw['request'] = self.request # the trick!
+        return kw
+
+    def form_valid(self, form):
+        if form.cleaned_data['action'] == 'enroll':
+            form.enroll()
+        else:
+            form.un_enroll()
+        
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('level')
