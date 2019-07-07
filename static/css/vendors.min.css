@@ -1,6 +1,6 @@
-@import url("bootstrap.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css");
 @import url("../fonts/feather/style.min.css");
-@import url("../fonts/line-awesome/css/line-awesome.min.css");
-@import url("../fonts/simple-line-icons/style.min.css");
-@import url("../fonts/flag-icon-css/css/flag-icon.min.css");
+@import url("https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.3.0/css/flag-icon.css");
 @import url("../vendors/css/extensions/pace.css");
