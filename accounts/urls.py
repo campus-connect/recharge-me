@@ -9,11 +9,13 @@ from .views import (
     Dashboard,
     ProfileUpdateView,
     LevelListView,
+    PeerListView,
 )
 
 urlpatterns = [
     path("", Dashboard.as_view(), name="dashboard"),
     path("@<username>", ProfileUpdateView.as_view(), name="user_profile"),
     path("", include(referrals_urls)),
-    path("levels", LevelListView.as_view(), name="level")
+    path("levels", LevelListView.as_view(), name="level"),
+    path("peers", PeerListView.as_view(), name="peer")
 ]

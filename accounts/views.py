@@ -84,3 +84,17 @@ class LevelListView(LoginRequiredMixin, FormView):
 
     def get_success_url(self):
         return reverse('level')
+
+
+class PeerListView(LoginRequiredMixin, ListView):
+
+    template_name = "dashboard/peer.html"
+    context_object_name = 'peer_list'
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.task == CustomUser.USER_TASK_RECEIVE_FUNDING:
+            return user.followers.all()
+        elif user.task == CustomUser.USER_TASK_SEND_FUNDING:
+            return user.following.all()
+    
