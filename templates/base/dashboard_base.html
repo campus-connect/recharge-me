@@ -1,4 +1,4 @@
-<!DOCTYPE html>{% load static account socialaccount %}
+<!DOCTYPE html>{% load static account socialaccount avatar_tags %}
 <html class="loading" lang="en" data-textdirection="ltr">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -80,10 +80,9 @@
                   <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Read all notifications</a></li>
                 </ul>
               </li>
-              <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="wallet.html"><i class="ficon icon-wallet"></i></a></li>
               <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             
-              <span class="avatar avatar-online"><img src="images/portrait/small/avatar-s-1.png" alt="avatar"></span>
-              <span class="mr-1">Level<span class="user-name text-bold-700">{{user.level.name}}</span></span></a>
+              <span class="avatar avatar-online">{% avatar user %}</span>
+              <span class="mr-1">₦<span class="user-name text-bold-700">{{user.amount_received}}</span></span></a>
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="{% url 'user_profile' user.username %}"><i class="ft-award"></i>{{ user.username }}</a>
                     <div class="dropdown-divider"></div>

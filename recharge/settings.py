@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'phonenumber_field',
     'referrals.apps.ReferralsConfig',
+    'avatar',
 
 
     # local apps

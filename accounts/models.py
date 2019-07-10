@@ -25,7 +25,6 @@ class CustomUser(AbstractUser):
     )
 
 
-    avatar = models.ImageField(upload_to='avatars/%Y/%m/%d/', blank=True)
     gender = models.CharField(max_length=2, choices=GENDERCHOICES)
     date_of_birth = models.DateField("date of birth", blank=True, null=True)
     phone_number = PhoneNumberField(verbose_name = "phone number", null=True, blank=True)

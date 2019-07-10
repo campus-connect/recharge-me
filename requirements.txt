@@ -3,9 +3,10 @@ certifi==2019.6.16
 chardet==3.0.4
 defusedxml==0.6.0
 dj-database-url==0.5.0
-Django==2.2.3
+Django==2.2.2
 django-allauth==0.39.1
 django-appconf==1.0.3
+django-avatar==4.1.0
 django-environ==0.4.4
 django-heroku==0.3.1
 django-phonenumber-field==3.0.1
@@ -19,7 +20,6 @@ model-mommy==1.6.0
 oauthlib==3.0.1
 phonenumbers==8.10.13
 Pillow==6.0.0
-pinax-referrals==3.0.3
 psycopg2==2.8.3
 psycopg2-binary==2.8.3
 python-http-client==3.1.0
