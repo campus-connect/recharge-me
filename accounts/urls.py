@@ -5,6 +5,7 @@
 
 from django.urls import path, include
 from referrals import urls as referrals_urls
+from referrals.views import FlatReferralListView
 from .views import (
     Dashboard,
     ProfileUpdateView,
@@ -15,7 +16,7 @@ from .views import (
 urlpatterns = [
     path("", Dashboard.as_view(), name="dashboard"),
     path("@<username>", ProfileUpdateView.as_view(), name="user_profile"),
-    path("", include(referrals_urls)),
+    path("referrals", FlatReferralListView.as_view(), name='referral'),
     path("levels", LevelListView.as_view(), name="level"),
     path("peers", PeerListView.as_view(), name="peer")
 ]
