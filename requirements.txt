@@ -11,7 +11,7 @@ django-environ==0.4.4
 django-heroku==0.3.1
 django-phonenumber-field==3.0.1
 django-sendgrid-v5==0.8.0
-django-simple-referrals==0.2
+-e git+https://github.com/ochui/django-simple-referrals.git@0af7cb21add537164bf00c33791d91682773b720#egg=django_simple_referrals
 django-treebeard==4.3
 future==0.17.1
 gunicorn==19.9.0
