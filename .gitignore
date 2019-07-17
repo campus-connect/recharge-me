@@ -76,7 +76,8 @@ target/
 .python-version
 
 # celery beat schedule file
-celerybeat-schedule
+# celerybeat-schedule.*
+celerybeat*
 
 # SageMath parsed files
 *.sage.py
@@ -130,3 +131,6 @@ staticfiles/
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
+
+# Redis
+dump.rdb
