@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'referrals.apps.ReferralsConfig',
     'avatar',
+    'django_celery_beat',
 
 
     # local apps
@@ -134,6 +135,8 @@ USE_L10N = True
 
 USE_TZ = True
 
+TIME_ZONE = 'Africa/Lagos'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -175,6 +178,15 @@ PHONENUMBER_DB_FORMAT = 'E164'
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 SENDGRID_SANDBOX_MODE_IN_DEBUG = os.environ.get("SENDGRID_SANDBOX_MODE_IN_DEBUG") == 'True'
+
+# celery
+CELERY_BROKER_URL = 'redis://localhost:6379'  
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'  
+CELERY_ACCEPT_CONTENT = ['application/json']  
+CELERY_RESULT_SERIALIZER = 'json'  
+CELERY_TASK_SERIALIZER = 'json'
+# https://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-beat_scheduler
+CELERYBEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 #Heroku
 django_heroku.settings(locals())
