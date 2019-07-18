@@ -27,17 +27,8 @@ function fill_notification_list(data) {
     if (menus) {
         var messages = data.unread_list.map(function (item) {
             var message = "";
-            if(typeof item.actor !== 'undefined'){
-                message = item.actor;
-            }
-            if(typeof item.verb !== 'undefined'){
-                message = message + " " + item.verb;
-            }
-            if(typeof item.target !== 'undefined'){
-                message = message + " " + item.target;
-            }
-            if(typeof item.timestamp !== 'undefined'){
-                message = message + " " + item.timestamp;
+            if(typeof item.target == 'undefined'){
+                item.target = '';
             }
             return `
             <a href="javascript:void(0)">
@@ -45,8 +36,8 @@ function fill_notification_list(data) {
                     <div class="media-left align-self-center"><i
                         class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div>
                     <div class="media-body">
-                    <h6 class="media-heading red darken-1">99% Server load</h6>
-                    <p class="notification-text font-small-3 text-muted">${item.verb}</p>
+                    <h6 class="media-heading red darken-1">${item.actor}</h6>
+                    <p class="notification-text font-small-3 text-muted">${item.verb} ${item.target}</p>
                     <small>
                         <time class="media-meta text-muted" datetime="${item.timestamp}">${humanized_time_span(item.timestamp)}</time></small>
                     </div>
