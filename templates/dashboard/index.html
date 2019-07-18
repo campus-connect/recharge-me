@@ -1,45 +1,10 @@
 {% extends 'base/dashboard_base.html' %}{% load static karma %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/pages/timeline.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/pages/dashboard-ico.min.css' %}">
+{% endblock css %}
 {% block content %}
 <div class="content-body">
-    <!-- ICO Token &  Distribution-->
-    <div class="row match-height">
-        <div class="col-xl-8 col-12">
-            <div class="card card-transparent">
-                <div class="card-header card-header-transparent py-20">
-                    <div class="btn-group dropdown">
-                        <h6>ICO Token (Supply & Demand)</h6>
-                    </div>
-                </div>
-                <div id="ico-token-supply-demand-chart" class="height-300"></div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-lg-12">
-            <div class="card card-transparent">
-                <div class="card-header card-header-transparent">
-                    <h6 class="card-title">Token distribution</h6>
-                </div>
-                <div class="card-content">
-                    <div id="token-distribution-chart" class="height-200 donut donutShadow"></div>
-                    <div class="card-body">
-                        <div class="row mx-0">
-                            <ul class="token-distribution-list col-md-6 mb-0">
-                                <li class="crowd-sale">Crowd sale <span class="float-right text-muted">41%</span></li>
-                                <li class="team">Team <span class="float-right text-muted">18%</span></li>
-                                <li class="advisors">Advisors <span class="float-right text-muted">15%</span></li>
-                            </ul>
-                            <ul class="token-distribution-list col-md-6 mb-0">
-                                <li class="project-reserve">Project <span class="float-right text-muted">10%</span></li>
-                                <li class="master-nodes">Master nodes <span class="float-right text-muted">8%</span>
-                                </li>
-                                <li class="program">Program <span class="float-right text-muted">8%</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--/ ICO Token &  Distribution-->
     <!-- ICO Token balance & sale progress -->
     <div class="row">
         <div class="col-md-8 col-12">

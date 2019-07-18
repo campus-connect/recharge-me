@@ -1,8 +1,10 @@
-{% extends 'base/dashboard_base.html' %}{% load referral_link karma static %}
+{% extends 'base/dashboard_base.html' %}{% load referral_link karma static avatar_tags %}
 {% block breadcrumb %}
 {% include 'partials/breadcrumb.html' with current_page_name="Account Profile" %}
 {% endblock breadcrumb %}
-
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/pages/account-profile.min.css' %}">
+{% endblock css %}
 {% block content %}
 <div class="content-body">
 <div class="row">
@@ -14,7 +16,7 @@
                     <div class="col-12">
                         <div class="row">
                             <div class="col-md-2 col-12">
-                                <img src="{{user.avatar}}" class="rounded-circle height-100" alt="Card image" />
+                                {% avatar user 100 class="rounded-circle height-100" id="user_avatar" %}
                             </div>
                             <div class="col-md-10 col-12">
                                 <div class="row">

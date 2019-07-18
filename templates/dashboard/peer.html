@@ -1,4 +1,7 @@
-{% extends 'base/dashboard_base.html' %}{% load avatar_tags %}
+{% extends 'base/dashboard_base.html' %}{% load avatar_tags static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/pages/transactions.min.css' %}">
+{% endblock css %}
 {% block breadcrumb %}
 {% include 'partials/breadcrumb.html' with current_page_name="Peers" %}
 {% endblock breadcrumb %}

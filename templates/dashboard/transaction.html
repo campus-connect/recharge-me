@@ -1,7 +1,10 @@
-{% extends 'base/dashboard_base.html' %}
+{% extends 'base/dashboard_base.html' %}{% load static %}
 {% block breadcrumb %}
 {% include 'partials/breadcrumb.html' with current_page_name="Transaction" %}
 {% endblock breadcrumb %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/pages/wallet.min.css' %}">
+{% endblock css %}
 {% block content %}
       <div class="content-body">
 

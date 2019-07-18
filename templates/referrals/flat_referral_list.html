@@ -1,4 +1,7 @@
-{% extends 'base/dashboard_base.html' %}{% load referrals %}
+{% extends 'base/dashboard_base.html' %}{% load referrals static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/pages/wallet.min.css' %}">
+{% endblock css %}
 {% block breadcrumb %}
 {% include 'partials/breadcrumb.html' with current_page_name="Referrals" %}
 {% endblock breadcrumb %}

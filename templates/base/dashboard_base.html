@@ -14,7 +14,6 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/app.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/core/menu/menu-types/vertical-compact-menu.min.css' %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cryptocoins-icons@2.9.0/webfont/cryptocoins.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/pages/timeline.min.css' %}">
   {% block css %}
   {% endblock css %}
 </head>
@@ -70,8 +69,8 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{% url 'user_profile' user.username %}"><i class="ft-user"></i>
                   Profile</a>
-                <a class="dropdown-item" href="wallet.html"><i class="icon-wallet"></i> My Wallet</a>
-                <a class="dropdown-item" href="transactions.html"><i class="ft-check-square"></i> Transactions</a>
+                <a class="dropdown-item" href="{% url 'referral' %}"><i class="icon-loop"></i> Referrals</a>
+                <a class="dropdown-item" href="{% url 'transactions' %}"><i class="ft-check-square"></i> Transactions</a>
                 <div class="dropdown-divider"></div><a class="dropdown-item" href="{% url 'account_logout' %}"><i
                     class="ft-power"></i> Logout</a>
               </div>

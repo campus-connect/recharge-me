@@ -96,6 +96,12 @@ class PeerListView(LoginRequiredMixin, ListView):
     template_name = "dashboard/peer.html"
     context_object_name = 'peer_list'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page"] = "peer"
+        return context
+    
+
     def get_queryset(self):
         user = self.request.user
         if user.task == CustomUser.USER_TASK_RECEIVE_FUNDING:
@@ -109,6 +115,12 @@ class TransactionLogListView(LoginRequiredMixin, ListView):
     model = TransactionLog
     template_name = "dashboard/transaction.html"
     context_object_name = 'transaction_logs'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page"] = "transaction"
+        return context
+    
 
     def get_queryset(self):
 
