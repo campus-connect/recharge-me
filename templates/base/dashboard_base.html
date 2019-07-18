@@ -1,123 +1,116 @@
-<!DOCTYPE html>{% load static account socialaccount avatar_tags %}
+<!DOCTYPE html>
+{% load static account socialaccount avatar_tags custom_notifications_tags %}{% notifications_unread as unread_count %}{% now "Y" as current_year %}
 <html class="loading" lang="en" data-textdirection="ltr">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <title>Dashboard</title>
-    <link rel="shortcut icon" type="image/x-icon" href="images/ico/favicon.ico">
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i|Comfortaa:300,400,500,700" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/vendors.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/app.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/core/menu/menu-types/vertical-compact-menu.min.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cryptocoins-icons@2.9.0/webfont/cryptocoins.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/pages/timeline.min.css' %}">
-    {% block css %}
-    {% endblock css %}
-  </head>
-  <body class="vertical-layout vertical-compact-menu 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-compact-menu" data-col="2-columns">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+  <title>Dashboard</title>
+  <link rel="shortcut icon" type="image/x-icon" href="images/ico/favicon.ico">
+  <link
+    href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i|Comfortaa:300,400,500,700"
+    rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendors.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/app.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/core/menu/menu-types/vertical-compact-menu.min.css' %}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cryptocoins-icons@2.9.0/webfont/cryptocoins.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/pages/timeline.min.css' %}">
+  {% block css %}
+  {% endblock css %}
+</head>
 
-    <!-- fixed-top-->
-    <nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-light navbar-bg-color">
-      <div class="navbar-wrapper">
-        <div class="navbar-header d-md-none">
-          <ul class="nav navbar-nav flex-row">
-            <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
-            <li class="nav-item d-md-none"><a class="navbar-brand" href="index.html"><img class="brand-logo d-none d-md-block" alt="logo" src="images/logo/logo.png"><img class="brand-logo d-sm-block d-md-none" alt="logo sm" src="images/logo/logo-sm.png"></a></li>
-            <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="fa fa-ellipsis-v">   </i></a></li>
+<body class="vertical-layout vertical-compact-menu 2-columns   menu-expanded fixed-navbar" data-open="click"
+  data-menu="vertical-compact-menu" data-col="2-columns">
+
+  <!-- fixed-top-->
+  <nav
+    class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-light navbar-bg-color">
+    <div class="navbar-wrapper">
+      <div class="navbar-header d-md-none">
+        <ul class="nav navbar-nav flex-row">
+          <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs"
+              href="#"><i class="ft-menu font-large-1"></i></a></li>
+          <li class="nav-item d-md-none"><a class="navbar-brand" href="index.html"><img
+                class="brand-logo d-none d-md-block" alt="logo" src="images/logo/logo.png"><img
+                class="brand-logo d-sm-block d-md-none" alt="logo sm" src="images/logo/logo-sm.png"></a></li>
+          <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse"
+              data-target="#navbar-mobile"><i class="fa fa-ellipsis-v"> </i></a></li>
+        </ul>
+      </div>
+      <div class="navbar-container">
+        <div class="collapse navbar-collapse" id="navbar-mobile">
+          <ul class="nav navbar-nav mr-auto float-left">
+            <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i
+                  class="ft-menu"> </i></a></li>
+          </ul>
+          <ul class="nav navbar-nav float-right">
+            <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"
+                data-toggle="dropdown"><i class="ficon ft-bell"></i>
+                  {% live_notify_badge badge_class="live_notify_badge badge badge-pill badge-default badge-danger badge-default badge-up badge-glow" %}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                <li class="dropdown-menu-header">
+                  <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span></h6>
+                    {% live_notify_badge badge_class="live_notify_badge notification-tag badge badge-default badge-danger float-right m-0" extra_text="New" %}
+                </li>
+                
+                {% live_notify_list list_class="live_notify_list scrollable-container media-list w-100" %}
+
+                <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center"
+                    href="javascript:void(0)">Read all notifications</a></li>
+              </ul>
+            </li>
+            <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#"
+                data-toggle="dropdown">
+                <span class="avatar avatar-online">{% avatar user %}</span>
+                <span class="mr-1">₦<span class="user-name text-bold-700">{{user.amount_received}}</span></span></a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="{% url 'user_profile' user.username %}"><i
+                    class="ft-award"></i>{{ user.username }}</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'user_profile' user.username %}"><i class="ft-user"></i>
+                  Profile</a>
+                <a class="dropdown-item" href="wallet.html"><i class="icon-wallet"></i> My Wallet</a>
+                <a class="dropdown-item" href="transactions.html"><i class="ft-check-square"></i> Transactions</a>
+                <div class="dropdown-divider"></div><a class="dropdown-item" href="{% url 'account_logout' %}"><i
+                    class="ft-power"></i> Logout</a>
+              </div>
+            </li>
           </ul>
         </div>
-        <div class="navbar-container">
-          <div class="collapse navbar-collapse" id="navbar-mobile">
-            <ul class="nav navbar-nav mr-auto float-left">
-              <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu">         </i></a></li>
-            </ul>
-            <ul class="nav navbar-nav float-right">         
-              <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i><span class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">5</span></a>
-                <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
-                  <li class="dropdown-menu-header">
-                    <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span></h6><span class="notification-tag badge badge-default badge-danger float-right m-0">5 New</span>
-                  </li>
-                  <li class="scrollable-container media-list w-100"><a href="javascript:void(0)">
-                      <div class="media">
-                        <div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
-                        <div class="media-body">
-                          <h6 class="media-heading">You have new order!</h6>
-                          <p class="notification-text font-small-3 text-muted">Lorem ipsum dolor sit amet, consectetuer elit.</p><small>
-                            <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">30 minutes ago</time></small>
-                        </div>
-                      </div></a><a href="javascript:void(0)">
-                      <div class="media">
-                        <div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div>
-                        <div class="media-body">
-                          <h6 class="media-heading red darken-1">99% Server load</h6>
-                          <p class="notification-text font-small-3 text-muted">Aliquam tincidunt mauris eu risus.</p><small>
-                            <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Five hour ago</time></small>
-                        </div>
-                      </div></a><a href="javascript:void(0)">
-                      <div class="media">
-                        <div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3"></i></div>
-                        <div class="media-body">
-                          <h6 class="media-heading yellow darken-3">Warning notifixation</h6>
-                          <p class="notification-text font-small-3 text-muted">Vestibulum auctor dapibus neque.</p><small>
-                            <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Today</time></small>
-                        </div>
-                      </div></a><a href="javascript:void(0)">
-                      <div class="media">
-                        <div class="media-left align-self-center"><i class="ft-check-circle icon-bg-circle bg-cyan"></i></div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Complete the task</h6><small>
-                            <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last week</time></small>
-                        </div>
-                      </div></a><a href="javascript:void(0)">
-                      <div class="media">
-                        <div class="media-left align-self-center"><i class="ft-file icon-bg-circle bg-teal"></i></div>
-                        <div class="media-body">
-                          <h6 class="media-heading">Generate monthly report</h6><small>
-                            <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last month</time></small>
-                        </div>
-                      </div></a></li>
-                  <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)">Read all notifications</a></li>
-                </ul>
-              </li>
-              <li class="dropdown dropdown-user nav-item"><a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">             
-              <span class="avatar avatar-online">{% avatar user %}</span>
-              <span class="mr-1">₦<span class="user-name text-bold-700">{{user.amount_received}}</span></span></a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="{% url 'user_profile' user.username %}"><i class="ft-award"></i>{{ user.username }}</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{% url 'user_profile' user.username %}"><i class="ft-user"></i> Profile</a>
-                    <a class="dropdown-item" href="wallet.html"><i class="icon-wallet"></i> My Wallet</a>
-                    <a class="dropdown-item" href="transactions.html"><i class="ft-check-square"></i> Transactions</a>
-                    <div class="dropdown-divider"></div><a class="dropdown-item" href="{% url 'account_logout' %}"><i class="ft-power"></i> Logout</a>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    {% include 'partials/dashboard_navbar.html' with page=page %}
-
-    <div class="app-content content">
-      <div class="content-wrapper">
-        {% block breadcrumb %}
-        <div class="content-header row">
-        </div>
-        {% endblock breadcrumb %}
-        {% block content %}
-        {% endblock content %}
       </div>
     </div>
-    <footer class="footer footer-static footer-transparent">
-      <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-block d-md-inline-block">Copyright  &copy; 2018 <a class="text-bold-800 grey darken-2" href="" target="_blank">Ochui Princewill </a>, All rights reserved. </span><span class="float-md-right d-block d-md-inline-blockd-none d-lg-block">Hand-crafted & Made with <i class="ft-heart pink"></i></span></p>
-    </footer>
-    <script src="{% static 'vendors/js/vendors.min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'vendors/js/timeline/horizontal-timeline.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/core/app-menu.min.js' %}" type="text/javascript"></script>
-    <script src="{% static 'js/core/app.min.js' %}" type="text/javascript"></script>
-    {% block javascript %}
-    {% endblock javascript %}
-  </body>
+  </nav>
+
+  {% include 'partials/dashboard_navbar.html' with page=page %}
+
+  <div class="app-content content">
+    <div class="content-wrapper">
+      {% block breadcrumb %}
+      <div class="content-header row">
+      </div>
+      {% endblock breadcrumb %}
+      {% block content %}
+      {% endblock content %}
+    </div>
+  </div>
+  <footer class="footer footer-static footer-transparent">
+    <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span
+        class="float-md-left d-block d-md-inline-block">Copyright &copy; {{ current_year }} <a class="text-bold-800 grey darken-2"
+          href="" target="_blank">Ochui Princewill </a>, All rights reserved. </span><span
+        class="float-md-right d-block d-md-inline-blockd-none d-lg-block">Hand-crafted & Made with <i
+          class="ft-heart pink"></i></span></p>
+  </footer>
+  <script src="{% static 'vendors/js/vendors.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'vendors/js/timeline/horizontal-timeline.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/core/app-menu.min.js' %}" type="text/javascript"></script>
+  <script src="{% static 'js/core/app.min.js' %}" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-js-dom@6.0.118/vanilla.min.js"></script>
+  <script src="{% static 'js/humanized_time_span.js' %}" type="text/javascript"></script>
+  <script src="{% static 'notifications/custom_notify.js' %}" type="text/javascript"></script>
+  {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %}
+  {% block javascript %}
+  {% endblock javascript %}
+</body>
+
 </html>

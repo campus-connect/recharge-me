@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'referrals.apps.ReferralsConfig',
     'avatar',
     'django_celery_beat',
+    'notifications',
 
 
     # local apps
