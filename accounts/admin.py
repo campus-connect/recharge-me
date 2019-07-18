@@ -6,7 +6,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser, Peer, Level
+from .models import CustomUser, Peer, Level, TransactionLog
 
 
 @admin.register(CustomUser)
@@ -43,3 +43,13 @@ class PeerAdmin(admin.ModelAdmin):
 class LevelAdmin(admin.ModelAdmin):
     
     list_display = ['name', 'entry_fee', 'level_reward'] 
+
+@admin.register(TransactionLog)
+class TransactionLogAdmin(admin.ModelAdmin):
+    
+    list_display = ['user', 'status', 'created', 'updated']
+    list_filter = ['status', 'created', 'updated']
+    search_fields = [
+        'user__username', 'user__firstname', 'user__lastname',
+        'user__phone_number'
+    ]

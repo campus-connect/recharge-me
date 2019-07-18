@@ -95,3 +95,37 @@ class Level(models.Model):
 
     def get_absolute_url(self):
         return reverse("level_detail", kwargs={"pk": self.pk})
+
+class TransactionLog(models.Model):
+
+    TRANSACTION_REJECTED = 'Rejected'
+    TRANSACTION_PAID = 'Paid'
+    TRANSACTION_IN_PROGRESS = 'In Progress'
+    TRANSACTION_STATUS = (
+        (TRANSACTION_IN_PROGRESS, TRANSACTION_IN_PROGRESS),
+        (TRANSACTION_REJECTED, TRANSACTION_REJECTED),
+        (TRANSACTION_PAID, TRANSACTION_PAID)
+    )
+
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=8, decimal_places=2)
+    status = models.CharField(max_length=50, choices=TRANSACTION_STATUS, default=TRANSACTION_IN_PROGRESS)
+    description = models.TextField(blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def update_status(self, new_status):
+
+        self.status = new_status
+        self.save()
+            
+    class Meta:
+        verbose_name = "Transaction Log"
+        verbose_name_plural = "Transaction Logs"
+
+    def __str__(self):
+        return self.user
+
+    def get_absolute_url(self):
+        return reverse("TransactionLog_detail", kwargs={"pk": self.pk})
+
