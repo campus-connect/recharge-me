@@ -124,7 +124,7 @@ class TransactionLog(models.Model):
         verbose_name_plural = "Transaction Logs"
 
     def __str__(self):
-        return self.user
+        return '{} ---- {} ---- {}'.format(self.user, self.status, self.description)
 
     def get_absolute_url(self):
         return reverse("TransactionLog_detail", kwargs={"pk": self.pk})

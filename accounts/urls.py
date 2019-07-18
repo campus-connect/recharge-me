@@ -11,6 +11,7 @@ from .views import (
     ProfileUpdateView,
     LevelListView,
     PeerListView,
+    TransactionLogListView
 )
 
 urlpatterns = [
@@ -18,5 +19,6 @@ urlpatterns = [
     path("@<username>", ProfileUpdateView.as_view(), name="user_profile"),
     path("referrals", FlatReferralListView.as_view(), name='referral'),
     path("levels", LevelListView.as_view(), name="level"),
-    path("peers", PeerListView.as_view(), name="peer")
+    path("peers", PeerListView.as_view(), name="peer"),
+    path("transactions", TransactionLogListView.as_view(), name="transactions")
 ]

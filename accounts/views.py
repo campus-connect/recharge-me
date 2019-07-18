@@ -10,23 +10,27 @@ from django.views.generic.list import ListView
 from django.http import Http404
 from django.urls import reverse
 from allauth.account.models import EmailAddress
-from .models import CustomUser, Level
+from .models import CustomUser, Level, TransactionLog
 from .forms import EditProfileForm, LevelEnrollmentForm
 
+
 class Dashboard(LoginRequiredMixin, TemplateView):
-    
+
     template_name = 'dashboard/index.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["page"] = 'dashboard'
-        #check user email status
-        if not EmailAddress.objects.filter(user=self.request.user, verified=True).exists():
-            context['verified_email'] = False
-        else:
-            context['verified_email'] = True
-                
+        # check user email status
+        # if not EmailAddress.objects.filter(user=self.request.user, verified=True).exists():
+        #     context['verified_email'] = False
+        # else:
+        #     context['verified_email'] = True
+
+        context['lastest_transactions'] = TransactionLog.objects.filter(user=self.request.user).order_by('-created')[:5]
+
         return context
+
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
@@ -47,14 +51,15 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
             queryset = self.get_queryset()
 
         queryset = queryset.filter(username=self.kwargs['username'])
-        
+
         try:
             # Get the single item from the filtered queryset
             obj = queryset.get()
         except queryset.model.DoesNotExist:
             raise Http404("No %(verbose_name)s found matching the query" %
-                        {'verbose_name': queryset.model._meta.verbose_name})
+                          {'verbose_name': queryset.model._meta.verbose_name})
         return obj
+
 
 class LevelListView(LoginRequiredMixin, FormView):
 
@@ -66,12 +71,12 @@ class LevelListView(LoginRequiredMixin, FormView):
         context["level_list"] = Level.objects.all()
         context["page"] = 'level'
         return context
-    
 
      # Hack to make request available in forms
+
     def get_form_kwargs(self):
         kw = super(LevelListView, self).get_form_kwargs()
-        kw['request'] = self.request # the trick!
+        kw['request'] = self.request  # the trick!
         return kw
 
     def form_valid(self, form):
@@ -79,7 +84,7 @@ class LevelListView(LoginRequiredMixin, FormView):
             form.enroll()
         else:
             form.un_enroll()
-        
+
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -97,4 +102,24 @@ class PeerListView(LoginRequiredMixin, ListView):
             return user.followers.all()
         elif user.task == CustomUser.USER_TASK_SEND_FUNDING:
             return user.following.all()
-    
+
+
+class TransactionLogListView(LoginRequiredMixin, ListView):
+
+    model = TransactionLog
+    template_name = "dashboard/transaction.html"
+    context_object_name = 'transaction_logs'
+
+    def get_queryset(self):
+
+        filter = self.request.GET.get('filter')
+        if filter:
+            qs = TransactionLog.objects.filter(
+                user=self.request.user,
+            ).filter(status=filter)
+        else:
+            qs = TransactionLog.objects.filter(
+                user=self.request.user,
+            )
+        
+        return qs
