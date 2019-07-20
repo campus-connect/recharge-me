@@ -74,6 +74,7 @@ class Peer(models.Model):
 
     class Meta:
         ordering = ('-created_at',)
+        unique_together = (('user_from', 'user_to'),)
 
     def __str__(self):
         return '%(user_from)s ---->> %(user_to)s' % {'user_from':self.user_from, 'user_to':self.user_to}

@@ -13,12 +13,12 @@ logger = get_task_logger(__name__)
 def peer_merging_task():
 
     for top_level in Level.objects.all().order_by('order'):
-        print(top_level)
         # get buttom level for current top_level
         buttom_level = None
         try:
             buttom_level_order = (top_level.order-1)
             buttom_level = Level.objects.get(order=buttom_level_order)
+            print(top_level, buttom_level)
         except Level.DoesNotExist:
             logger.log(
                 msg="Breaking loop Level with the order of {} does not exist\n".format(
@@ -42,8 +42,8 @@ def peer_merging_task():
                 for downline in downline_user_list:
                     try:
                         Peer.objects.create(
-                            user_from=upline,
-                            user_to=downline,
+                            user_from=downline,
+                            user_to=upline,
                             expires_at=timezone.now()
                         )
                     except IntegrityError:
