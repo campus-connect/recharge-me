@@ -1,110 +1,150 @@
 {% extends 'base/dashboard_base.html' %}{% load avatar_tags static %}
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/pages/transactions.min.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+  integrity="sha256-KsRuvuRtUVvobe66OFtOQfjP8WA2SzYsmm4VPfMnxms=" crossorigin="anonymous"></script>
 {% endblock css %}
 {% block breadcrumb %}
 {% include 'partials/breadcrumb.html' with current_page_name="Peers" %}
 {% endblock breadcrumb %}
 {% block content %}
-      <div class="content-detached content-left">
-        <div class="content-body">
-          <div id="wallet">
-            <div class="wallet-table-th d-none d-md-block">
-              <div class="row">
-                <div class="col-md-6 col-12 py-1">
-                  <p class="mt-0 text-capitalize">User</p>
-                </div>
-                <div class="col-md-2 col-12 py-1 text-center">
-                  <p class="mt-0 text-capitalize">Amount</p>
-                </div>
-                <div class="col-md-4 col-12 py-1 text-center">
-                  <p class="mt-0 text-capitalize">Action</p>
-                </div>
-              </div>
-            </div>
-            {% for peer in peer_list %}<!-- Peer -->
-            <section class="card pull-up">
-              <div class="card-content">
-                <div class="card-body">
-                  <div class="col-12">
-                    <div class="row">
-                      <div class="col-md-6 col-12 py-1">
-                        <div class="media">
-                          {% avatar peer.username %}
-                          <div class="media-body">
-                            <h5 class="mt-0 text-capitalize">{{peer.username}}</h5>
-                            <p class="text-muted mb-0 font-small-3 wallet-address">{{user.phone_number}}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-2 col-12 py-1 text-center">
-                        <h6>N{{peer.level.entry_fee}}</h6>
-                        <p class="text-muted mb-0 font-small-3">~ $2650.78</p>
-                      </div>
-                      <div class="col-md-2 col-12 py-1 text-center">
-                        <a href="#" class="line-height-3">Confirm</a>
-                      </div>
-                      <div class="col-md-2 col-12 py-1 text-center">
-                        <a href="#" class="line-height-3">Purge</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-            <!--/ Peer -->{% endfor %}
+<div class="content-detached content-left">
+  <div class="content-body">
+    <div id="wallet">
+      <div class="wallet-table-th d-none d-md-block">
+        <div class="row">
+          <div class="col-md-6 col-12 py-1">
+            <p class="mt-0 text-capitalize">User</p>
+          </div>
+          <div class="col-md-2 col-12 py-1 text-center">
+            <p class="mt-0 text-capitalize">Amount</p>
+          </div>
+          <div class="col-md-4 col-12 py-1 text-center">
+            <p class="mt-0 text-capitalize">Action</p>
           </div>
         </div>
       </div>
-      <div class="sidebar-detached sidebar-right"="">
-        <div class="sidebar">
-          <div id="wallet-sidebar" class="sidebar-content">
-            <div class="row">
-              <p class="py-1 text-capitalize col-12">Your balance</p>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <h6 class="card-title text-center">ICO Tokens</h6>
+      <form method="POST" id="peer_form">
+        {% csrf_token %}
+        {% for peer in peer_list %}
+        <!-- Peer -->
+        <section class="card pull-up">
+          <div class="card-content">
+            <div class="card-body">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-md-6 col-12 py-1">
+                    <div class="media">
+                      {% for field in form.get_user_from_field %}
+                      {% if peer.id == field.value %}{{ field }}{% endif %}
+                      {% endfor %}
+                      {% avatar peer.username %}
+                      <div class="media-body">
+                        <h5 class="mt-0 text-capitalize">{{peer.username}}</h5>
+                        <p class="text-muted mb-0 font-small-3 wallet-address">{{user.phone_number}}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2 col-12 py-1 text-center">
+                    <h6>N{{peer.level.entry_fee}}</h6>
+                    <p class="text-muted mb-0 font-small-3">~ $2650.78</p>
+                  </div>
+                  <div class="col-md-2 col-12 py-1 text-center">
+                    <button onclick="processForm(event, 'confirm', {{peer.id}});"
+                      class="btn btn-success line-height-3">Confirm</button>
+                  </div>
+                  <div class="col-md-2 col-12 py-1 text-center">
+                    <button onclick="processForm(event, 'purge', {{peer.id}});"
+                      class="btn btn-danger line-height-3">Purge</button>
+                  </div>
+                </div>
               </div>
-              <div class="card-content collapse show">
-                <div class="card-body">
+            </div>
+          </div>
+        </section>
+        <!--/ Peer -->{% endfor %}
+      </form>
+    </div>
+  </div>
+</div>
+<div class="sidebar-detached sidebar-right"="">
+  <div class="sidebar">
+    <div id="wallet-sidebar" class="sidebar-content">
+      <div class="row">
+        <p class="py-1 text-capitalize col-12">Your balance</p>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title text-center">ICO Tokens</h6>
+        </div>
+        <div class="card-content collapse show">
+          <div class="card-body">
 
-                  <div class="text-center row clearfix mb-2">
-                    <div class="col-12">
-                      <i class="icon-layers font-large-3 bg-warning bg-glow white rounded-circle p-3 d-inline-block"></i>
-                    </div>
-                  </div>
-                  <h3 class="text-center">3,458.88 CIC</h3>
-                </div>
-                <div class="table-responsive">
-                  <table class="table table-de mb-0">
-                    <tbody>
-                      <tr>
-                        <td>CIC Token</td>
-                        <td><i class="icon-layers"></i> 3,258 CIC</td>
-                      </tr>
-                      <tr>
-                        <td>CIC Referral</td>
-                        <td><i class="icon-layers"></i> 200.88 CIC</td>
-                      </tr>
-                      <tr>
-                        <td>CIC Price</td>
-                        <td><i class="cc BTC-alt"></i> 0.0001 BTC</td>
-                      </tr>
-                      <tr>
-                        <td>Raised BTC</td>
-                        <td><i class="cc BTC-alt"></i> 2154 BTC</td>
-                      </tr>
-                      <tr>
-                        <td>Raised USD</td>
-                        <td><i class="la la-dollar"></i> 4.52 M</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+            <div class="text-center row clearfix mb-2">
+              <div class="col-12">
+                <i class="icon-layers font-large-3 bg-warning bg-glow white rounded-circle p-3 d-inline-block"></i>
               </div>
             </div>
+            <h3 class="text-center">3,458.88 CIC</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-de mb-0">
+              <tbody>
+                <tr>
+                  <td>CIC Token</td>
+                  <td><i class="icon-layers"></i> 3,258 CIC</td>
+                </tr>
+                <tr>
+                  <td>CIC Referral</td>
+                  <td><i class="icon-layers"></i> 200.88 CIC</td>
+                </tr>
+                <tr>
+                  <td>CIC Price</td>
+                  <td><i class="cc BTC-alt"></i> 0.0001 BTC</td>
+                </tr>
+                <tr>
+                  <td>Raised BTC</td>
+                  <td><i class="cc BTC-alt"></i> 2154 BTC</td>
+                </tr>
+                <tr>
+                  <td>Raised USD</td>
+                  <td><i class="la la-dollar"></i> 4.52 M</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}
+
+{% block javascript %}
+<script type="text/javascript">
+  function processForm(e, action, user_id) {
+    form = document.getElementById('peer_form')
+    e = e || window.event;
+    e.preventDefault();
+    if (action == 'confirm') {
+      updateForm(form, 'action', 'confirm')
+    } else if (action == 'purge') {
+      updateForm(form, 'action', 'purge')
+    } else {
+      return false;
+    }
+    updateForm(form, 'target', user_id)
+    form.submit()    
+  }
+
+  function updateForm(form, name, value) {
+    input = document.createElement('input');
+    input.setAttribute('name', name);
+    input.setAttribute('value', value);
+    input.setAttribute('type', 'hidden');
+    form.appendChild(input);
+    return form
+  }
+
+</script>
+{% endblock javascript %}

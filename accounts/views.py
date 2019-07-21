@@ -11,7 +11,7 @@ from django.http import Http404
 from django.urls import reverse
 from allauth.account.models import EmailAddress
 from .models import CustomUser, Level, TransactionLog
-from .forms import EditProfileForm, LevelEnrollmentForm
+from .forms import EditProfileForm, LevelEnrollmentForm, ConfirmationForm
 
 
 class Dashboard(LoginRequiredMixin, TemplateView):
@@ -91,10 +91,11 @@ class LevelListView(LoginRequiredMixin, FormView):
         return reverse('level')
 
 
-class PeerListView(LoginRequiredMixin, ListView):
+class PeerListView(LoginRequiredMixin, FormView, ListView):
 
     template_name = "dashboard/peer.html"
     context_object_name = 'peer_list'
+    form_class = ConfirmationForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -109,6 +110,21 @@ class PeerListView(LoginRequiredMixin, ListView):
         elif user.task == CustomUser.USER_TASK_SEND_FUNDING:
             return user.following.all()
 
+    def get_form_kwargs(self):
+        kw = super(PeerListView, self).get_form_kwargs()
+        kw['request'] = self.request  # the trick!
+        return kw
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        if self.request.POST['action'] == 'confirm':
+            print('confrim')
+        elif self.request.POST['action'] == 'purge':
+            print('purge')
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('peer')
 
 class TransactionLogListView(LoginRequiredMixin, ListView):
 

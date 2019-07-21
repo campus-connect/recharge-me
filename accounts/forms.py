@@ -71,7 +71,6 @@ class CustomSignupForm(SignupForm):
             }
         )
 
-
     def save(self, request):
         """
         Adds extra field data to the user instance
@@ -120,12 +119,13 @@ class CustomResetPasswordForm(ResetPasswordForm):
             }
         )
 
+
 class EditProfileForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
         fields = ('first_name', 'last_name', 'phone_number',
-                    'date_of_birth', )
+                  'date_of_birth', )
         widgets = {
             'first_name': forms.TextInput(
                 attrs={
@@ -153,9 +153,10 @@ class EditProfileForm(forms.ModelForm):
             )
         }
 
+
 class LevelEnrollmentForm(forms.Form):
-    
-    action = forms.CharField() 
+
+    action = forms.CharField()
 
     def __init__(self, *args, **kwargs):
         # important to "pop" added kwarg before call to parent's constructor
@@ -167,6 +168,7 @@ class LevelEnrollmentForm(forms.Form):
                 'value': self.get_action()
             }
         )
+
     def get_action(self):
         if self.request.user.level is not None:
             return 'un_enroll'
@@ -187,7 +189,8 @@ class LevelEnrollmentForm(forms.Form):
         user_current_level = self.request.user.level
         if user_current_level:
             try:
-                next_level = Level.objects.get(order=user_current_level.order+1)
+                next_level = Level.objects.get(
+                    order=user_current_level.order+1)
                 return next_level
             except Level.DoesNotExist:
                 return self.get_entry_level()
@@ -209,3 +212,52 @@ class LevelEnrollmentForm(forms.Form):
             user.save()
         except CustomUser.DoesNotExist:
             pass
+
+
+class ConfirmationForm(forms.Form):
+
+    action = forms.CharField(required=True, widget=forms.HiddenInput)
+    target = forms.IntegerField(required=True, widget=forms.HiddenInput)
+
+    def __init__(self, *args, **kwargs):
+        # important to "pop" added kwarg before call to parent's constructor
+        self.request = kwargs.pop('request', None)
+        super(ConfirmationForm, self).__init__(*args, **kwargs)
+
+        peers = self.get_peers(self.request)
+        for i in range(len(peers)):
+            field_name = 'user_%s' % (i,)
+            self.fields[field_name] = forms.CharField(
+                required=False,
+                widget=forms.HiddenInput
+            )
+            try:
+                self.initial[field_name] = peers[i].id
+            except IndexError:
+                self.initial[field_name] = ""
+
+    def get_peers(self, request):
+        user = self.request.user
+        if user.task == CustomUser.USER_TASK_RECEIVE_FUNDING:
+            return user.followers.all()
+        elif user.task == CustomUser.USER_TASK_SEND_FUNDING:
+            return user.following.all()
+
+    def get_user_from_field(self):
+        for field_name in self.fields:
+            if field_name.startswith('user_'):
+                yield self[field_name]
+
+    # def clean(self):
+    #     users = set()
+    #     i = 0
+    #     field_name = 'user_%s' % (i,)
+    #     while self.cleaned_data.get(field_name):
+    #        user = self.cleaned_data[field_name]
+    #        if user in users:
+    #            self.add_error(field_name, 'Duplicate')
+    #        else:
+    #            users.add(user)
+    #        i += 1
+    #        field_name = 'user_%s' % (i,)
+    #     self.cleaned_data['users'] = users
