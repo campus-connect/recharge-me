@@ -19,10 +19,10 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ['date_joined', 'last_login', 'is_active', 'is_staff']
     search_fields = ['username', 'email', 'phone_number']
     fieldsets = UserAdmin.fieldsets + (
-        ('KYC', {'fields': ('phone_number', 'gender', 'date_of_birth')}),
+        ('KYC', {'fields': ('phone_number', 'gender', 'date_of_birth', 'level', 'task')}),
     )
     add_fieldsets = UserAdmin.add_fieldsets + (
-        ('KYC', {'fields': ('phone_number', 'gender', 'date_of_birth')}),
+        ('KYC', {'fields': ('phone_number', 'gender', 'date_of_birth', 'level', 'task')}),
     )
     
     model = CustomUser

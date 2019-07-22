@@ -10,7 +10,7 @@ from django.views.generic.list import ListView
 from django.http import Http404
 from django.urls import reverse
 from allauth.account.models import EmailAddress
-from .models import CustomUser, Level, TransactionLog
+from .models import CustomUser, Level, TransactionLog, Peer
 from .forms import EditProfileForm, LevelEnrollmentForm, ConfirmationForm
 
 
@@ -118,7 +118,8 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
     def form_valid(self, form):
         print(form.cleaned_data)
         if self.request.POST['action'] == 'confirm':
-            print('confrim')
+            _user = CustomUser.objects.get(pk=form.cleaned_data['target'])
+            _peer = Peer.objects.filter(user_from=_user).filter(user_to=self.request.user).delete()
         elif self.request.POST['action'] == 'purge':
             print('purge')
         return super().form_valid(form)
