@@ -1,2 +1,2 @@
 web: gunicorn recharge.wsgi --log-file -
-worker: celery beat -A recharge --loglevel=info
+worker: celery worker -A recharge --loglevel=info --beat
