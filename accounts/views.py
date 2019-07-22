@@ -27,7 +27,8 @@ class Dashboard(LoginRequiredMixin, TemplateView):
         # else:
         #     context['verified_email'] = True
 
-        context['lastest_transactions'] = TransactionLog.objects.filter(user=self.request.user).order_by('-created')[:5]
+        context['lastest_transactions'] = TransactionLog.objects.filter(
+            user=self.request.user).order_by('-created')[:5]
 
         return context
 
@@ -101,7 +102,6 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
         context = super().get_context_data(**kwargs)
         context["page"] = "peer"
         return context
-    
 
     def get_queryset(self):
         user = self.request.user
@@ -118,14 +118,25 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
     def form_valid(self, form):
         print(form.cleaned_data)
         if self.request.POST['action'] == 'confirm':
+            # Delete relationship
             _user = CustomUser.objects.get(pk=form.cleaned_data['target'])
-            _peer = Peer.objects.filter(user_from=_user).filter(user_to=self.request.user).delete()
+            _peer = Peer.objects.filter(user_from=_user).filter(
+                user_to=self.request.user).delete()
+            # Send Notification
         elif self.request.POST['action'] == 'purge':
+            # Penalize user
+            # Delete Relationship
+            _user = CustomUser.objects.get(pk=form.cleaned_data['target'])
+            _peer = Peer.objects.filter(user_from=_user).filter(
+                user_to=self.request.user).delete()
+            # Re-merge User
+            # send Notification
             print('purge')
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('peer')
+
 
 class TransactionLogListView(LoginRequiredMixin, ListView):
 
@@ -137,7 +148,6 @@ class TransactionLogListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context["page"] = "transaction"
         return context
-    
 
     def get_queryset(self):
 
@@ -150,5 +160,5 @@ class TransactionLogListView(LoginRequiredMixin, ListView):
             qs = TransactionLog.objects.filter(
                 user=self.request.user,
             )
-        
+
         return qs

@@ -1,4 +1,4 @@
-{% extends 'base/dashboard_base.html' %}{% load avatar_tags static %}
+{% extends 'base/dashboard_base.html' %}{% load avatar_tags static timer %}
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/pages/transactions.min.css' %}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
@@ -24,6 +24,25 @@
           </div>
         </div>
       </div>
+      <script>
+        function countDowntime(_time, element) {
+
+          var deadline = new Date(_time).getTime();
+          var x = setInterval(function () {
+            var now = new Date().getTime();
+            var t = deadline - now;
+            var days = Math.floor(t / (1000 * 60 * 60 * 24)) ? Math.floor(t / (1000 * 60 * 60 * 24)).toString() + 'd' : '';
+            var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) ? Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString() + 'h' : '';
+            var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)) ? Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)).toString() + 'm' : '';
+            var seconds = Math.floor((t % (1000 * 60)) / 1000) ? Math.floor((t % (1000 * 60)) / 1000).toString() + 's' : '';
+            document.getElementById(element).innerHTML = days +" "+ hours +" "+ minutes +" "+ seconds;
+            if (t < 0) {
+              clearInterval(x);
+              document.getElementById(element).innerHTML = "EXPIRED";
+            }
+          }, 1000);
+        }
+      </script>
       <form method="POST" id="peer_form">
         {% csrf_token %}
         {% for peer in peer_list %}
@@ -33,7 +52,7 @@
             <div class="card-body">
               <div class="col-12">
                 <div class="row">
-                  <div class="col-md-6 col-12 py-1">
+                  <div class="col-md-4 col-12 py-1">
                     <div class="media">
                       {% for field in form.get_user_from_field %}
                       {% if peer.id == field.value %}{{ field }}{% endif %}
@@ -45,9 +64,13 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-2 col-12 py-1 text-center">
+                  <div class="col-md-4 col-12 py-1 text-center">
                     <h6>N{{peer.level.entry_fee}}</h6>
-                    <p class="text-muted mb-0 font-small-3">~ $2650.78</p>
+                    <p id="timer_{{peer.id}}" class="text-muted mb-0 font-small-3">
+                      {% if user.task == 'R' %}
+                      <script>countDowntime("{% timer peer None %}", 'timer_{{peer.id}}')</script> {% else %}
+                      <script>countDowntime("{% timer None peer %}", 'timer_{{peer.id}}')</script> {% endif %}
+                    </p>
                   </div>
                   <div class="col-md-2 col-12 py-1 text-center">
                     <button onclick="processForm(event, 'confirm', {{peer.id}});"
@@ -134,7 +157,7 @@
       return false;
     }
     updateForm(form, 'target', user_id)
-    form.submit()    
+    form.submit()
   }
 
   function updateForm(form, name, value) {
