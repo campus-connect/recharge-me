@@ -3,16 +3,20 @@
 #  * For the full copyright and license information, please view the "LICENSE.md"
 #  * file that was distributed with this source code.
 
+
 def humanize_list(elements):
     """"
     splits a list and add punctuations to it elements
     """
     humanize_string = ''
-    for element in elements:
-        if element == elements[len(elements)-2]: #second to last item
-            humanize_string = humanize_string + element.username+' and '
-        elif element == elements[len(elements)-1]: # last item
-            humanize_string = humanize_string + element.username
-        else:
-            humanize_string = humanize_string + element.username+', '
-    return humanize_string
+    if len(elements) > 1:
+        for element in elements:
+            if element == elements[len(elements)-2]:  # second to last item
+                humanize_string = humanize_string + element.username+' and '
+            elif element == elements[len(elements)-1]:  # last item
+                humanize_string = humanize_string + element.username
+            else:
+                humanize_string = humanize_string + element.username+', '
+        return humanize_string
+    else:
+        return humanize_string + elements[0].username
