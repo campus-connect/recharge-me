@@ -6,7 +6,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser, Peer, Level, TransactionLog
+from .models import CustomUser, Peer, Level, TransactionLog, Remerge
 
 
 @admin.register(CustomUser)
@@ -49,6 +49,16 @@ class TransactionLogAdmin(admin.ModelAdmin):
     
     list_display = ['user', 'status', 'created', 'updated']
     list_filter = ['status', 'created', 'updated']
+    search_fields = [
+        'user__username', 'user__firstname', 'user__lastname',
+        'user__phone_number'
+    ]
+
+@admin.register(Remerge)
+class RemergeAdmin(admin.ModelAdmin):
+    
+    list_display = ['user', 'count', 'level', 'created', 'updated']
+    list_filter = ['level', 'count', 'created', 'updated']
     search_fields = [
         'user__username', 'user__firstname', 'user__lastname',
         'user__phone_number'

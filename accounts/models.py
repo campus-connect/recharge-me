@@ -130,3 +130,21 @@ class TransactionLog(models.Model):
     def get_absolute_url(self):
         return reverse("TransactionLog_detail", kwargs={"pk": self.pk})
 
+class Remerge(models.Model):
+    """
+    keep tracts of users that needs to be re-merge 
+    """
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    count = models.SmallIntegerField()
+    level = models.ForeignKey(Level, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "re-merge"
+        verbose_name_plural = "re-merging list"
+
+    def __str__(self):
+        return '{} on {} requires {} user(s)'.format(
+            self.user, self.count, self.level
+        )

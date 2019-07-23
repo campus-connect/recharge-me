@@ -11,7 +11,7 @@ from django.http import Http404
 from django.urls import reverse
 from allauth.account.models import EmailAddress
 from notifications.signals import notify
-from .models import CustomUser, Level, TransactionLog, Peer
+from .models import CustomUser, Level, TransactionLog, Peer, Remerge
 from .forms import EditProfileForm, LevelEnrollmentForm, ConfirmationForm
 from . import verbs
 
@@ -141,6 +141,12 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
             _peer = Peer.objects.filter(user_from=_user).filter(
                 user_to=self.request.user).delete()
             # Re-merge User
+            try:
+                user_to_add = Remerge.objects.get(user=self.request.user)
+                user_to_add.count = user_to_add.count + 1
+                user_to_add.save()
+            except Remerge.DoesNotExist:
+                Remerge.objects.create(user=self.request.user, level=self.request.user.level, count=1)
             # send Notification
             notify.send(
                 sender=self.request.user, recipient=self.request.user, verb=verbs.PENDING_RE_MERGE_VERB,
