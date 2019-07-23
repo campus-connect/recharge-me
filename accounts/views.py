@@ -10,8 +10,10 @@ from django.views.generic.list import ListView
 from django.http import Http404
 from django.urls import reverse
 from allauth.account.models import EmailAddress
+from notifications.signals import notify
 from .models import CustomUser, Level, TransactionLog, Peer
 from .forms import EditProfileForm, LevelEnrollmentForm, ConfirmationForm
+from . import verbs
 
 
 class Dashboard(LoginRequiredMixin, TemplateView):
@@ -116,22 +118,45 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
         return kw
 
     def form_valid(self, form):
-        print(form.cleaned_data)
         if self.request.POST['action'] == 'confirm':
             # Delete relationship
             _user = CustomUser.objects.get(pk=form.cleaned_data['target'])
             _peer = Peer.objects.filter(user_from=_user).filter(
                 user_to=self.request.user).delete()
             # Send Notification
+            notify.send(
+                sender=self.request.user, recipient=_user, verb=verbs.TRANSACTION_APPROVED_VERB,
+                target=self.request.user, description=verbs.TRANSACTION_APPROVED_DESCRIPTION.format(self.request.user)
+            )
+            # Log Transaction
+            TransactionLog.objects.create(
+                user=_user, amount=_user.level.entry_fee,
+                status=TransactionLog.TRANSACTION_PAID,
+                description=verbs.TRANSACTION_APPROVED_DESCRIPTION.format(self.request.user)
+            )
         elif self.request.POST['action'] == 'purge':
-            # Penalize user
+            # Penalize user reduce karma point
             # Delete Relationship
             _user = CustomUser.objects.get(pk=form.cleaned_data['target'])
             _peer = Peer.objects.filter(user_from=_user).filter(
                 user_to=self.request.user).delete()
             # Re-merge User
             # send Notification
-            print('purge')
+            notify.send(
+                sender=self.request.user, recipient=self.request.user, verb=verbs.PENDING_RE_MERGE_VERB,
+                target=self.request.user, description=verbs.PENDING_RE_MERGE.format(_user)
+            )
+            # Send Notification to defaulting user
+            notify.send(
+                sender=self.request.user, recipient=_user, verb=verbs.PURGE_VERB,
+                target=self.request.user, description=verbs.PURGE.format(self.request.user)
+            )
+            # Log Transaction
+            TransactionLog.objects.create(
+                user=_user, amount=_user.level.entry_fee,
+                status=TransactionLog.TRANSACTION_REJECTED,
+                description=verbs.PENDING_RE_MERGE.format(_user)
+            )
         return super().form_valid(form)
 
     def get_success_url(self):

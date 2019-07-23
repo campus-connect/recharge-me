@@ -36,8 +36,8 @@ function fill_notification_list(data) {
                     <div class="media-left align-self-center"><i
                         class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div>
                     <div class="media-body">
-                    <h6 class="media-heading red darken-1">${item.actor}</h6>
-                    <p class="notification-text font-small-3 text-muted">${item.verb} ${item.target}</p>
+                    <h6 class="media-heading red darken-1">${item.verb}</h6>
+                    <p class="notification-text font-small-3 text-muted">${item.description}</p>
                     <small>
                         <time class="media-meta text-muted" datetime="${item.timestamp}">${humanized_time_span(item.timestamp)}</time></small>
                     </div>
