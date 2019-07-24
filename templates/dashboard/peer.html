@@ -35,7 +35,7 @@
             var hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) ? Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString() + 'h' : '';
             var minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)) ? Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)).toString() + 'm' : '';
             var seconds = Math.floor((t % (1000 * 60)) / 1000) ? Math.floor((t % (1000 * 60)) / 1000).toString() + 's' : '';
-            document.getElementById(element).innerHTML = days +" "+ hours +" "+ minutes +" "+ seconds;
+            document.getElementById(element).innerHTML = days + " " + hours + " " + minutes + " " + seconds;
             if (t < 0) {
               clearInterval(x);
               document.getElementById(element).innerHTML = "EXPIRED";
@@ -72,6 +72,7 @@
                       <script>countDowntime("{% timer None peer %}", 'timer_{{peer.id}}')</script> {% endif %}
                     </p>
                   </div>
+                  {% if user.task == 'R' %}
                   <div class="col-md-2 col-12 py-1 text-center">
                     <button onclick="processForm(event, 'confirm', {{peer.id}});"
                       class="btn btn-success line-height-3">Confirm</button>
@@ -80,6 +81,16 @@
                     <button onclick="processForm(event, 'purge', {{peer.id}});"
                       class="btn btn-danger line-height-3">Purge</button>
                   </div>
+                  {% else %}
+                  <div class="col-md-2 col-12 py-1 text-center">
+                    <button onclick="processForm(event, 'paid', {{peer.id}});"
+                      class="btn btn-success line-height-3">Paid</button>
+                  </div>
+                  <div class="col-md-2 col-12 py-1 text-center">
+                    <button onclick="processForm(event, 'purge_self', {{peer.id}});"
+                      class="btn btn-danger line-height-3">Purge</button>
+                  </div>
+                  {% endif %}
                 </div>
               </div>
             </div>
@@ -153,6 +164,10 @@
       updateForm(form, 'action', 'confirm')
     } else if (action == 'purge') {
       updateForm(form, 'action', 'purge')
+    } else if (action == 'purge_self') {
+      updateForm(form, 'action', 'purge_self')
+    } else if (action == 'paid') {
+      updateForm(form, 'action', 'paid')
     } else {
       return false;
     }

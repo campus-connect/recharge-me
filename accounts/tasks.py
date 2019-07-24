@@ -50,7 +50,7 @@ def peer_merging_task():
                             expires_at=timezone.now() + timedelta(hours=2)  # Two hours from now
                         )
                         notify.send(
-                            sender=downline, recipient=downline, verb=verbs.NEW_TASK,
+                            sender=downline, recipient=downline, verb=verbs.ATTENTION,
                             target=upline, description=verbs.MERGED_TASK_SEND.format(
                                 upline)
                         )

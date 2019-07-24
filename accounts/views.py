@@ -126,14 +126,51 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
             # Send Notification
             notify.send(
                 sender=self.request.user, recipient=_user, verb=verbs.TRANSACTION_APPROVED_VERB,
-                target=self.request.user, description=verbs.TRANSACTION_APPROVED_DESCRIPTION.format(self.request.user)
+                target=self.request.user, description=verbs.TRANSACTION_APPROVED_DESCRIPTION.format(
+                    self.request.user)
             )
             # Log Transaction
             TransactionLog.objects.create(
                 user=_user, amount=_user.level.entry_fee,
                 status=TransactionLog.TRANSACTION_PAID,
-                description=verbs.TRANSACTION_APPROVED_DESCRIPTION.format(self.request.user)
+                description=verbs.TRANSACTION_APPROVED_DESCRIPTION.format(
+                    self.request.user)
             )
+            # update user level
+            _user.level = self.request.user.level
+            _user.task = CustomUser.USER_TASK_RECEIVE_FUNDING
+            _user.save()
+
+            _peer_count = Peer.objects.filter(
+                user_to=self.request.user).count()
+            if _peer_count == 0:
+                # update user Level/task
+                r_user = CustomUser.objects.get(pk=self.request.user.id)
+                next_level = None
+                try:
+                    next_level_order = self.request.user.level.order + 1
+                    next_level = Level.objects.get(
+                        order=next_level_order)
+                    r_user.task = CustomUser.USER_TASK_SEND_FUNDING
+                    r_user.save()
+
+                    # Send Notification
+                    notify.send(
+                        sender=self.request.user, recipient=self.request.user,  verb=verbs.NEW_LEVEL_VERB,
+                        target=self.request.user, description=verbs.NEW_TASK
+                    )
+                except Level.DoesNotExist:
+                    r_user.level = Level.objects.get(
+                        order=1)  # Reset to level one
+                    r_user.task = CustomUser.USER_TASK_SEND_FUNDING
+                    r_user.save()
+
+                    # Send Notification
+                    notify.send(
+                        sender=self.request.user, recipient=self.request.user,  verb=verbs.NEW_LEVEL_VERB,
+                        target=self.request.user, description=verbs.AUTO_SET_LEVEL.format(
+                            r_user.level.name)
+                    )
         elif self.request.POST['action'] == 'purge':
             # Penalize user reduce karma point
             # Delete Relationship
@@ -146,22 +183,55 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
                 user_to_add.count = user_to_add.count + 1
                 user_to_add.save()
             except Remerge.DoesNotExist:
-                Remerge.objects.create(user=self.request.user, level=self.request.user.level, count=1)
+                Remerge.objects.create(
+                    user=self.request.user, level=self.request.user.level, count=1)
             # send Notification
             notify.send(
                 sender=self.request.user, recipient=self.request.user, verb=verbs.PENDING_RE_MERGE_VERB,
-                target=self.request.user, description=verbs.PENDING_RE_MERGE.format(_user)
+                target=self.request.user, description=verbs.PENDING_RE_MERGE.format(
+                    _user)
             )
             # Send Notification to defaulting user
             notify.send(
                 sender=self.request.user, recipient=_user, verb=verbs.PURGE_VERB,
-                target=self.request.user, description=verbs.PURGE.format(self.request.user)
+                target=self.request.user, description=verbs.PURGE.format(
+                    self.request.user)
             )
             # Log Transaction
             TransactionLog.objects.create(
                 user=_user, amount=_user.level.entry_fee,
                 status=TransactionLog.TRANSACTION_REJECTED,
                 description=verbs.PENDING_RE_MERGE.format(_user)
+            )
+        elif self.request.POST['action'] == 'purge_self':
+            _user = CustomUser.objects.get(pk=form.cleaned_data['target'])
+            # Delete Relationship
+            _peer = Peer.objects.filter(user_from=self.request.user).filter(
+                user_to=_user
+            ).delete()
+            # Re-merge User
+            try:
+                user_to_add = Remerge.objects.get(user=_user)
+                user_to_add.count = user_to_add.count + 1
+                user_to_add.save()
+            except Remerge.DoesNotExist:
+                Remerge.objects.create(
+                    user=_user, level=_user.level, count=1)
+
+             # send Notification
+            notify.send(
+                sender=self.request.user, recipient=_user, verb=verbs.PENDING_RE_MERGE_VERB,
+                target=_user, description=verbs.PENDING_RE_MERGE.format(
+                    _user)
+            )
+
+        elif self.request.POST['action'] == 'paid':
+            _user = CustomUser.objects.get(pk=form.cleaned_data['target'])
+            # send Notification
+            notify.send(
+                sender=self.request.user, recipient=_user, verb=verbs.ATTENTION,
+                target=_user, description=verbs.CONFIRMATION_REQUEST.format(
+                    self.request.user)
             )
         return super().form_valid(form)
 
