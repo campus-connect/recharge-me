@@ -34,6 +34,7 @@ class CustomUser(AbstractUser):
     amount_sent = models.DecimalField("Amount sent", max_digits=8, decimal_places=2, default=0)
     amount_received = models.DecimalField("Amount received", max_digits=8, decimal_places=2, default=0)
     karma = models.FloatField(default=10)
+    can_merge = models.BooleanField(default=False)
 
     def update_level(self, level=None):
 

@@ -33,13 +33,13 @@ def peer_merging_task():
         upline_user_list = CustomUser.objects.filter(
             task=CustomUser.USER_TASK_RECEIVE_FUNDING,
             level=top_level
-        )
+        ).filter(can_merge=True)
 
         for upline in upline_user_list:
             downline_user_list = CustomUser.objects.filter(
                 task=CustomUser.USER_TASK_SEND_FUNDING,
                 level=buttom_level
-            )[:2]
+            ).filter(can_merge=True)[:2]
 
             if downline_user_list.count() > 1:
                 for downline in downline_user_list:
@@ -54,6 +54,10 @@ def peer_merging_task():
                             target=upline, description=verbs.MERGED_TASK_SEND.format(
                                 upline)
                         )
+                        upline.can_merge =  downline.can_merge = False
+                        upline.save()
+                        downline.save()
+
                     except IntegrityError:
                         continue
                 notify.send(
@@ -120,6 +124,8 @@ def peer_re_merging_task():
                     )
                     upline.count = upline.count - 1
                     upline.save()
+                    downline.can_merger = False
+                    downline.save()
                     if upline.count == 0:
                         upline.delete() 
                 except IntegrityError:
