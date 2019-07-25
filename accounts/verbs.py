@@ -19,3 +19,4 @@ PENDING_RE_MERGE = '{} has been removed from your list you will be re-merged sho
 AUTO_SET_LEVEL = 'Your level has been set to {} automatically. You will be merge shortly to make payment'
 ATTENTION = 'ATTENTION'
 CONFIRMATION_REQUEST = '{} is requesting comfirmantion.'
+PURGE_SELF = '{} has been from your list, you will be suspended once your karma point reach zero'

@@ -142,8 +142,12 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
             _user.save()
 
             _peer_count = Peer.objects.filter(
-                user_to=self.request.user).count()
-            if _peer_count == 0:
+                user_to=self.request.user
+            ).count()
+            _peer_re_merge_count = Remerge.objects.filter(
+                user=self.request.user
+            ).count()
+            if (_peer_count == 0) and (_peer_re_merge_count == 0):
                 # update user Level/task
                 r_user = CustomUser.objects.get(pk=self.request.user.id)
                 next_level = None
@@ -222,6 +226,11 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
             notify.send(
                 sender=self.request.user, recipient=_user, verb=verbs.PENDING_RE_MERGE_VERB,
                 target=_user, description=verbs.PENDING_RE_MERGE.format(
+                    _user)
+            )
+            notify.send(
+                sender=self.request.user, recipient=self.request.user, verb=verbs.PURGE_VERB,
+                target=_user, description=verbs.PURGE_SELF.format(
                     _user)
             )
 
