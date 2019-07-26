@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static account socialaccount avatar_tags custom_notifications_tags %}{% notifications_unread as unread_count %}{% now "Y" as current_year %}
 <html class="loading" lang="en" data-textdirection="ltr">
+
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,6 +15,7 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/app.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/core/menu/menu-types/vertical-compact-menu.min.css' %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cryptocoins-icons@2.9.0/webfont/cryptocoins.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jboesch/Gritter@1.7.4/css/jquery.gritter.css">
   {% block css %}
   {% endblock css %}
 </head>
@@ -45,14 +47,14 @@
           <ul class="nav navbar-nav float-right">
             <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#"
                 data-toggle="dropdown"><i class="ficon ft-bell"></i>
-                  {% live_notify_badge badge_class="live_notify_badge badge badge-pill badge-default badge-danger badge-default badge-up badge-glow" %}
+                {% live_notify_badge badge_class="live_notify_badge badge badge-pill badge-default badge-danger badge-default badge-up badge-glow" %}
               </a>
               <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                 <li class="dropdown-menu-header">
                   <h6 class="dropdown-header m-0"><span class="grey darken-2">Notifications</span></h6>
-                    {% live_notify_badge badge_class="live_notify_badge notification-tag badge badge-default badge-danger float-right m-0" extra_text="New" %}
+                  {% live_notify_badge badge_class="live_notify_badge notification-tag badge badge-default badge-danger float-right m-0" extra_text="New" %}
                 </li>
-                
+
                 {% live_notify_list list_class="live_notify_list scrollable-container media-list w-100" %}
 
                 <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center"
@@ -70,7 +72,8 @@
                 <a class="dropdown-item" href="{% url 'user_profile' user.username %}"><i class="ft-user"></i>
                   Profile</a>
                 <a class="dropdown-item" href="{% url 'referral' %}"><i class="icon-loop"></i> Referrals</a>
-                <a class="dropdown-item" href="{% url 'transactions' %}"><i class="ft-check-square"></i> Transactions</a>
+                <a class="dropdown-item" href="{% url 'transactions' %}"><i class="ft-check-square"></i>
+                  Transactions</a>
                 <div class="dropdown-divider"></div><a class="dropdown-item" href="{% url 'account_logout' %}"><i
                     class="ft-power"></i> Logout</a>
               </div>
@@ -95,9 +98,9 @@
   </div>
   <footer class="footer footer-static footer-transparent">
     <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span
-        class="float-md-left d-block d-md-inline-block">Copyright &copy; {{ current_year }} <a class="text-bold-800 grey darken-2"
-          href="" target="_blank">Ochui Princewill </a>, All rights reserved. </span><span
-        class="float-md-right d-block d-md-inline-blockd-none d-lg-block">Hand-crafted & Made with <i
+        class="float-md-left d-block d-md-inline-block">Copyright &copy; {{ current_year }} <a
+          class="text-bold-800 grey darken-2" href="" target="_blank">Ochui Princewill </a>, All rights reserved.
+      </span><span class="float-md-right d-block d-md-inline-blockd-none d-lg-block">Hand-crafted & Made with <i
           class="ft-heart pink"></i></span></p>
   </footer>
   <script src="{% static 'vendors/js/vendors.min.js' %}" type="text/javascript"></script>
@@ -105,11 +108,27 @@
   <script src="{% static 'js/core/app-menu.min.js' %}" type="text/javascript"></script>
   <script src="{% static 'js/core/app.min.js' %}" type="text/javascript"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanilla-js-dom@6.0.118/vanilla.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/jboesch/Gritter@1.7.4/js/jquery.gritter.min.js"></script>
   <script src="{% static 'js/humanized_time_span.js' %}" type="text/javascript"></script>
   <script src="{% static 'notifications/custom_notify.js' %}" type="text/javascript"></script>
   {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %}
   {% block javascript %}
   {% endblock javascript %}
+  <script>
+    $(document).ready(function () {
+      {% if messages %}
+      {% for message in messages %}
+      $.gritter.add({
+      title: '{{ message.tags }}',
+      text: '{{ message }}',
+      time: '5000',
+      close_icon: 'l-arrows-remove s16',
+      class_name: 'info-notice'
+      });
+    {% endfor %}
+    {% endif %}
+    });
+  </script>
 </body>
 
 </html>

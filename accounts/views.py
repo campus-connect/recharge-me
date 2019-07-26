@@ -9,6 +9,7 @@ from django.views.generic.edit import UpdateView, ProcessFormView, FormMixin, Fo
 from django.views.generic.list import ListView
 from django.http import Http404
 from django.urls import reverse
+from django.contrib import messages
 from allauth.account.models import EmailAddress
 from notifications.signals import notify
 from .models import CustomUser, Level, TransactionLog, Peer, Remerge

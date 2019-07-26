@@ -5,6 +5,7 @@
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from allauth.account.forms import SignupForm, LoginForm, ResetPasswordForm, AddEmailForm
@@ -215,7 +216,7 @@ class LevelEnrollmentForm(forms.Form):
             except CustomUser.DoesNotExist:
                 pass
         else:
-            pass
+            messages.error(self.request, 'Please complete all task assign to you', extra_tags='alert')
 
 
 class ConfirmationForm(forms.Form):

@@ -2,6 +2,7 @@
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/pages/timeline.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/pages/dashboard-ico.min.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/pages/buy-ico.min.css' %}">
 {% endblock css %}
 {% block content %}
 <div class="content-body">
@@ -12,13 +13,27 @@
                 <div class="card-content">
                     <div class="card-body">
                         <div class="col-12">
-                            <div class="row">
-                                <div class="col-md-8 col-12">
-                                    <p><strong>Earnings:</strong></p>
-                                    <h1>N{{user.amount_received}}</h1>
-                                    <p class="mb-0">Welcome bonus <strong>+30%</strong> expires in 21 days.</p>
+                            <form action="{% url 'level' %}" method="POST">
+                                <div class="row">
+                                    <div class="col-md-3 col-xl-2 col-3 d-none d-md-block">
+                                        <div class="crypto-circle rounded-circle">
+                                            <i class="icon-layers"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 col-xl-6 col-6">
+                                        <p><strong>Earnings:</strong></p>
+                                        <h1>N{{user.amount_received}}</h1>
+                                        <p class="mb-0">Welcome bonus <strong>+30%</strong> expires in 21 days.</p>
+                                    </div>
+                                    <div class="col-md-4 col-xl-4 col-3 text-right">
+                                        <button type="submit"
+                                            class="btn-gradient-secondary mt-2">{% if user.level %}Uneroll{% else %}Enroll{% endif %}
+                                            <i class="la la-angle-right"></i></button>
+                                    </div>
                                 </div>
-                            </div>
+                                {{form}}
+                                {% csrf_token %}
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -49,7 +64,8 @@
                             <tbody>
                                 {% for transaction in lastest_transactions %}<tr>
                                     <td class="text-truncate"><i
-                                            class="fa fa-dot-circle-o success font-medium-1 mr-1"></i> {{transaction.status}}</td>
+                                            class="fa fa-dot-circle-o success font-medium-1 mr-1"></i>
+                                        {{transaction.status}}</td>
                                     <td class="text-truncate"><a href="#">{{transaction.created}}</a></td>
                                     <td class="text-truncate">
                                         <a href="#" class="mb-0 btn-sm btn btn-outline-success round">Deposit</a>
