@@ -17,8 +17,9 @@ from .forms import EditProfileForm, LevelEnrollmentForm, ConfirmationForm
 from . import verbs
 
 
-class Dashboard(LoginRequiredMixin, TemplateView):
+class Dashboard(LoginRequiredMixin, TemplateView, FormView):
 
+    form_class = LevelEnrollmentForm
     template_name = 'dashboard/index.html'
 
     def get_context_data(self, **kwargs):
@@ -35,6 +36,10 @@ class Dashboard(LoginRequiredMixin, TemplateView):
 
         return context
 
+    def get_form_kwargs(self):
+        kw = super(Dashboard, self).get_form_kwargs()
+        kw['request'] = self.request  # the trick!
+        return kw
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
