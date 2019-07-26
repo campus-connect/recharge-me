@@ -54,7 +54,7 @@ def peer_merging_task():
                             target=upline, description=verbs.MERGED_TASK_SEND.format(
                                 upline)
                         )
-                        upline.can_merge =  downline.can_merge = False
+                        upline.can_merge = downline.can_merge = False
                         upline.save()
                         downline.save()
 
@@ -87,7 +87,7 @@ def peer_merging_task():
     ignore_result=True
 )
 def peer_re_merging_task():
-    
+
     uplines = Remerge.objects.all()
     for upline in uplines:
         # get buttom level for current top_level
@@ -102,12 +102,11 @@ def peer_re_merging_task():
                 ),
                 level=20)
             continue
-        
+
         downline_user_list = CustomUser.objects.filter(
-                task=CustomUser.USER_TASK_SEND_FUNDING,
-                level=buttom_level
-            )[:upline.count]
-        
+            task=CustomUser.USER_TASK_SEND_FUNDING,
+            level=buttom_level
+        )[:upline.count]
 
         if downline_user_list.count() > 0:
             for downline in downline_user_list:
@@ -127,7 +126,7 @@ def peer_re_merging_task():
                     downline.can_merger = False
                     downline.save()
                     if upline.count == 0:
-                        upline.delete() 
+                        upline.delete()
                 except IntegrityError:
                     continue
             notify.send(
@@ -142,4 +141,39 @@ def peer_re_merging_task():
                 ),
                 level=20
             )
-            continue # Check next user
+            continue  # Check next user
+
+
+@task(
+    ignore_result=True
+)
+def auto_purge_task():
+
+    for level in Level.objects.all().order_by('order'):
+        time_threshold = timezone.now() - timedelta(hours=2)
+        purge_list = Peer.objects.filter(expires_at__lt=time_threshold).filter(
+            user_to__level=level
+        )
+        for peer in purge_list:
+            # Re-merge User
+            try:
+                user_to_add = Remerge.objects.get(user=peer.user_to)
+                user_to_add.count = user_to_add.count + 1
+                user_to_add.save()
+            except Remerge.DoesNotExist:
+                Remerge.objects.create(
+                    user=peer.user_to, level=peer.user_to.level, count=1)
+            
+            # send Notification
+            notify.send(
+                sender=peer.user_to, recipient=peer.user_to, verb=verbs.PENDING_RE_MERGE_VERB,
+                target=peer.user_from, description=verbs.PENDING_RE_MERGE.format(
+                    peer.user_from)
+            )
+            # Send Notification to defaulting user
+            notify.send(
+                sender=peer.user_to, recipient=peer.user_from, verb=verbs.PURGE_VERB,
+                target=peer.user_from, description=verbs.PURGE.format(
+                    peer.user_to)
+            )
+            peer.delete()
