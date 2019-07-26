@@ -6,12 +6,13 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 from allauth.account.forms import SignupForm, LoginForm, ResetPasswordForm, AddEmailForm
 from phonenumber_field.formfields import PhoneNumberField
 from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 from referrals.widgets import ReferralWidget
 from referrals.fields import ReferralField
-from .models import CustomUser, Level
+from .models import CustomUser, Level, Peer
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -206,11 +207,14 @@ class LevelEnrollmentForm(forms.Form):
             pass
 
     def un_enroll(self):
-        try:
-            user = CustomUser.objects.get(pk=self.request.user.id)
-            user.level = None
-            user.save()
-        except CustomUser.DoesNotExist:
+        if (Peer.objects.filter(Q(user_from=self.request.user) | Q(user_to=self.request.user)).count() == 0) and (self.request.user.task == CustomUser.USER_TASK_SEND_FUNDING):
+            try:
+                user = CustomUser.objects.get(pk=self.request.user.id)
+                user.level = None
+                user.save()
+            except CustomUser.DoesNotExist:
+                pass
+        else:
             pass
 
 
