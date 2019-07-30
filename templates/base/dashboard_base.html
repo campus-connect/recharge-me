@@ -15,7 +15,8 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/app.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'css/core/menu/menu-types/vertical-compact-menu.min.css' %}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cryptocoins-icons@2.9.0/webfont/cryptocoins.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jboesch/Gritter@1.7.4/css/jquery.gritter.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
+        integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
   {% block css %}
   {% endblock css %}
 </head>
@@ -111,22 +112,36 @@
   <script src="https://cdn.jsdelivr.net/gh/jboesch/Gritter@1.7.4/js/jquery.gritter.min.js"></script>
   <script src="{% static 'js/humanized_time_span.js' %}" type="text/javascript"></script>
   <script src="{% static 'notifications/custom_notify.js' %}" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+  integrity="sha256-3blsJd4Hli/7wCQ+bmgXfOdK7p/ZUMtPXY08jmxSSgk=" crossorigin="anonymous"></script>
   {% register_notify_callbacks callbacks='fill_notification_list,fill_notification_badge' %}
   {% block javascript %}
   {% endblock javascript %}
   <script>
     $(document).ready(function () {
+      toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": true,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      }
       {% if messages %}
       {% for message in messages %}
-      $.gritter.add({
-      title: '{{ message.tags }}',
-      text: '{{ message }}',
-      time: '5000',
-      close_icon: 'l-arrows-remove s16',
-      class_name: 'info-notice'
-      });
-    {% endfor %}
-    {% endif %}
+
+      toastr['{{ message.tags }}']("{{message| escape}}")
+      {% endfor %}
+      {% endif %}
     });
   </script>
 </body>
