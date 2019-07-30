@@ -55,7 +55,7 @@ class CustomSignupForm(SignupForm):
         self.fields['phone_number'].widget = PhoneNumberInternationalFallbackWidget(
             attrs={
                 'class': 'form-control',
-                'placeholder': '080xxxxxxxx'
+                'placeholder': 'Phone Number'
             }
         )
 
@@ -105,7 +105,7 @@ class CustomLoginForm(LoginForm):
 
         self.fields['remember'].widget = forms.CheckboxInput(
             attrs={
-                'class': 'chk-remember'
+                'class': 'custom-control-input'
             }
         )
 
