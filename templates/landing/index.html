@@ -1,0 +1,720 @@
+<!DOCTYPE html>{% load static %}{% now "Y" as current_year %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="assets/img/norma.ico" type="image/gif">
+
+    <!-- Title -->
+
+    <title>Agapeer | Home</title>
+
+    <!--bootstrap.min.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous" />
+    <!--bootstrap-grid.min.css-->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap-grid.min.css"
+        integrity="sha256-vl+0p/Z28RcVvC+cofUiIeYusGdOc4CXk/taqgQ2/XU=" crossorigin="anonymous" />
+    <!--owl.carousel.min.css-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+        integrity="sha256-UhQQ4fxEeABh4JrcmAJ1+16id/1dnlOEVCFOxDef9Lw=" crossorigin="anonymous" />
+    <!--owl.theme.default.min.css-->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+        integrity="sha256-kksNxjDRxd/5+jGurZUJd1sdR2v+ClrCl3svESBaJqw=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
+        integrity="sha256-RdH19s+RN0bEXdaXsajztxnALYs/Z43H/Cdm1U4ar24=" crossorigin="anonymous" />
+    <!--magnific-popup.cs-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+        integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
+    <!--fontawesome 5-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"
+        integrity="sha256-PF6MatZtiJ8/c9O9HQ8uSUXr++R9KBYu4gbNG5511WE=" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800,900&amp;display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Morphext/2.4.4/morphext.css"
+        integrity="sha256-iwSnUqgAndMlZnwFWAAzto9R/6Un2RBguZEITMb0Olk=" crossorigin="anonymous" />
+    <!--style.css-->
+    <link rel="stylesheet" href="{% static 'landing/assets/css/style.css' %}">
+    <!--responsive.css-->
+    <link rel="stylesheet" href="{% static 'landing/assets/css/responsive.css' %}">
+
+</head>
+
+<body>
+    <!--preloder-->
+    <div id="preloader">
+        <div id="status">&nbsp;</div>
+    </div>
+    <!--end preloder-->
+
+
+    <!-- Header Area Start-->
+    <header id="top-header">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+            <a class="navbar-brand" href="{% url 'landing_page' %}"><img
+                    src="{% static 'landing/assets/img/logo-n.png' %}" alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'landing_page' %}">Home</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="portfolio.html">Our Work</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact-us.html">Contact</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <!--navbar-->
+                <ul class="navbar-nav ml-auto">
+                    <li class="phone">
+                        <a href="#!" class="nav-link "><span class="phone-nav"><i class="fas fa-phone"></i>Inquire
+                                Now</span></a>
+                    </li>
+                </ul>
+            </div>
+            <!--collapse-->
+        </nav>
+        <!--nav-->
+    </header>
+    <!--Header Area End-->
+
+
+    <!--Banner Area Start-->
+    <section id="banner">
+        <div class="banner-cover-inde">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="banner-area">
+                            <div class="banner-text">
+                                <div class="table-cell">
+                                    <h1>Take your <span id="js-rotating">business, online presence, relationship</span>
+                                        to the next level with us</h1>
+                                    <p>Individuals and businesses of all sizes are using online marketing but small
+                                        businesses may
+                                        not have the type of online presence tto follow up new
+                                        customers.
+                                        Agapeer is a robust platform for convenient Airtime
+                                        Recharge/Data funding
+                                    </p>
+                                    <div class="banner-btn d-flex">
+                                        <div class="play-btn">
+                                            <a href="#!" class="btn">Learn More</a>
+                                        </div>
+                                    </div>
+                                    <!--"banner-btn-->
+                                </div>
+                                <!--table-cell-->
+                            </div>
+                            <!--banner-text-->
+                        </div>
+                    </div>
+                    <!--col-md-8-->
+                </div>
+                <!--row-->
+            </div>
+            <!--container-->
+        </div>
+    </section>
+    <!--Banner Area End-->
+
+
+    <!-- About Area Start -->
+    <section id="about">
+        <div class="content-box">
+            <!-- content title -->
+            <div class="content-title">
+                <h2>What We Do</h2>
+                <p>Building an Internet of Opportunity for Africa</p>
+            </div>
+        </div><!-- end content box -->
+        <!-- container start -->
+        <div class="container">
+            <!-- row start -->
+            <div class="about-slider owl-carousel owl-theme">
+                <div class="item-about">
+                    <div class="about-slider-item text-center card">
+                        <img src="{% static 'landing/assets/img/service/seo.png' %}" alt="icon" class="about-1">
+                        <div class="about-info">
+                            <h3>SEO Marketing</h3>
+                            <img src="{% static 'landing/assets/img/about-bottom.png' %}" alt="icon" class="abo-img">
+                            <p>It’s imperative that we balance creative, clever work while keeping client objectives
+                                front of mind. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-about">
+                    <div class="about-slider-item text-center card">
+                        <img src="{% static 'landing/assets/img/service/web.png' %}" alt="icon" class="about-1">
+                        <div class="about-info">
+                            <h3>Data funding</h3>
+                            <img src="{% static 'landing/assets/img/about-bottom.png' %}" alt="icon" class="abo-img">
+                            <p>It’s imperative that we balance creative, clever work while keeping client objectives
+                                front of mind. </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item-about">
+                    <div class="about-slider-item text-center card">
+                        <img src="{% static 'landing/assets/img/service/als.png' %}" alt="icon" class="about-1">
+                        <div class="about-info">
+                            <h3>Airtime funding</h3>
+                            <img src="{% static 'landing/assets/img/about-bottom.png' %}" alt="icon" class="abo-img">
+                            <p>It’s imperative that we balance creative, clever work while keeping client objectives
+                                front of mind.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- About Area End -->
+
+
+    <!-- veido area start -->
+    <section id="veido">
+        <!-- container start -->
+        <div class="container">
+            <!-- start row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- main play group start -->
+                    <div class="play-group">
+                        <a class="video-link" href="https://www.youtube.com/embed/qsJYrwzfd6w" data-width="1200"
+                            data-height="1080"><i class="fas fa-play"></i></a>
+                        <h5>We are changing the market trend</h5>
+                    </div><!-- main play group end -->
+                </div>
+            </div><!-- row end -->
+        </div>
+        <!--container end-->
+    </section>
+    <!-- video area end-->
+
+    <!-- Mission vision are start -->
+    <section id="mission">
+        <!-- main container start -->
+        <div class="container-fluid">
+            <!-- row 1  start -->
+            <div class="row">
+                <div class="col-md-6 col-sm-12 col-12">
+                    <!-- left side text start-->
+                    <div class="mission-text ">
+                        <h2>We are here with our individual mission of giving the best</h2>
+                        <p>Positive energy knows no boundaries. If everyone were to spread positive energy on the
+                            Internet, the world would be a much better place.
+                        </p>
+                        <!-- button start -->
+                        <div class="sub-btn d-flex">
+                            <div class="play-btn mission">
+                                <a href="#!" class="btn">Learn More</a>
+                            </div>
+                        </div><!-- button end -->
+                    </div><!-- left side text end-->
+                </div>
+                <div class="col-md-6 col-sm-12 col-12">
+                    <!-- right side img start -->
+                    <div class="mission-img">
+                        <img src="{% static 'landing/assets/img/mission.png' %}" alt="img"
+                            class="img img-responsive m-1">
+                    </div><!-- right side img end -->
+                </div>
+            </div> <!-- row 1 end -->
+            <!-- row 2 start -->
+            <div class="row">
+                <div class="col-md-6 col-sm-12 col-12">
+                    <!-- left img start -->
+                    <div class="vision-img">
+                        <img src="{% static 'landing/assets/img/vision.png' %}" alt="icon">
+                    </div><!-- left img end -->
+                </div>
+                <div class="col-md-6 col-sm-12 col-12">
+                    <!-- right side text start -->
+                    <div class="vision-text">
+                        <h2>We don't leave any stone unturned</h2>
+                        <p>
+                            We motivate people through integrity based, genuine, yet compassionate relationships based
+                            on tough love principles designed to illicit change; therefore, acting as the catalyst to
+                            keep everybody connected.
+                        </p>
+                        <!-- button start -->
+                        <div class="sub-btn d-flex ">
+                            <div class="play-btn">
+                                <a href="#!" class="btn">Learn More</a>
+                            </div>
+                        </div><!-- button end -->
+                    </div><!-- right side text end -->
+                </div>
+            </div><!-- row 2 end -->
+        </div> <!-- main container end -->
+    </section>
+    <!-- Mission vision are end -->
+
+    <!-- reason work area start -->
+    <section id="reason-work">
+        <!-- first container start -->
+        <div class="img-40">
+            <img src="{% static 'landing/assets/img/dot.png' %}" alt="img" class="dot">
+        </div>
+        <div class="container">
+            <!-- start row -->
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-12">
+                    <div class="reason-text-1">
+                        <h2>Reason to Work <br> With Us</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="reason-text-2">
+                        <p>
+                            We’re driven by curiosity, optimism, and the belief that every person can grow.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="reason-work-btn d-flex">
+                        <div class="play-btn">
+                            <a href="contact-us.html" class="btn">Contact us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom"></div>
+            </div> <!-- end row -->
+            <!-- seccend row start -->
+            <div class="row">
+                <div class="col-md-6 col-sm-12 col-12">
+                    <!-- item reason -->
+                    <div class="all-reason-item">
+                        <img src="{% static 'landing/assets/img/work/work-4.png' %}" alt="img">
+                        <div class="reason-text-3">
+                            <h5>Creative Minds</h5>
+                            <p>Motivated by the desire to achieve, not by the desire to beat others.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-12">
+                    <!-- item reason -->
+                    <div class="all-reason-item">
+                        <img src="{% static 'landing/assets/img/work/work-1.png' %}" alt="img">
+                        <div class="reason-text-3">
+                            <h5>24/7 Support</h5>
+                            <p>Satisfaction is a rating. Loyalty is a brand, we put our customers first.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-12">
+                    <!-- item reason -->
+                    <div class="all-reason-item">
+                        <img src="{% static 'landing/assets/img/work/work-3.png' %}" alt="img">
+                        <div class="reason-text-3">
+                            <h5>Clean Coding</h5>
+                            <p>
+                                Trust, honesty, humility, transparency and accountability are the building blocks of our reputation. Agapeer provides zero backdoor.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-12">
+                    <!-- item reason -->
+                    <div class="all-reason-item">
+                        <img src="{% static 'landing/assets/img/work/work-2.png' %}" alt="img">
+                        <div class="reason-text-3">
+                            <h5>We Talk Plain English</h5>
+                            <p>We want you to understand what we are doing and what the problem is. No geek-speak here!</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- seccend row end -->
+        </div><!-- first container end -->
+    </section><!-- reason work area end -->
+
+
+
+    <!-- Subscribe are start -->
+    <section id="subscribe">
+        <div class="subscribe-cover">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-12">
+                        <div class="subscribe-text wow fadeInLeft">
+                            <h5>Subscribe you email address for latest news and updates</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-12">
+                        <div class="latest-news-form wow fadeInRight">
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="Email Address..." name="email">
+                                <div class="input-group-button">
+                                    <a href="#!" class="input-group-text ">Subscribe</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Subscribe are end -->
+
+    <!-- testimonial area start -->
+    <section id="testimonial">
+        <div class="content-box-m">
+            <div class="content-title">
+                <h2>Trusted By Many</h2>
+                <p>We’re determined and creative in transforming our bold ambitions into reality.</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="all-cover-test-item">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="testimonial-item">
+                            <div class="testimonial-text">
+                                <h4>"Great Service. I will work with them again"</h4>
+                                <p>Quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
+                                    quaerat volup</p>
+                            </div>
+                            <div class="overlay-2">
+                                <div class="test-img">
+                                    <img src="{% static 'landing/assets/img/test-1.jpg' %}" alt="img"
+                                        class="img-responsive">
+                                </div>
+                                <div class="author">
+                                    <h4>Jhon Doe</h4>
+                                    <p>CTO And it</p>
+                                </div>
+                                <div class="koma">
+                                    <img src="{% static 'landing/assets/img/koma.png' %}" alt="img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="testimonial-item">
+                            <div class="testimonial-text">
+                                <h4>"Great Service. I will work with them again"</h4>
+                                <p>Quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
+                                    quaerat volup</p>
+                            </div>
+                            <div class="overlay-2">
+                                <div class="test-img">
+                                    <img src="{% static 'landing/assets/img/test-1.jpg' %}" alt="img"
+                                        class="img-responsive">
+                                </div>
+                                <div class="author">
+                                    <h4>Jhon Doe</h4>
+                                    <p>CTO And it</p>
+                                </div>
+                                <div class="koma">
+                                    <img src="{% static 'landing/assets/img/koma.png' %}" alt="img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="testimonial-item">
+                            <div class="testimonial-text">
+                                <h4>"Very energetic young entrepreneurs"</h4>
+                                <p>Quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
+                                    quaerat volup</p>
+                            </div>
+                            <div class="overlay-2">
+                                <div class="test-img">
+                                    <img src="{% static 'landing/assets/img/test-1.jpg' %}" alt="img"
+                                        class="img-responsive">
+                                </div>
+                                <div class="author">
+                                    <h4>Jhon Doe</h4>
+                                    <p>CTO And it</p>
+                                </div>
+                                <div class="koma">
+                                    <img src="{% static 'landing/assets/img/koma.png' %}" alt="img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row te-row">
+                    <div class="col-md-4 offset-md-2">
+                        <div class="testimonial-item">
+                            <div class="testimonial-text">
+                                <h4>"Quality of the works are flawless"</h4>
+                                <p>Quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
+                                    quaerat volup</p>
+                            </div>
+                            <div class="overlay-2">
+                                <div class="test-img">
+                                    <img src="{% static 'landing/assets/img/test-1.jpg' %}" alt="img"
+                                        class="img-responsive">
+                                </div>
+                                <div class="author">
+                                    <h4>Jhon Doe</h4>
+                                    <p>CTO And it</p>
+                                </div>
+                                <div class="koma">
+                                    <img src="{% static 'landing/assets/img/koma.png' %}" alt="img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="testimonial-item">
+                            <div class="testimonial-text">
+                                <h4>"I will come back again for their service"</h4>
+                                <p>Quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam
+                                    quaerat volup</p>
+                            </div>
+                            <div class="overlay-2">
+                                <div class="test-img">
+                                    <img src="{% static 'landing/assets/img/test-1.jpg' %}" alt="img"
+                                        class="img-responsive">
+                                </div>
+                                <div class="author">
+                                    <h4>Jhon Doe</h4>
+                                    <p>CTO And it</p>
+                                </div>
+                                <div class="koma">
+                                    <img src="{% static 'landing/assets/img/koma.png' %}" alt="img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testinomal area end-->
+    <!-- News & Articles are start -->
+    <section id="news-area">
+        <div class="content-box">
+            <div class="content-title">
+                <h2>News & Articles</h2>
+                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium </p>
+                <p>doloremque laudantium totam rem aperiam eaque ipsa</p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="card-2">
+                        <div class="news-2-img">
+                            <img src="{% static 'landing/assets/img/news/3.png' %}" alt="img">
+                        </div>
+                        <div class="news-head-text">
+                            <h4><a href="#">A Fruitful Retirement: Social Security Benefit</a></h4>
+                            <p>Bring to the win-win survival strategies to ensure proactive domination...</p>
+                            <div class="news-icon">
+                                <i class="far fa-clock"></i>
+                                <span>Apr 4, 2019</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="card-2">
+                        <div class="news-2-img">
+                            <img src="{% static 'landing/assets/img/news/2.png' %}" alt="img">
+                        </div>
+                        <div class="news-head-text">
+                            <h4><a href="#!">A Fruitful Retirement: Social Security Benefit</a></h4>
+                            <p>Bring to the win-win survival strategies to ensure proactive domination...</p>
+                            <div class="news-icon">
+                                <i class="far fa-clock"></i>
+                                <span>Apr 4, 2019</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                    <div class="card-2 news-mr-tr">
+                        <div class="news-2-img">
+                            <img src="{% static 'landing/assets/img/news/3.png' %}" alt="img">
+                        </div>
+                        <div class="news-head-text">
+                            <h4><a href="#!">A Fruitful Retirement: Social Security Benefit</a></h4>
+                            <p>Bring to the win-win survival strategies to ensure proactive domination...</p>
+                            <div class="news-icon">
+                                <i class="far fa-clock"></i>
+                                <span>Apr 4, 2019</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12  di-no">
+                    <div class="card-2 news-mr-tr">
+                        <div class="news-2-img">
+                            <img src="{% static 'landing/assets/img/news/3.png' %}" alt="img">
+                        </div>
+                        <div class="news-head-text">
+                            <h4><a href="#!">A Fruitful Retirement: Social Security Benefit</a></h4>
+                            <p>Bring to the win-win survival strategies to ensure proactive domination...</p>
+                            <div class="news-icon">
+                                <i class="far fa-clock"></i>
+                                <span>Apr 4, 2019</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- button start -->
+                <div class="news-btn d-flex">
+                    <div class="play-btn btn-work">
+                        <a href="#?" class="btn">More Blogs</a>
+                    </div>
+                </div> <!-- button end -->
+            </div>
+        </div>
+    </section>
+    <!-- News & Articles are end -->
+    <!-- footer start -->
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <div class="footer-icon">
+                        <div class="footer-img">
+                            <img src="{% static 'landing/assets/img/logo-n.png' %}" alt="logo">
+                        </div>
+                        <div class="footer-para">
+                            <p>Ochui Princewill © {{ current_year }}. All Rights Reserved</p>
+                        </div>
+                        <div class="fot-icon">
+                            <a href="#!" title="facebook"><img src="{% static 'landing/assets/img/footer/1.png' %}"
+                                    alt="icon"></a>
+                            <a href="#!" title="twitter"><img src="{% static 'landing/assets/img/footer/2.png' %}"
+                                    alt="icon"></a>
+                            <a href="#!" title="instagram"><img src="{% static 'landing/assets/img/footer/3.png' %}"
+                                    alt="icon"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6 col-xs-12">
+                    <div class="company">
+                        <div class="foot-hade">
+                            <h3>COMPANY</h3>
+                        </div>
+                        <div class="com-item">
+                            <ul class="f-item">
+
+                                <li><a href="#!">About</a></li>
+
+                                <li><a href="#!">Career</a></li>
+
+                                <li><a href="#!">News</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="service">
+                        <div class="foot-hade">
+                            <h3>SERVICES</h3>
+                        </div>
+                        <div class="ser-item">
+                            <ul class="f-item">
+
+                                <li><a href="#!">SEO Marketing</a></li>
+
+
+                                <li><a href="#!">UX Design</a></li>
+
+
+                                <li><a href="#!">Web Development</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="support">
+                        <div class="foot-hade">
+                            <h3>SUPPORT</h3>
+                        </div>
+                        <div class="sup-item">
+                            <ul class="f-item">
+
+                                <li><a href="#!">Policy</a></li>
+
+
+                                <li><a href="#!">Forum</a></li>
+
+
+                                <li><a href="#!">Anti-Piracy</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer End -->
+
+
+    <!-- Jquery.min.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!--bootstrap.min.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
+    <!--owl-carousel.min.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+        integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
+    <!--wow.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"
+        integrity="sha256-z6FznuNG1jo9PP3/jBjL6P3tvLMtSwiVAowZPOgo56U=" crossorigin="anonymous"></script>
+    <!--magnify-popup	-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"
+        integrity="sha256-P93G0oq6PBPWTP1IR8Mz/0jHHUpaWL0aBJTKauisG7Q=" crossorigin="anonymous"></script>
+    <!--	modernizr.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
+        integrity="sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Morphext/2.4.4/morphext.min.js"
+        integrity="sha256-qG3zvg7/f5CZHwV8IeaQfBY5Hm+M0KR3PMk9lAHp39s=" crossorigin="anonymous"></script>
+    <!--custom.js-->
+    <script src="{% static 'landing/assets/js/custom.js' %}"></script>
+    <script>
+        $("#js-rotating").Morphext({
+            // The [in] animation type. Refer to Animate.css for a list of available animations.
+            animation: "bounceIn",
+            // An array of phrases to rotate are created based on this separator. Change it if you wish to separate the phrases differently (e.g. So Simple | Very Doge | Much Wow | Such Cool).
+            separator: ",",
+            // The delay between the changing of each phrase in milliseconds.
+            speed: 3000,
+            complete: function () {
+                // Called after the entrance animation is executed.
+            }
+        });
+    </script>
+
+</body>
+
+</html>
