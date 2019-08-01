@@ -1,112 +1,8 @@
-<!DOCTYPE html>{% load static %}{% now "Y" as current_year %}
-<html lang="en">
-
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="assets/img/norma.ico" type="image/gif">
-
-    <!-- Title -->
-
-    <title>Agapeer | Home</title>
-
-    <!--bootstrap.min.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous" />
-    <!--bootstrap-grid.min.css-->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap-grid.min.css"
-        integrity="sha256-vl+0p/Z28RcVvC+cofUiIeYusGdOc4CXk/taqgQ2/XU=" crossorigin="anonymous" />
-    <!--owl.carousel.min.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-        integrity="sha256-UhQQ4fxEeABh4JrcmAJ1+16id/1dnlOEVCFOxDef9Lw=" crossorigin="anonymous" />
-    <!--owl.theme.default.min.css-->
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
-        integrity="sha256-kksNxjDRxd/5+jGurZUJd1sdR2v+ClrCl3svESBaJqw=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
-        integrity="sha256-RdH19s+RN0bEXdaXsajztxnALYs/Z43H/Cdm1U4ar24=" crossorigin="anonymous" />
-    <!--magnific-popup.cs-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
-        integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
-    <!--fontawesome 5-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"
-        integrity="sha256-PF6MatZtiJ8/c9O9HQ8uSUXr++R9KBYu4gbNG5511WE=" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800,900&amp;display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Morphext/2.4.4/morphext.css"
-        integrity="sha256-iwSnUqgAndMlZnwFWAAzto9R/6Un2RBguZEITMb0Olk=" crossorigin="anonymous" />
-    <!--style.css-->
-    <link rel="stylesheet" href="{% static 'landing/assets/css/style.css' %}">
-    <!--responsive.css-->
-    <link rel="stylesheet" href="{% static 'landing/assets/css/responsive.css' %}">
-
-</head>
-
-<body>
-    <!--preloder-->
-    <div id="preloader">
-        <div id="status">&nbsp;</div>
-    </div>
-    <!--end preloder-->
-
-
-    <!-- Header Area Start-->
-    <header id="top-header">
-        <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-            <a class="navbar-brand" href="{% url 'landing_page' %}"><img
-                    src="{% static 'landing/assets/img/logo-n.png' %}" alt="logo"></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'landing_page' %}">Home</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="portfolio.html">Our Work</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact-us.html">Contact</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_login' %}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
-                    </li>
-                    {% endif %}
-                </ul>
-                <!--navbar-->
-                <ul class="navbar-nav ml-auto">
-                    <li class="phone">
-                        <a href="#!" class="nav-link "><span class="phone-nav"><i class="fas fa-phone"></i>Inquire
-                                Now</span></a>
-                    </li>
-                </ul>
-            </div>
-            <!--collapse-->
-        </nav>
-        <!--nav-->
-    </header>
-    <!--Header Area End-->
-
-
+{% extends 'base/landing_base.html' %}{% load static %}
+{% block navbar %}
+{% include 'partials/landing_navbar.html' with page=page %}
+{% endblock navbar %}
+{% block content %}
     <!--Banner Area Start-->
     <section id="banner">
         <div class="banner-cover-inde">
@@ -356,8 +252,6 @@
         </div><!-- first container end -->
     </section><!-- reason work area end -->
 
-
-
     <!-- Subscribe are start -->
     <section id="subscribe">
         <div class="subscribe-cover">
@@ -512,6 +406,7 @@
         </div>
     </section>
     <!-- Testinomal area end-->
+
     <!-- News & Articles are start -->
     <section id="news-area">
         <div class="content-box">
@@ -593,128 +488,5 @@
         </div>
     </section>
     <!-- News & Articles are end -->
-    <!-- footer start -->
-    <footer id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="footer-icon">
-                        <div class="footer-img">
-                            <img src="{% static 'landing/assets/img/logo-n.png' %}" alt="logo">
-                        </div>
-                        <div class="footer-para">
-                            <p>Ochui Princewill © {{ current_year }}. All Rights Reserved</p>
-                        </div>
-                        <div class="fot-icon">
-                            <a href="#!" title="facebook"><img src="{% static 'landing/assets/img/footer/1.png' %}"
-                                    alt="icon"></a>
-                            <a href="#!" title="twitter"><img src="{% static 'landing/assets/img/footer/2.png' %}"
-                                    alt="icon"></a>
-                            <a href="#!" title="instagram"><img src="{% static 'landing/assets/img/footer/3.png' %}"
-                                    alt="icon"></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-2 col-sm-6 col-xs-12">
-                    <div class="company">
-                        <div class="foot-hade">
-                            <h3>COMPANY</h3>
-                        </div>
-                        <div class="com-item">
-                            <ul class="f-item">
-
-                                <li><a href="#!">About</a></li>
-
-                                <li><a href="#!">Career</a></li>
-
-                                <li><a href="#!">News</a></li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="service">
-                        <div class="foot-hade">
-                            <h3>SERVICES</h3>
-                        </div>
-                        <div class="ser-item">
-                            <ul class="f-item">
-
-                                <li><a href="#!">SEO Marketing</a></li>
-
-
-                                <li><a href="#!">UX Design</a></li>
-
-
-                                <li><a href="#!">Web Development</a></li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-sm-6 col-xs-12">
-                    <div class="support">
-                        <div class="foot-hade">
-                            <h3>SUPPORT</h3>
-                        </div>
-                        <div class="sup-item">
-                            <ul class="f-item">
-
-                                <li><a href="#!">Policy</a></li>
-
-
-                                <li><a href="#!">Forum</a></li>
-
-
-                                <li><a href="#!">Anti-Piracy</a></li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- footer End -->
-
-
-    <!-- Jquery.min.js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <!--bootstrap.min.js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"
-        integrity="sha256-VsEqElsCHSGmnmHXGQzvoWjWwoznFSZc6hs7ARLRacQ=" crossorigin="anonymous"></script>
-    <!--owl-carousel.min.js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
-        integrity="sha256-pTxD+DSzIwmwhOqTFN+DB+nHjO4iAsbgfyFq5K5bcE0=" crossorigin="anonymous"></script>
-    <!--wow.js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"
-        integrity="sha256-z6FznuNG1jo9PP3/jBjL6P3tvLMtSwiVAowZPOgo56U=" crossorigin="anonymous"></script>
-    <!--magnify-popup	-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"
-        integrity="sha256-P93G0oq6PBPWTP1IR8Mz/0jHHUpaWL0aBJTKauisG7Q=" crossorigin="anonymous"></script>
-    <!--	modernizr.js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
-        integrity="sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Morphext/2.4.4/morphext.min.js"
-        integrity="sha256-qG3zvg7/f5CZHwV8IeaQfBY5Hm+M0KR3PMk9lAHp39s=" crossorigin="anonymous"></script>
-    <!--custom.js-->
-    <script src="{% static 'landing/assets/js/custom.js' %}"></script>
-    <script>
-        $("#js-rotating").Morphext({
-            // The [in] animation type. Refer to Animate.css for a list of available animations.
-            animation: "bounceIn",
-            // An array of phrases to rotate are created based on this separator. Change it if you wish to separate the phrases differently (e.g. So Simple | Very Doge | Much Wow | Such Cool).
-            separator: ",",
-            // The delay between the changing of each phrase in milliseconds.
-            speed: 3000,
-            complete: function () {
-                // Called after the entrance animation is executed.
-            }
-        });
-    </script>
-
-</body>
-
-</html>
+ 
+{% endblock content %}

@@ -1,0 +1,303 @@
+{% extends 'base/landing_base.html' %}{% load static %}
+{% block navbar %}
+{% include 'partials/landing_navbar.html' with page=page %}
+{% endblock navbar %}
+{% block content %}
+	<!--Banner Area Start-->
+	<section id="content-banner">
+		<div class="content-cover">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="content-banner-area">
+							<h1>About us</h1>
+							<h6>
+								<a href="{% url 'landing_page' %}">Home</a>
+								<i class="fas fa-angle-right"></i>
+								<a href="#!">About</a>
+							</h6>
+						</div>
+					</div>
+					<!--col-md-6-->
+				</div>
+				<!--row-->
+			</div>
+			<!--container-->
+		</div>
+	</section>
+	<!--Banner Area End-->
+
+	<!-- About company start-->
+	<section id="about-story">
+		<div class="about-story-cover">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 offset-md-2 col-sm-12 col-12">
+						<div class="about-story-img">
+							<img src="{% static 'landing/assets/img/about/ab-m.png' %}" alt="img">
+						</div>
+					</div>
+				</div>
+				<div class="about-story-heading text-center">
+					<h2>Our Story</h2>
+					<p>We have great story to tell you</p>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-sm-12 col-12">
+						<div class="about-story-info">
+							<p>
+                                The Internet in Africa is limited by a lower penetration rate when compared to the rest of the world. Measurable parameters such as the number of ISP subscriptions, overall number of hosts, IXP-traffic, and overall available bandwidth all indicate that Africa is way behind the "digital divide". 
+                                Also a large section of Internet traffic in Africa goes through expensive satellite links making .
+							</p>
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-12 col-12">
+						<div class="about-story-info">
+							<p>
+								A basic broadband connection is most expensive in Africa of all the regions around the world. This is according to an update of the 2017 Affordability Report from the Alliance for Affordable Internet (A4AI) which the internet lobby group says it compiled using more recent pricing and income data.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- About company  end-->
+
+	<!-- Mission vision are start -->
+	<section id="mission">
+		<!-- main container start -->
+		<div class="container-fluid">
+			<!-- row 1  start -->
+			<div class="row">
+				<div class="col-md-6">
+					<!-- left side text start-->
+					<div class="mission-text">
+						<h2>We are here with our individual mission of giving the bes</h2>
+						<p>
+                            We sit on the same side of the table as YOU to provide business solutions to business problems. We don’t try to sell you the latest techno gizmo – instead – we listen to your business problem and offer several strategies to resolve the ROOT of the problem and achieve your objectives.
+                        </p>
+						<!-- button start -->
+						<div class="sub-btn d-flex">
+							<div class="play-btn mission">
+								<a href="{% url 'dashboard' %}" class="btn">Get Started</a>
+							</div>
+						</div><!-- button end -->
+					</div><!-- left side text end-->
+				</div>
+				<div class="col-md-6">
+					<!-- right side img start -->
+					<div class="mission-img">
+						<img src="{% static 'landing/assets/img/mission.png' %}" alt="img" class="img img-responsive m-1">
+					</div><!-- right side img end -->
+				</div>
+			</div> <!-- row 1 end -->
+			<!-- row 2 start -->
+			<div class="row">
+				<div class="col-md-6">
+					<!-- left img start -->
+					<div class="vision-img">
+						<img src="{% static 'landing/assets/img/vision.png' %}" alt="icon">
+					</div><!-- left img end -->
+				</div>
+				<div class="col-md-6">
+					<!-- right side text start -->
+					<div class="vision-text ">
+						<h2>We don't leave any stone unturned</h2>
+						<p>
+                        Unlike others in our industry, we can prove and show you how we deliver Peace of Mind, Less Downtime, Faster Problem Resolution, Privacy Protection, Money Savings, Streamlined Communications, and Simplicity in our services for you.
+                        </p>
+						<!-- button start -->
+						<div class="sub-btn d-flex">
+							<div class="play-btn mission">
+								<a href="{% url 'dashboard' %}" class="btn">Get Started</a>
+							</div>
+						</div><!-- button end -->
+					</div><!-- right side text end -->
+				</div>
+			</div><!-- row 2 end -->
+		</div> <!-- main container end -->
+	</section>
+	<!-- Mission vision are end -->
+
+	<!-- veido area start -->
+	<section id="veido">
+		<!-- container start -->
+		<div class="container">
+			<!-- start row -->
+			<div class="row">
+				<div class="col-md-12">
+					<!-- main play group start -->
+					<div class="play-group">
+						<a class="video-link" href="https://www.youtube.com/embed/qsJYrwzfd6w" data-width="1200" data-height="1080"><i class="fas fa-play"></i></a>
+						<h5>We are changing the market trend</h5>
+					</div><!-- main play group end -->
+				</div>
+			</div><!-- row end -->
+		</div>
+		<!--container end-->
+	</section>
+	<!-- veido area end-->
+
+	<!--Team start-->
+	<section id="team-member">
+		<div class="team-heading text-center">
+			<h2>Meet the Team</h2>
+		</div>
+		<div class="team-dot-img">
+			<img src="{% static 'landing/assets/img/dot.png' %}" alt="img">
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-sm-6 col-12">
+					<div class="team-img text-center">
+						<img src="{% static 'landing/assets/img/team/1.png' %}" alt="img" class="team-imges">
+						<div class="overlay-team">
+							<div class="team_icon">
+								<a href="#!"><img src="{% static 'landing/assets/img/team/icon.png' %}" alt="Icon"></a>
+							</div>
+							<div class="social-icon">
+								<a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+								<a href="#" title="Linkedin"><i class="fab fa-linkedin-in"></i></a>
+								<a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="team-info text-center">
+						<h4>Palu Harris</h4>
+						<p>Cheif Audit officer</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6 col-12">
+					<div class="team-img text-center">
+						<img src="{% static 'landing/assets/img/team/2.png' %}" alt="img" class="team-imges">
+						<div class="overlay-team">
+							<div class="team_icon">
+								<a href="#!"><img src="{% static 'landing/assets/img/team/icon.png' %}" alt="Icon"></a>
+							</div>
+							<div class="social-icon">
+								<a href="#!" title="Twitter"><i class="fab fa-twitter"></i></a>
+								<a href="#!" title="Linkedin"><i class="fab fa-linkedin-in"></i></a>
+								<a href="#!" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="team-info text-center">
+						<h4>Palu Harris</h4>
+						<p>Cheif Audit officer</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6 col-12">
+					<div class="team-img text-center">
+						<img src="{% static 'landing/assets/img/team/3.png' %}" alt="img" class="team-imges">
+						<div class="overlay-team">
+							<div class="team_icon">
+								<a href="#!"><img src="{% static 'landing/assets/img/team/icon.png' %}" alt="Icon"></a>
+							</div>
+							<div class="social-icon">
+								<a href="#!" title="Twitter"><i class="fab fa-twitter"></i></a>
+								<a href="#!" title="Linkedin"><i class="fab fa-linkedin-in"></i></a>
+								<a href="#!" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="team-info text-center">
+						<h4>Palu Harris</h4>
+						<p>Cheif Audit officer</p>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-6 col-12 dis-ni">
+					<div class="team-img text-center">
+						<img src="{% static 'landing/assets/img/team/3.png' %}" alt="img" class="team-imges">
+						<div class="overlay-team">
+							<div class="team_icon">
+								<a href="#!"><img src="{% static 'landing/assets/img/team/icon.png' %}" alt="Icon"></a>
+							</div>
+							<div class="social-icon">
+								<a href="#!" title="Twitter"><i class="fab fa-twitter"></i></a>
+								<a href="#!" title="Linkedin"><i class="fab fa-linkedin-in"></i></a>
+								<a href="#!" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="team-info text-center">
+						<h4>Palu Harris</h4>
+						<p>Cheif Audit officer</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="sub-btn work-btn d-flex">
+			
+		</div>
+	</section>
+	<!--Team end-->
+	<!--About-info start-->
+	<section id="about-info-l">
+		<div class="about-cor-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-12">
+						<div class="about-info-img text-center">
+							<img src="{% static 'landing/assets/img/about/ab-l.png' %}" alt="img">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom-info">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-12">
+						<div class="about-designation text-center">
+							<h4>JOIN US</h4>
+							<h2>Interested in Working With Us?</h2>
+						</div>
+						<div class="about-info-btn text-center">
+							{% if user.is_authenticated %}
+                            <div class="about-btn ">
+								<a href="{% url 'dashboard' %}" class="btn">My Account</a>
+							</div>
+                            {% else %}
+                            <div class="about-btn ">
+								<a href="{% url 'account_login' %}" class="btn">Login</a>
+							</div>
+							<div class="about-btn">
+								<a href="{% url 'account_signup' %}" class="btn-2">Register</a>
+							</div>
+                            {% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--About-info end-->
+	<!-- Subscribe are start -->
+	<section id="subscribe">
+		<div class="subscribe-cover-p">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="subscribe-text  wow fadeInLeft">
+							<h5 class="about_sub">Subscribe you email address for latest news and update</h5>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="latest-news-form  wow fadeInRight">
+							<div class="input-group">
+								<input type="email" class="form-control" placeholder="Email Address..." name="email">
+								<div class="input-group-button">
+									<a href="#!" class="input-group-text ">Subscribe</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Subscribe are end -->
+
+{% endblock content %}

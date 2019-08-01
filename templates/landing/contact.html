@@ -1,0 +1,117 @@
+{% extends 'base/landing_base.html' %}{% load static %}
+{% block navbar %}
+{% include 'partials/landing_navbar.html' with page=page %}
+{% endblock navbar %}
+{% block content %}
+	<!--Banner Area Start-->
+	<section id="content-banner">
+		<div class="content-cover">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="content-banner-area">
+							<h1>Contact</h1>
+							<h6>
+								<a href="{% url 'landing_page' %}">Home</a>
+								<i class="fas fa-angle-right"></i>
+								<a href="#!">Contact</a>
+							</h6>
+						</div>
+					</div>
+					<!--col-md-6-->
+				</div>
+				<!--row-->
+			</div>
+			<!--container-->
+		</div>
+	</section>
+	<!--Banner Area End-->
+
+	<!-- contact main content start-->
+	<section id="contact-us">
+		<!-- google map start-->
+		<div class="map-area">
+			{% comment %} <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3677.6962663570607!2d89.56355961427838!3d22.813715829827952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ff901efac79b59%3A0x5be01a1bc0dc7eba!2sAnd+IT!5e0!3m2!1sen!2sbd!4v1557901943656!5m2!1sen!2sbd" ></iframe> {% endcomment %}
+            <iframe src="https://maps.google.com/maps?q=uuniversity%20of%20uyo&t=&z=13&ie=UTF8&iwloc=&output=embed" width="600" height="450" allowfullscreen></iframe>
+		</div>
+		<!-- google map end-->
+		<div class="container">
+			<div class="eamil-submit-two">
+				<div class="contact-heading-two text-center">
+					<h5>Get in touch</h5>
+				</div>
+				<div class="row">
+					<div class="col-md-4 col-sm-6 col-12">
+						<div class="con-1">
+							<div class="con-al-info">
+								<img src="{% static 'landing/assets/img/contact/1.png' %}" alt="img" class="img-responsive">
+								<p>Royel 27 khulna 9100, Bangladesh</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6 col-12">
+						<div class="con-1">
+							<div class="con-al-info mc-ac-ca">
+								<img src="{% static 'landing/assets/img/contact/2.png' %}" alt="img" class="img-responsive">
+								<div class="con-info">
+									<p>+123 (2486) 567</p>
+									<p>+123 (2486) 567</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6 col-12">
+						<div class="con-1">
+							<div class="con-al-info">
+								<img src="{% static 'landing/assets/img/contact/3.png' %}" alt="img" class="img-responsive">
+								<div class="con-info-2">
+									<p>mailexample@gmail.com</p>
+									<p>infomail@gmail.com</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="contact-heading-two text-center">
+					<h5 class="leave">Leave us a message</h5>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="blog-contact-form main-contact">
+							<form id="contact-form">
+								<div class="d-flex justify-content-between">
+									<div class="form-group flex-fill">
+										<label for="name">Full Name <span>*</span></label>
+										<input type="text" class="form-control" id="name" required>
+									</div>
+									<div class="form-group blog-for-email con-man-pa flex-fill">
+										<label for="email">Email <span>*</span></label>
+										<input type="email" class="form-control" id="email" required>
+									</div>
+									<div class="form-group flex-fill">
+										<label for="url">Website <span>*</span></label>
+										<input type="url" class="form-control" id="url" required>
+									</div>
+								</div>
+								<div class="blog-text-area flex-fill">
+									<label for="message">Write a Message <span>*</span></label>
+									<textarea rows="5" class="form-control" id="message" required></textarea>
+								</div>
+								<div class="contact-form0submit-btn text-center">
+									<button type="button" class="btn contactsuccess">Submit Message</button>
+								</div>
+								<div class="sending-gif" style="display: none">
+									<img src="assets/img/loading.gif" alt="send-gif">
+								</div>
+							</form>
+							<div class="success-msg alert alert-success" style="display: none">
+								<strong>Success!</strong> Email Send Succesfully.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- contact main content end-->
+{% endblock content %}
