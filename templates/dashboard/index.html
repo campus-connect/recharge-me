@@ -57,7 +57,6 @@
                                     <th class="border-top-0">Status</th>
                                     <th class="border-top-0">Date</th>
                                     <th class="border-top-0">Amount</th>
-                                    <th class="border-top-0">Type</th>
                                     <th class="border-top-0">Details</th>
                                 </tr>
                             </thead>
@@ -68,10 +67,9 @@
                                         {{transaction.status}}</td>
                                     <td class="text-truncate"><a href="#">{{transaction.created}}</a></td>
                                     <td class="text-truncate">
-                                        <a href="#" class="mb-0 btn-sm btn btn-outline-success round">Deposit</a>
+                                        {{transaction.amount}}
                                     </td>
-                                    <td class="text-truncate p-1">5.34111</td>
-                                    <td class="text-truncate">{{transaction.descriptions}}</td>
+                                    <td class="text-truncate">{{transaction.description}}</td>
                                 </tr>{% endfor %}
                             </tbody>
                         </table>
@@ -88,19 +86,17 @@
             <div class="card">
                 <div class="card-content">
                     <img class="img-fluid"
-                        src="https://pixinvent.com/demo/crypto-ico-admin/app-assets/images/pages/blog-post.png"
+                        src="https://i0.wp.com/www.scholarsammo.com/wp-content/uploads/2019/06/sussex.jpg?w=620&ssl=1"
                         alt="Card image cap">
                     <div class="card-body">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
-                        <a href="#" class="card-link">Another link</a>
+                        <p class="card-text">Sussex Excellence Scholarship for International Students in the UK 2019</p>
+                        <a href="https://www.sussex.ac.uk/study/fees-funding/undergraduate-scholarships/view/966-Sussex-Excellence-Scholarship" class="card-link">Learn more</a>
+                        <a href="https://www.sussex.ac.uk/study/undergraduate/apply" class="card-link">Apply</a>
                     </div>
                 </div>
                 <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
-                    <span class="float-left">3 hours ago</span>
                     <span class="float-right">
-                        <a href="#" class="card-link">Read More <i class="fa fa-angle-right"></i></a>
+                        <a href="https://www.scholarsammo.com/" class="card-link">More Scholarships <i class="fa fa-angle-right"></i></a>
                     </span>
                 </div>
             </div>
@@ -111,107 +107,7 @@
                 <div class="card-content">
                     <div class="card-body">
                         <div class="card-text">
-                            <section class="cd-horizontal-timeline">
-                                <div class="timeline">
-                                    <div class="events-wrapper">
-                                        <div class="events">
-                                            <ol>
-                                                <li><a href="#0" data-date="16/01/2018" class="selected">16 Jan</a></li>
-                                                <li><a href="#0" data-date="28/02/2018">28 Feb</a></li>
-                                                <li><a href="#0" data-date="20/04/2018">20 Mar</a></li>
-                                                <li><a href="#0" data-date="20/05/2018">20 May</a></li>
-                                                <li><a href="#0" data-date="09/07/2018">09 Jul</a></li>
-                                                <li><a href="#0" data-date="30/08/2018">30 Aug</a></li>
-                                                <li><a href="#0" data-date="15/09/2018">15 Sep</a></li>
-                                            </ol>
-                                            <span class="filling-line" aria-hidden="true"></span>
-                                        </div>
-                                        <!-- .events -->
-                                    </div>
-                                    <!-- .events-wrapper -->
-                                    <ul class="cd-timeline-navigation">
-                                        <li><a href="#0" class="prev inactive">Prev</a></li>
-                                        <li><a href="#0" class="next">Next</a></li>
-                                    </ul>
-                                    <!-- .cd-timeline-navigation -->
-                                </div>
-                                <!-- .timeline -->
-                                <div class="events-content">
-                                    <ol>
-                                        <li class="selected" data-date="16/01/2018">
-                                            <blockquote class="blockquote border-0">
-                                                <p class="text-bold-600">Crypto ICO platform idea</p>
-                                            </blockquote>
-                                            <p class="lead mt-2">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
-                                                praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci?
-                                                Consequuntur aspernatur at.
-                                            </p>
-                                        </li>
-                                        <li data-date="28/02/2018">
-                                            <blockquote class="blockquote border-0">
-                                                <p class="text-bold-600">Technical & strategy development</p>
-                                            </blockquote>
-                                            <p class="lead mt-2">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
-                                                praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci?
-                                                Consequuntur aspernatur at.
-                                            </p>
-                                        </li>
-                                        <li data-date="20/04/2018">
-                                            <blockquote class="blockquote border-0">
-                                                <p class="text-bold-600">ICO Launched</p>
-                                            </blockquote>
-                                            <p class="lead mt-2">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
-                                                praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci?
-                                                Consequuntur aspernatur at.
-                                            </p>
-                                        </li>
-                                        <li data-date="20/05/2018">
-                                            <blockquote class="blockquote border-0">
-                                                <p class="text-bold-600">Crypto ICO beta version launched</p>
-                                            </blockquote>
-                                            <p class="lead mt-2">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
-                                                praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci?
-                                                Consequuntur aspernatur at.
-                                            </p>
-                                        </li>
-                                        <li data-date="09/07/2018">
-                                            <blockquote class="blockquote border-0">
-                                                <p class="text-bold-600">Mobile apps for iOS & Android</p>
-                                            </blockquote>
-                                            <p class="lead mt-2">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
-                                                praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci?
-                                                Consequuntur aspernatur at.
-                                            </p>
-                                        </li>
-                                        <li data-date="30/08/2018">
-                                            <blockquote class="blockquote border-0">
-                                                <p class="text-bold-600">Partnership with business merchant</p>
-                                            </blockquote>
-                                            <p class="lead mt-2">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
-                                                praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci?
-                                                Consequuntur aspernatur at.
-                                            </p>
-                                        </li>
-                                        <li data-date="15/09/2018">
-                                            <blockquote class="blockquote border-0">
-                                                <p class="text-bold-600">Launch live paltform</p>
-                                            </blockquote>
-                                            <p class="lead mt-2">
-                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
-                                                praesentium officia, fugit recusandae ipsa, quia velit nulla adipisci?
-                                                Consequuntur aspernatur at.
-                                            </p>
-                                        </li>
-                                    </ol>
-                                </div>
-                                <!-- .events-content -->
-                            </section>
+                            
                         </div>
                     </div>
                 </div>

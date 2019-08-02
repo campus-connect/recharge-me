@@ -1,4 +1,4 @@
-{% extends 'base/dashboard_base.html' %}{% load referral_link karma static avatar_tags %}
+{% extends 'base/dashboard_base.html' %}{% load referral_link karma static avatar_tags app_filters %}
 {% block breadcrumb %}
 {% include 'partials/breadcrumb.html' with current_page_name="Account Profile" %}
 {% endblock breadcrumb %}
@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="col-6">
                                         <fieldset class="form-label-group">
-                                            <input type="text" class="form-control" value={{user.task}}  disabled autofocus="">
+                                            <input type="text" class="form-control" value="{{user.task| task_filter}}"  disabled autofocus="">
                                             <label for="old-password">Task</label>
                                         </fieldset>
                                     </div>
@@ -82,9 +82,7 @@
                                         </fieldset>
                                     </div>
                                 </form>
-                                <p>This is your Crypto ICO referral link. You can use it to share the project with your friends and other interested parties. 
-                                If any of them sign up with this link, they will get reward amounts to 1% and will be added to your referral program. 
-                                Your reward amounts to 5.0% of all ICI tokens purchased by your referrals.</p>
+                                <p>This is your Agapeer referral link. You can use it to share the project with your friends and other interested parties.</p>
                             </div>
                         </div>
                     </div>
@@ -93,47 +91,20 @@
         </section>
     </div>
     <div class="col-12 col-md-4">
+        {% karma %}
         <div class="card">
             <div class="card-header">
-                <h6 class="card-title text-center">Queue</h6>
+                <h6 class="card-title text-center">Ads</h6>
             </div>
             <div class="card-content collapse show">
                 <div class="card-body">
-                    <div class="text-center row clearfix mb-2">
-                        <div class="col-12">
-                            <i class="bg-warning bg-glow white rounded-circle p-3 d-inline-block">10</i>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-de mb-0">
-                        <tbody>
-                            <tr>
-                                <td>CIC Token</td>
-                                <td><i class="icon-layers"></i> 3,258 CIC</td>
-                            </tr>
-                            <tr>
-                                <td>CIC Referral</td>
-                                <td><i class="icon-layers"></i> 200.88 CIC</td>
-                            </tr>
-                            <tr>
-                                <td>CIC Price</td>
-                                <td><i class="cc BTC-alt"></i> 0.0001 BTC</td>
-                            </tr>
-                            <tr>
-                                <td>Raised BTC</td>
-                                <td><i class="cc BTC-alt"></i> 2154 BTC</td>
-                            </tr>
-                            <tr>
-                                <td>Raised USD</td>
-                                <td><i class="la la-dollar"></i> 4.52 M</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    
                 </div>
             </div>
         </div>
-        {% karma %}
     </div>
 </div>
         </div>

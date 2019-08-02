@@ -15,16 +15,16 @@
                 <div class="col-md-2 col-12 py-1">
                   <p class="mb-0">Date</p>
                 </div>
-                <div class="col-md-2 col-12 py-1">
+                {% comment %} <div class="col-md-2 col-12 py-1">
                   <p class="mb-0">Type</p>
-                </div>
+                </div> {% endcomment %}
                 <div class="col-md-2 col-12 py-1">
                   <p class="mb-0">Amount</p>
                 </div>
                 <div class="col-md-2 col-12 py-1">
                   <p class="mb-0">Status</p>
                 </div>
-                <div class="col-md-4 col-12 py-1">
+                <div class="col-md-6 col-12 py-1">
                   <p class="mb-0">Details</p>
                 </div>
               </div>
@@ -39,16 +39,16 @@
                       <div class="col-md-2 col-12 py-1">
                         <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Date: </span>{{transaction_log.created}}</p>
                       </div>
-                      <div class="col-md-2 col-12 py-1">
+                      {% comment %} <div class="col-md-2 col-12 py-1">
                         <span class="d-inline-block d-md-none text-bold-700">Type: </span> <span class="d-inline-block d-md-none text-bold-700">Type: </span> <a href="#" class="mb-0 btn-sm btn btn-outline-warning round">Deposit</a>
-                      </div>
+                      </div> {% endcomment %}
                       <div class="col-md-2 col-12 py-1">
                         <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Amount: </span> {{transaction_log.amount}} </p>
                       </div>
                       <div class="col-md-2 col-12 py-1">
-                        <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Status: </span> <span class="d-inline-block d-md-none text-bold-700">Type: </span> <a href="#" class="mb-0 btn-sm btn btn-outline-warning round">{{transaction_log.status}}</a>
+                        <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Status: </span> <span class="d-inline-block d-md-none text-bold-700">Type: </span> <a href="#" class="mb-0 btn-sm btn btn-outline-info round">{{transaction_log.status}}</a>
                       </div>
-                      <div class="col-md-4 col-12 py-1">
+                      <div class="col-md-6 col-12 py-1">
                         <p class="mb-0"><span class="d-inline-block d-md-none text-bold-700">Details: </span> {{transaction_log.description}}<i class="la la-thumbs-up warning float-right"></i></p>
                       </div>
                     </div>

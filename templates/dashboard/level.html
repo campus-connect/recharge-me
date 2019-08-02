@@ -1,4 +1,4 @@
-{% extends 'base/dashboard_base.html' %}{% load static karma %}
+{% extends 'base/dashboard_base.html' %}{% load static karma  avatar_tags %}
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/pages/buy-ico.min.css' %}">
@@ -23,7 +23,7 @@
                 <div class="col-md-5 col-xl-6 col-6">
                   <p><strong>Earnings:</strong></p>
                   <h1>N{{user.amount_received}}</h1>
-                  <p class="mb-0">Welcome bonus <strong>+30%</strong> expires in 21 days.</p>
+                  <p class="mb-0">Contributed <strong>N{{user.amount_received}}</strong> in {{user.date_joined|timesince}}</p>
                 </div>
                 <div class="col-md-4 col-xl-4 col-3 text-right">
                   <button type="submit" class="btn-gradient-secondary mt-2">{% if user.level %}Uneroll{% else %}Enroll{% endif %} <i class="la la-angle-right"></i></button>
@@ -37,8 +37,7 @@
       </div>
     </section>
     <!--/ CIC -->
-    <h3 class="mt-4">Packages</h3>
-    <p>To buy tokens, transfer ETH or BTC to your personal deposit address:</p>
+    <h3 class="mt-4">Levels</h3>
     {% for level in level_list %}
     <!-- Level -->
     <section class="card {% if level.id == user.level.id %}level-active{% endif %}">
@@ -57,7 +56,9 @@
                 <h5>Reward: {{level.level_reward}}</h5>
               </div>
               <div class="col-md-4 col-xl-3 col-12 d-none d-md-block">
-                <img src="https://pixinvent.com/demo/crypto-ico-admin/app-assets/images/icons/sample-qr.png">
+                {% if level.id == user.level.id %}
+                {% avatar user 100 class="rounded-circle height-100" id="user_avatar" %}
+                {% endif %}
               </div>
             </div>
           </div>
