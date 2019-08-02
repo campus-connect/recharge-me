@@ -8,3 +8,30 @@
   box-shadow: 0 14px 24px rgba(62, 57, 107, 0.664);
   z-index: 999;
 }
+
+.btn-gradient-secondary {
+  border-radius: 2rem;
+  -webkit-transition: .5s;
+  -o-transition: .5s;
+  -moz-transition: .5s;
+  transition: .5s;
+  background-image: -webkit-gradient(linear,left top,right top,from( rgb(187, 196, 239)),color-stop(51%, rgb(123, 189, 246)),to( rgb(187, 196, 239)));
+  background-image: -webkit-linear-gradient(left, rgb(187, 196, 239) 0, rgb(123, 189, 246) 51%, rgb(187, 196, 239) 100%);
+  background-image: -moz-linear-gradient(left, rgb(187, 196, 239) 0, rgb(123, 189, 246) 51%, rgb(187, 196, 239) 100%);
+  background-image: -o-linear-gradient(left, rgb(187, 196, 239) 0, rgb(123, 189, 246) 51%, rgb(187, 196, 239) 100%);
+  background-image: linear-gradient(to right, rgb(187, 196, 239) 0, rgb(123, 189, 246) 51%, rgb(187, 196, 239) 100%);
+  background-position: left center;
+  -webkit-background-size: 200% auto;
+  background-size: 200% auto;
+  border: 0;
+  -webkit-box-shadow: 0 0 16px 0 rgba(72, 143, 241,.5);
+  box-shadow: 0 0 16px 0 rgba(72, 143, 241,.5);
+}
+
+.bg-warning {
+  background-color: rgb(72, 143, 241)!important;
+}
+
+.bg-warning.bg-glow {
+  box-shadow: 0 1px 20px 1px rgba(72, 143, 241,.5);
+}

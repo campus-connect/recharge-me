@@ -201,10 +201,12 @@
     border: 0;
     background-color: red;
     background-color: var(--forny-color-accent-500);
+    background: linear-gradient(90deg, rgb(187, 196, 239) 0%, rgb(98, 188, 250) 100%)
 }
 
 .forny-form .btn.btn-primary:hover {
     background-color: var(--forny-color-accent-700);
+    background: linear-gradient(90deg, rgb(98, 188, 250) 0%, rgb(187, 196, 239) 100%)
 }
 
 .forny-container .text-facebook {

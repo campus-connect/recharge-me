@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cryptocoins-icons@2.9.0/webfont/cryptocoins.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
         integrity="sha256-ENFZrbVzylNbgnXx0n3I1g//2WeO47XxoPe0vkp3NC8=" crossorigin="anonymous" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
   {% block css %}
   {% endblock css %}
 </head>
@@ -33,8 +34,8 @@
           <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs"
               href="#"><i class="ft-menu font-large-1"></i></a></li>
           <li class="nav-item d-md-none"><a class="navbar-brand" href="index.html"><img
-                class="brand-logo d-none d-md-block" alt="logo" src="images/logo/logo.png"><img
-                class="brand-logo d-sm-block d-md-none" alt="logo sm" src="images/logo/logo-sm.png"></a></li>
+                class="brand-logo d-none d-md-block" alt="logo" src="{% static 'landing/assets/img/logo-n.png' %}"><img
+                class="brand-logo d-sm-block d-md-none" alt="logo sm" src="{% static 'landing/assets/img/logo-n.png' %}"></a></li>
           <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse"
               data-target="#navbar-mobile"><i class="fa fa-ellipsis-v"> </i></a></li>
         </ul>
