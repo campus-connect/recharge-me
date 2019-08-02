@@ -155,6 +155,9 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 SITE_ID = 1
 
+SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT') == 'True'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # allauth customization
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
