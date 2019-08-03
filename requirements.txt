@@ -2,6 +2,7 @@ amqp==2.5.0
 autopep8==1.4.4
 Babel==2.7.0
 billiard==3.6.0.0
+Brotli==1.0.7
 celery==4.3.0
 certifi==2019.6.16
 chardet==3.0.4
@@ -19,6 +20,7 @@ django-notifications-hq==1.5.0
 django-phonenumber-field==3.0.1
 django-sendgrid-v5==0.8.0
 -e git+https://github.com/ochui/django-simple-referrals.git@0af7cb21add537164bf00c33791d91682773b720#egg=django_simple_referrals
+django-static-compress==1.2.1
 django-timezone-field==3.0
 django-treebeard==4.3
 future==0.17.1
@@ -47,3 +49,4 @@ sqlparse==0.3.0
 urllib3==1.25.3
 vine==1.3.0
 whitenoise==4.1.2
+zopfli==0.1.6
