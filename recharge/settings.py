@@ -67,6 +67,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'htmlmin.middleware.HtmlMinifyMiddleware',
+    'htmlmin.middleware.MarkRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'recharge.urls'
@@ -206,6 +208,10 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 # Message framework
 MESSAGE_LEVEL = message_constants.DEBUG
+
+# django-htmlmin settings 
+# https://github.com/cobrateam/django-htmlmin
+HTML_MINIFY = True
 
 #Heroku
 django_heroku.settings(locals())
