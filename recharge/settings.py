@@ -149,6 +149,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
 
+DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+
+DROPBOX_OAUTH2_TOKEN = os.environ.get('DROP_BOX_KEY')
+DROPBOX_ROOT_PATH = 'agapeer'
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
