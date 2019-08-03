@@ -158,7 +158,8 @@ DROPBOX_ROOT_PATH = 'agapeer'
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 # STATICFILES_STORAGE = 'static_compress.CompressedStaticFilesStorage'
 
 # Custom User Model
