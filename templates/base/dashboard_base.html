@@ -3,11 +3,12 @@
 <html class="loading" lang="en" data-textdirection="ltr">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  {% block seo %}
+  {% include 'partials/seo_tags.html' with title=title %}
+  {% endblock seo %}
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-  <title>Dashboard</title>
-  <link rel="shortcut icon" type="image/x-icon" href="images/ico/favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'favicons/favicon.ico' %}">
   <link
     href="https://fonts.googleapis.com/css?family=Muli:300,300i,400,400i,600,600i,700,700i|Comfortaa:300,400,500,700"
     rel="stylesheet">

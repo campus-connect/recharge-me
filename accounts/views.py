@@ -25,6 +25,7 @@ class Dashboard(LoginRequiredMixin, TemplateView, FormView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["page"] = 'dashboard'
+        context["title"] = 'Dashboard'
         # check user email status
         # if not EmailAddress.objects.filter(user=self.request.user, verified=True).exists():
         #     context['verified_email'] = False
@@ -50,6 +51,7 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["page"] = 'profile'
+        context["title"] = 'Profile'
         return context
 
     def get_object(self, queryset=None):
@@ -79,6 +81,7 @@ class LevelListView(LoginRequiredMixin, FormView):
         context = super().get_context_data(**kwargs)
         context["level_list"] = Level.objects.all()
         context["page"] = 'level'
+        context["title"] = 'Level'
         return context
 
      # Hack to make request available in forms
@@ -109,6 +112,7 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["page"] = "peer"
+        context["title"] = 'Peer'
         return context
 
     def get_queryset(self):
@@ -266,6 +270,7 @@ class TransactionLogListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["page"] = "transaction"
+        context["title"] = 'Transaction Logs'
         return context
 
     def get_queryset(self):

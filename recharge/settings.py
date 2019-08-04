@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'avatar',
     'django_celery_beat',
     'notifications',
+    'robots',
+    'django.contrib.sitemaps',
 
 
     # local apps
@@ -77,13 +79,20 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
+        # 'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+            ],
+            'loaders': [
+            ('django.template.loaders.cached.Loader', [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+
+            ]),
             ],
         },
     },
@@ -213,6 +222,9 @@ MESSAGE_LEVEL = message_constants.DEBUG
 # django-htmlmin settings 
 # https://github.com/cobrateam/django-htmlmin
 HTML_MINIFY = True
+
+# Robot.txt
+ROBOTS_CACHE_TIMEOUT = 60*60*24
 
 #Heroku
 django_heroku.settings(locals())

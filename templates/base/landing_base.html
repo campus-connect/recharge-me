@@ -3,17 +3,12 @@
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
+    {% block seo %}
+    {% include 'partials/seo_tags.html' with title=title robot=True%}
+    {% endblock seo %}
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="assets/img/norma.ico" type="image/gif">
-
-    <!-- Title -->
-
-    <title>Agapeer | Home</title>
+    <link rel="icon" href="{% static 'favicons/favicon.ico' %}" type="image/gif">
 
     <!--bootstrap.min.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
