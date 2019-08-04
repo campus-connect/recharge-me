@@ -20,6 +20,7 @@ django-htmlmin==0.11.0
 django-model-utils==3.2.0
 django-notifications-hq==1.5.0
 django-phonenumber-field==3.0.1
+django-robots==3.1.0
 django-sendgrid-v5==0.8.0
 -e git+https://github.com/ochui/django-simple-referrals.git@0af7cb21add537164bf00c33791d91682773b720#egg=django_simple_referrals
 django-static-compress==1.2.1
