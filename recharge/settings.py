@@ -175,7 +175,7 @@ STATICFILES_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
-SITE_ID = 1
+SITE_ID = os.environ.get('SITE_ID', 1)
 
 if DEBUG == False:
     SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT') == 'True'
