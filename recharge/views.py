@@ -11,7 +11,7 @@ class LandingView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["page"] = 'landing'
-        context["title"] = 'Home'
+        context["title"] = 'Unlimited Peer-to-peer airtime and data funding'
         return context
     
 
