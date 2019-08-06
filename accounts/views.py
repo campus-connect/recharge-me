@@ -71,6 +71,10 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
                           {'verbose_name': queryset.model._meta.verbose_name})
         return obj
 
+    def form_valid(self, form):
+        messages.success(self.request, verbs.PROFILE_UPDATED)
+        return super().form_valid(form)
+
 
 class LevelListView(LoginRequiredMixin, FormView):
 
@@ -158,6 +162,7 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
             _peer_re_merge_count = Remerge.objects.filter(
                 user=self.request.user
             ).count()
+            messages.success(request, verbs.CONFIRMATION_MESSAGE)
             if (_peer_count == 0) and (_peer_re_merge_count == 0):
                 # update user Level/task
                 r_user = CustomUser.objects.get(pk=self.request.user.id)
@@ -214,6 +219,7 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
                 target=self.request.user, description=verbs.PURGE.format(
                     self.request.user)
             )
+            messages.success(request, verbs.PURGE_MESSAGE)
             # Log Transaction
             TransactionLog.objects.create(
                 user=_user, amount=_user.level.entry_fee,
@@ -255,6 +261,7 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
                 target=_user, description=verbs.CONFIRMATION_REQUEST.format(
                     self.request.user)
             )
+            messages.success(request, verbs.SENT_MESSAGE)
         return super().form_valid(form)
 
     def get_success_url(self):

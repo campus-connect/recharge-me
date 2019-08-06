@@ -14,6 +14,7 @@ from phonenumber_field.widgets import PhoneNumberInternationalFallbackWidget
 from referrals.widgets import ReferralWidget
 from referrals.fields import ReferralField
 from .models import CustomUser, Level, Peer
+from . import verbs
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -204,6 +205,7 @@ class LevelEnrollmentForm(forms.Form):
             user = CustomUser.objects.get(pk=self.request.user.id)
             user.level = self.get_entry_level()
             user.save()
+            messages.success(self.request, verbs.ENROL)
         except CustomUser.DoesNotExist:
             pass
 
@@ -213,10 +215,14 @@ class LevelEnrollmentForm(forms.Form):
                 user = CustomUser.objects.get(pk=self.request.user.id)
                 user.level = None
                 user.save()
+                messages.success(self.request, verbs.UN_ENROL)
             except CustomUser.DoesNotExist:
                 pass
         else:
-            messages.error(self.request, 'Please complete all task assign to you', extra_tags='alert')
+            if self.request.user.task == CustomUser.USER_TASK_RECEIVE_FUNDING:
+                messages.error(self.request, verbs.UN_ENROL_ERROR_DISALLOW)
+            else:
+                messages.error(self.request, verbs.UN_ENROL_ERROR)
 
 
 class ConfirmationForm(forms.Form):

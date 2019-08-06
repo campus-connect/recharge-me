@@ -20,3 +20,9 @@ AUTO_SET_LEVEL = 'Your level has been set to {} automatically. You will be merge
 ATTENTION = 'ATTENTION'
 CONFIRMATION_REQUEST = '{} is requesting comfirmantion.'
 PURGE_SELF = '{} has been from your list, you will be suspended once your karma point reach zero'
+SENT_MESSAGE = 'Notification sent to peer'
+PURGE_MESSAGE = 'Request complete'
+ENROL= UN_ENROL = CONFIRMATION_MESSAGE = 'Request complete'
+PROFILE_UPDATED = "Profile updated"
+UN_ENROL_ERROR = 'Please complete all task assign to you'
+UN_ENROL_ERROR_DISALLOW = 'Request not completed, please contact support'
