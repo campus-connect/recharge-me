@@ -179,7 +179,7 @@ SITE_ID = os.environ.get('SITE_ID', 1)
 
 if DEBUG == False:
     SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT') == 'True'
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # allauth customization
 ACCOUNT_EMAIL_REQUIRED = True
