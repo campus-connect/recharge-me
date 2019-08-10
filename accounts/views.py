@@ -10,6 +10,7 @@ from django.views.generic.list import ListView
 from django.http import Http404
 from django.urls import reverse
 from django.contrib import messages
+from django.contrib.auth import logout
 from allauth.account.models import EmailAddress
 from notifications.signals import notify
 from .models import CustomUser, Level, TransactionLog, Peer, Remerge
@@ -132,7 +133,7 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
         return kw
 
     def form_valid(self, form):
-        if self.request.POST['action'] == 'confirm':
+        if (self.request.POST['action'] == 'confirm') and (self.request.user.task == CustomUser.USER_TASK_RECEIVE_FUNDING):
             # Delete relationship
             _user = CustomUser.objects.get(pk=form.cleaned_data['target'])
             _peer = Peer.objects.filter(user_from=_user).filter(
@@ -194,9 +195,14 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
                             r_user.level.name)
                     )
         elif self.request.POST['action'] == 'purge':
-            # Penalize user reduce karma point
-            # Delete Relationship
             _user = CustomUser.objects.get(pk=form.cleaned_data['target'])
+            # Penalize user reduce karma point
+            _user.karma -= 2
+            if _user.karma <= 0:
+                _user.active = False
+                # TODO: Logout user 
+            _user.save() 
+            # Delete Relationship
             _peer = Peer.objects.filter(user_from=_user).filter(
                 user_to=self.request.user).delete()
             # Re-merge User
@@ -252,6 +258,13 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
                 target=_user, description=verbs.PURGE_SELF.format(
                     _user)
             )
+            # Penalize user
+            user = CustomUser.objects.get(pk=self.request.user.pk)
+            user.karma -= 2
+            if _user.karma <= 0:
+                user.active = False
+                logout(self.request)
+            user.save() 
 
         elif self.request.POST['action'] == 'paid':
             _user = CustomUser.objects.get(pk=form.cleaned_data['target'])
