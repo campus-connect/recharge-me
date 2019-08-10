@@ -27,7 +27,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') == 'True' # Python does not parse environment variables to Python objects, it just gets them as strings. 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['agapeer.me']
+
+if DEBUG == False:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
 
 # Application definition
@@ -177,9 +180,9 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 SITE_ID = os.environ.get('SITE_ID', 1)
 
-# if DEBUG == False:
-#     SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT') == 'True'
-#     # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+if DEBUG == False:
+    SECURE_SSL_REDIRECT = os.environ.get('SECURE_SSL_REDIRECT') == 'True'
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # allauth customization
 ACCOUNT_EMAIL_REQUIRED = True
