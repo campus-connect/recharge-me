@@ -3,10 +3,13 @@ from django.contrib.messages import constants as message_constants
 import django_heroku
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.celery import CeleryIntegration
+from sentry_sdk.integrations.redis import RedisIntegration
+
 
 sentry_sdk.init(
     dsn="https://b86ba5e3a4c745cba7bc55f18f237612@sentry.io/1526898",
-    integrations=[DjangoIntegration()]
+    integrations=[DjangoIntegration(), CeleryIntegration(), RedisIntegration()]
 )
 
 
@@ -58,6 +61,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.gzip.GZipMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -164,8 +168,8 @@ DROPBOX_ROOT_PATH = 'agapeer'
 # https://warehouse.python.org/project/whitenoise/
 
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATICFILES_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-# STATICFILES_STORAGE = 'static_compress.CompressedStaticFilesStorage'
+# STATICFILES_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+STATICFILES_STORAGE = 'static_compress.CompressedStaticFilesStorage'
 
 # Custom User Model
 
@@ -204,8 +208,8 @@ SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 SENDGRID_SANDBOX_MODE_IN_DEBUG = os.environ.get("SENDGRID_SANDBOX_MODE_IN_DEBUG") == 'True'
 
 # celery
-CELERY_BROKER_URL = 'redis://localhost:6379'  
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'  
+CELERY_BROKER_URL = os.environ.get("REDIS_URL")  
+CELERY_RESULT_BACKEND = os.environ.get("REDIS_URL")  
 CELERY_ACCEPT_CONTENT = ['application/json']  
 CELERY_RESULT_SERIALIZER = 'json'  
 CELERY_TASK_SERIALIZER = 'json'
