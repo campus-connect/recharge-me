@@ -29,7 +29,7 @@ DEBUG = os.environ.get('DEBUG') == 'True' # Python does not parse environment va
 
 ALLOWED_HOSTS = ['agapeer.me']
 
-if DEBUG == False:
+if DEBUG:
     ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
 
 
