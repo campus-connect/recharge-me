@@ -1,4 +1,13 @@
 {% extends 'base/auth_base.html' %}
+{% block seo %}
+{% include 'partials/seo_tags.html' with title="Sign up for an Agapeer account" robot=True desc="Sign up for an Agapeer account and start recieving Airtime and Data funding"%}
+{% endblock seo %}
+{% block auth_text %}
+<div class="text-center">
+    <h4>Create an account</h4>
+    <p class="mb-10">Setup a new account in a minute.</p>
+</div>
+{% endblock auth_text %}
 {% block auth_form %}
 <form id="register-form" method="POST" action="{% url 'account_signup' %}">
     {% if redirect_field_value %}

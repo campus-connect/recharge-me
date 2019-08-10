@@ -1,4 +1,13 @@
 {% extends 'base/auth_base.html' %}
+{% block seo %}
+{% include 'partials/seo_tags.html' with title="Login to Agapeer" robot=True desc="Log in to Agapeer and start recieving Airtime and Data funding"%}
+{% endblock seo %}
+{% block auth_text %}
+<div class="text-center">
+    <h4>Login into Agapeer</h4>
+    <p class="mb-10">Use your credentials to access your account.</p>
+</div>
+{% endblock auth_text %}
 {% block auth_form %}
 <form action="{% url 'account_login' %}" method="POST">
           <div class="form-group">
