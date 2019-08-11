@@ -15,10 +15,11 @@ from allauth.account.models import EmailAddress
 from notifications.signals import notify
 from .models import CustomUser, Level, TransactionLog, Peer, Remerge
 from .forms import EditProfileForm, LevelEnrollmentForm, ConfirmationForm
+from .mixin import SeoMixin
 from . import verbs
 
 
-class Dashboard(LoginRequiredMixin, TemplateView, FormView):
+class Dashboard(LoginRequiredMixin, TemplateView, FormView, SeoMixin):
 
     form_class = LevelEnrollmentForm
     template_name = 'dashboard/index.html'
@@ -43,7 +44,7 @@ class Dashboard(LoginRequiredMixin, TemplateView, FormView):
         kw['request'] = self.request  # the trick!
         return kw
 
-class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+class ProfileUpdateView(LoginRequiredMixin, UpdateView, SeoMixin):
 
     template_name = "dashboard/profile.html"
     form_class = EditProfileForm
@@ -108,7 +109,7 @@ class LevelListView(LoginRequiredMixin, FormView):
         return reverse('level')
 
 
-class PeerListView(LoginRequiredMixin, FormView, ListView):
+class PeerListView(LoginRequiredMixin, FormView, ListView, SeoMixin):
 
     template_name = "dashboard/peer.html"
     context_object_name = 'peer_list'
@@ -281,7 +282,7 @@ class PeerListView(LoginRequiredMixin, FormView, ListView):
         return reverse('peer')
 
 
-class TransactionLogListView(LoginRequiredMixin, ListView):
+class TransactionLogListView(LoginRequiredMixin, ListView, SeoMixin):
 
     model = TransactionLog
     template_name = "dashboard/transaction.html"

@@ -6,6 +6,7 @@
     {% block seo %}
     {% include 'partials/seo_tags.html' with title=title robot=True%}
     {% endblock seo %}
+    <link rel="canonical" href="{{ CANONICAL_PATH }}" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-icon-57x57.png' %}">

@@ -4,8 +4,9 @@
 #  * file that was distributed with this source code.
 
 from django.views.generic.base import TemplateView
+from accounts.mixin import SeoMixin
 
-class LandingView(TemplateView):
+class LandingView(TemplateView, SeoMixin):
     template_name = "landing/index.html"
 
     def get_context_data(self, **kwargs):
@@ -15,7 +16,7 @@ class LandingView(TemplateView):
         return context
     
 
-class AboutView(TemplateView):
+class AboutView(TemplateView, SeoMixin):
     template_name = "landing/about.html"
 
     def get_context_data(self, **kwargs):
@@ -24,7 +25,7 @@ class AboutView(TemplateView):
         context["title"] = 'About Us'
         return context
 
-class ContactView(TemplateView):
+class ContactView(TemplateView, SeoMixin):
     template_name = "landing/contact.html"
 
     def get_context_data(self, **kwargs):
