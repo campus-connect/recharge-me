@@ -86,12 +86,12 @@
                             <p>Ochui Princewill © {{ current_year }}. All Rights Reserved</p>
                         </div>
                         <div class="fot-icon">
-                            <a href="#!" title="facebook"><img src="{% static 'landing/assets/img/footer/1.png' %}"
+                            <a href="//facebook.com/agapeer.me" title="facebook"><img src="{% static 'landing/assets/img/footer/1.png' %}"
                                     alt="icon"></a>
-                            <a href="#!" title="twitter"><img src="{% static 'landing/assets/img/footer/2.png' %}"
+                            <a href="//twitter.com/ochui_princewil" title="twitter"><img src="{% static 'landing/assets/img/footer/2.png' %}"
                                     alt="icon"></a>
-                            <a href="#!" title="instagram"><img src="{% static 'landing/assets/img/footer/3.png' %}"
-                                    alt="icon"></a>
+                            {% comment %} <a href="" title="instagram"><img src="{% static 'landing/assets/img/footer/3.png' %}"
+                                    alt="icon"></a> {% endcomment %}
                         </div>
                     </div>
                 </div>
@@ -103,11 +103,11 @@
                         <div class="com-item">
                             <ul class="f-item">
 
-                                <li><a href="{% url 'about_page' %}">About</a></li>
+                                <li><a href="{% url 'about_page' %}" title="about">About</a></li>
 
-                                <li><a href="{% url 'contact_page' %}">Contact</a></li>
+                                <li><a href="{% url 'contact_page' %}" title="contact">Contact</a></li>
 
-                                <li><a href="{% url 'dashboard' %}">My Account</a></li>
+                                <li><a href="{% url 'dashboard' %}" title="dashboard">My Account</a></li>
 
                             </ul>
                         </div>
@@ -147,7 +147,7 @@
                                 <li><a href="#!">Disclaimer</a></li>
 
 
-                                <li><a href="#!">Forum</a></li>
+                                <li><a href="{% url 'spirit:index' %}" title="forum">Forum</a></li>
 
                             </ul>
                         </div>

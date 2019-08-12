@@ -16,6 +16,10 @@
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link {% if page == 'forum' %}active{% endif %}" href="{% url 'spirit:index' %}">Forum</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link {% if page == 'about' %}active{% endif %}" href="{% url 'about_page' %}">About</a>
                     </li>
 
