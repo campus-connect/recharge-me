@@ -242,6 +242,7 @@ PHONENUMBER_DB_FORMAT = 'E164'
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = os.environ.get("SENDGRID_API_KEY")
 SENDGRID_SANDBOX_MODE_IN_DEBUG = os.environ.get("SENDGRID_SANDBOX_MODE_IN_DEBUG") == 'True'
+DEFAULT_FROM_EMAIL = "support@agapeer.me"
 
 # celery
 CELERY_BROKER_URL = os.environ.get("REDIS_URL")  

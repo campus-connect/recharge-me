@@ -27,7 +27,8 @@ def create_referral_token(sender, **kwargs):
     """
     creates a referral token, only after email has been confirm
     """
-    Link.objects.create(user=kwargs['user'])
+    user = kwargs['email_address'].user
+    Link.objects.create(user=user)
 
 
 @receiver(email_changed)
@@ -36,8 +37,8 @@ def delete_referral_token(sender, **kwargs):
     Only user with verified email can have referral token
     """
     try:
-        link = Link.objects.get(user=kwargs['user'])
+        link = Link.objects.get(user=kwargs['email_address'].user)
         link.delete() 
         # TODO: send an email/onsite notification to user
     except Link.DoesNotExist:
-        logger.exception('No token found for user with username {} '.format(kwargs['user'].username))
+        logger.exception('No token found for user with username {} '.format(kwargs['email_address'].user))
