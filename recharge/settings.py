@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     # 3rd party
     'allauth',
@@ -53,11 +54,38 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'notifications',
     'robots',
-    'django.contrib.sitemaps',
-
 
     # local apps
     'accounts.apps.AccountsConfig',
+    'spirit.core',
+    'spirit.admin',
+    'spirit.search',
+
+    'spirit.user',
+    'spirit.user.admin',
+    'spirit.user.auth',
+
+    'spirit.category',
+    'spirit.category.admin',
+
+    'spirit.topic',
+    'spirit.topic.admin',
+    'spirit.topic.favorite',
+    'spirit.topic.moderate',
+    'spirit.topic.notification',
+    'spirit.topic.private',
+    'spirit.topic.unread',
+
+    'spirit.comment',
+    'spirit.comment.bookmark',
+    'spirit.comment.flag',
+    'spirit.comment.flag.admin',
+    'spirit.comment.history',
+    'spirit.comment.like',
+    'spirit.comment.poll',
+
+    'djconfig',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -71,6 +99,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
+    # 'spirit.core.middleware.XForwardedForMiddleware',
+    'spirit.user.middleware.TimezoneMiddleware',
+    'spirit.user.middleware.LastIPMiddleware',
+    'spirit.user.middleware.LastSeenMiddleware',
+    'spirit.user.middleware.ActiveUserMiddleware',
+    'spirit.core.middleware.PrivateForumMiddleware',
+    'djconfig.middleware.DjConfigMiddleware',
 ]
 
 ROOT_URLCONF = 'recharge.urls'
@@ -86,6 +121,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'djconfig.context_processors.config',
             ],
             'loaders': [
             ('django.template.loaders.cached.Loader', [
@@ -225,6 +261,45 @@ HTML_MINIFY = True
 
 # Robot.txt
 ROBOTS_CACHE_TIMEOUT = 60*60*24
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'st_search'),
+    },
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'forum_cache',
+    },
+    'st_rate_limit': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'forum_rl_cache',
+        'TIMEOUT': None
+    }
+}
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(BASE_DIR, 'st_search'),
+    },
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'forum_cache',
+    },
+    'st_rate_limit': {
+        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+        'LOCATION': 'spirit_rl_cache',
+        'TIMEOUT': None
+    }
+}
+
 
 #Heroku
 django_heroku.settings(locals())
