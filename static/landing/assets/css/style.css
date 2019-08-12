@@ -667,7 +667,7 @@
 
 -------------------------------*/
   #veido {
-  	background: url("../img/pla.png");
+  	background: url("../img/pla.webp");
   	background-repeat: no-repeat;
   	background-size: cover;
   }
@@ -1013,7 +1013,7 @@
       7.6  subscribe area
 ================================*/
   #subscribe {
-  	background: url("../img/sub-bg.png");
+  	background: url("../img/sub-bg.webp");
   	background-repeat: no-repeat;
   	background-size: cover;
   	background-attachment: fixed;
@@ -1096,7 +1096,7 @@
   }
 
   .all-cover-test-item {
-  	background: url("../img/dot-2.png");
+  	background: url("../img/dot-2.webp");
   	background-repeat: no-repeat;
   	background-size: contain;
   }
