@@ -1,8 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-
-{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}{% now "Y" as current_year %}
+{% now "Y" as current_year %}
+{% load account %}{% user_display user as user_display %}{% load i18n %}{% autoescape off %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="format-detection" content="telephone=no">
@@ -363,7 +363,7 @@
 	</table>
 	<table data-module="footer center + nav 1"  class="o_esec" role="presentation" width="100%"
 	  cellspacing="0" cellpadding="0" border="0" style="-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;">
-
+{% endblocktrans %}{% endautoescape %}
 		<tbody>
 			<tr>
 				<td class="o_ereset o_bg-white o_px-ng o_pt o_pb-lg" align="center" data-bgcolor="White" data-link-color="Text Muted" style="line-height: 100%;background-color: #ffffff;padding-left: 48px;padding-right: 48px;padding-top: 16px;padding-bottom: 32px;font-size: 0 !important;"
