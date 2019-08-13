@@ -1,4 +1,4 @@
-{% extends 'base/dashboard_base.html' %}{% load avatar_tags static timer %}
+{% extends 'base/dashboard_base.html' %}{% load avatar_tags static timer ads_tags %}
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/pages/transactions.min.css' %}">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
@@ -114,9 +114,7 @@
         <div class="card-content collapse show">
           <div class="card-body">
 
-            <div class="text-center row clearfix mb-2">
-              
-            </div>
+           {% render_ads_zone 'sidebar' %}
           
           </div>
           <div class="table-responsive">

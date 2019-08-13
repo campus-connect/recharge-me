@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static account socialaccount avatar_tags custom_notifications_tags %}{% notifications_unread as unread_count %}{% now "Y" as current_year %}
+{% load static account socialaccount avatar_tags custom_notifications_tags sekizai_tags %}{% notifications_unread as unread_count %}{% now "Y" as current_year %}
 <html class="loading" lang="en" data-textdirection="ltr">
 
 <head>
@@ -195,6 +195,7 @@
       {% endif %}
     });
   </script>
+  {% render_block "js" %}
 </body>
 
 </html>

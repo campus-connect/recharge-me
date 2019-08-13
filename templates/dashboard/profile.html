@@ -1,4 +1,4 @@
-{% extends 'base/dashboard_base.html' %}{% load referral_link karma static avatar_tags app_filters %}
+{% extends 'base/dashboard_base.html' %}{% load referral_link karma static avatar_tags app_filters ads_tags %}
 {% block breadcrumb %}
 {% include 'partials/breadcrumb.html' with current_page_name="Account Profile" %}
 {% endblock breadcrumb %}
@@ -98,7 +98,7 @@
             </div>
             <div class="card-content collapse show">
                 <div class="card-body">
-                    
+                    {% render_ads_zone 'sidebar' %}
                 </div>
                 <div class="table-responsive">
                     

@@ -1,4 +1,4 @@
-{% extends 'base/dashboard_base.html' %}{% load static karma %}
+{% extends 'base/dashboard_base.html' %}{% load static karma %} {% load ads_tags %}
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/pages/dashboard-ico.min.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/pages/buy-ico.min.css' %}">
@@ -83,31 +83,15 @@
         <div class="col-xl-4 col-lg-12">
             <h6 class="my-2">Ads</h6>
             <div class="card">
-                <div class="card-content">
-                    <img class="img-fluid"
-                        src="https://i0.wp.com/www.scholarsammo.com/wp-content/uploads/2019/06/sussex.jpg?w=620&ssl=1"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <p class="card-text">Sussex Excellence Scholarship for International Students in the UK 2019</p>
-                        <a href="https://www.sussex.ac.uk/study/fees-funding/undergraduate-scholarships/view/966-Sussex-Excellence-Scholarship" class="card-link">Learn more</a>
-                        <a href="https://www.sussex.ac.uk/study/undergraduate/apply" class="card-link">Apply</a>
-                    </div>
-                </div>
-                <div class="card-footer border-top-blue-grey border-top-lighten-5 text-muted">
-                    <span class="float-right">
-                        <a href="https://www.scholarsammo.com/" class="card-link">More Scholarships <i class="fa fa-angle-right"></i></a>
-                    </span>
-                </div>
+                {% render_ads_zone 'dashboard' %}
             </div>
         </div>
         <div class="col-xl-8 col-lg-12">
-            <h6 class="my-2">Roadmap</h6>
+            <h6 class="my-2">Ads</h6>
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
-                        <div class="card-text">
-                            
-                        </div>
+                        {% render_ads_zone 'sidebar' %}
                     </div>
                 </div>
             </div>

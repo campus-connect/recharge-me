@@ -86,6 +86,8 @@ INSTALLED_APPS = [
 
     'djconfig',
     'haystack',
+    'ads',
+    'sekizai',
 ]
 
 MIDDLEWARE = [
@@ -122,6 +124,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'djconfig.context_processors.config',
+                'sekizai.context_processors.sekizai',
             ],
             'loaders': [
             ('django.template.loaders.cached.Loader', [
@@ -301,6 +304,76 @@ CACHES = {
     }
 }
 
+ADS_GOOGLE_ADSENSE_CLIENT = None  # 'ca-pub-xxxxxxxxxxxxxxxx'
+
+ADS_ZONES = {
+    'header': {
+        'name': 'Header',
+        'ad_size': {
+            'xs': '720x150',
+            'sm': '800x90',
+            'md': '800x90',
+            'lg': '800x90',
+            'xl': '800x90'
+        },
+        'google_adsense_slot': None,  # 'xxxxxxxxx',
+        'google_adsense_format': None,  # 'auto'
+    },
+    'content': {
+        'name': 'Content',
+        'ad_size': {
+            'xs': '720x150',
+            'sm': '800x90',
+            'md': '800x90',
+            'lg': '800x90',
+            'xl': '800x90'
+        },
+        'google_adsense_slot': None,  # 'xxxxxxxxx',
+        'google_adsense_format': None,  # 'auto'
+    },
+    'sidebar': {
+        'name': 'Sidebar',
+        'ad_size': {
+            'xs': '720x150',
+            'sm': '800x90',
+            'md': '800x90',
+            'lg': '800x90',
+            'xl': '800x90'
+        },
+        'google_adsense_slot': None,  # 'xxxxxxxxx',
+        'google_adsense_format': None,  # 'auto'
+    },
+    'dashboard': {
+        'name': 'Dashboard',
+        'ad_size': {
+            'xs': '720x150',
+            'sm': '800x90',
+            'md': '800x90',
+            'lg': '800x90',
+            'xl': '800x90'
+        },
+        'google_adsense_slot': None,  # 'xxxxxxxxx',
+        'google_adsense_format': None,  # 'auto'
+    },
+}
+
+ADS_DEFAULT_AD_SIZE = '720x150'
+
+ADS_DEVICES = (
+    ('xs', 'Extra small devices'),
+    ('sm', 'Small devices'),
+    ('md', 'Medium devices (Tablets)'),
+    ('lg', 'Large devices (Desktops)'),
+    ('xl', 'Extra large devices (Large Desktops)'),
+)
+
+ADS_VIEWPORTS = {
+    'xs': 'd-block img-fluid d-sm-none',
+    'sm': 'd-none img-fluid d-sm-block d-md-none',
+    'md': 'd-none img-fluid d-md-block d-lg-none',
+    'lg': 'd-none img-fluid d-lg-block d-xl-none',
+    'xl': 'd-none img-fluid d-xl-block',
+}
 
 #Heroku
 django_heroku.settings(locals())

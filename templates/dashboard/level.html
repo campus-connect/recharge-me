@@ -1,4 +1,4 @@
-{% extends 'base/dashboard_base.html' %}{% load static karma  avatar_tags %}
+{% extends 'base/dashboard_base.html' %}{% load static karma  avatar_tags ads_tags %}
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
 <link rel="stylesheet" type="text/css" href="{% static 'css/pages/buy-ico.min.css' %}">
@@ -81,7 +81,7 @@
         </div>
         <div class="card-content collapse show">
           <div class="card-body">
-            {% comment %} content {% endcomment %}
+           {% render_ads_zone 'sidebar' %}
           </div>
         </div>
       </div>
