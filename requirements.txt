@@ -10,10 +10,13 @@ chardet==3.0.4
 defusedxml==0.6.0
 dj-database-url==0.5.0
 Django==2.2.3
+django-ads==1.0.0
 django-allauth==0.39.1
 django-appconf==1.0.3
 django-avatar==4.1.0
+django-braces==1.13.0
 django-celery-beat==1.5.0
+django-classy-tags==0.9.0
 django-djconfig==0.10.0
 django-environ==0.4.4
 django-haystack==2.8.1
@@ -24,6 +27,7 @@ django-model-utils==3.2.0
 django-notifications-hq==1.5.0
 django-phonenumber-field==3.0.1
 django-robots==3.1.0
+django-sekizai==1.0.0
 django-sendgrid-v5==0.8.0
 -e git+https://github.com/ochui/django-simple-referrals.git@0af7cb21add537164bf00c33791d91682773b720#egg=django_simple_referrals
 django-static-compress==1.2.1
