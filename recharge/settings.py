@@ -108,6 +108,7 @@ MIDDLEWARE = [
     'spirit.user.middleware.ActiveUserMiddleware',
     'spirit.core.middleware.PrivateForumMiddleware',
     'djconfig.middleware.DjConfigMiddleware',
+    'redirect_to_non_www.middleware.RedirectToNonWww',
 ]
 
 ROOT_URLCONF = 'recharge.urls'
