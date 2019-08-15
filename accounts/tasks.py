@@ -1,9 +1,14 @@
 from datetime import timedelta
 from django.utils import timezone
 from django.db import IntegrityError
+from django.core.mail import send_mail
+from django.template import loader
+from django.urls import reverse
+from django.contrib.sites.models import Site
 from celery import task
 from celery.utils.log import get_task_logger
 from notifications.signals import notify
+from allauth.account.models import EmailAddress
 from accounts.models import Level, Peer, CustomUser, Remerge
 from accounts import verbs
 from recharge.utils import humanizer
@@ -163,7 +168,7 @@ def auto_purge_task():
             except Remerge.DoesNotExist:
                 Remerge.objects.create(
                     user=peer.user_to, level=peer.user_to.level, count=1)
-            
+
             # send Notification
             notify.send(
                 sender=peer.user_to, recipient=peer.user_to, verb=verbs.PENDING_RE_MERGE_VERB,
@@ -177,3 +182,26 @@ def auto_purge_task():
                     peer.user_to)
             )
             peer.delete()
+
+
+def reminder_level():
+    # get all user without level
+    user_list = CustomUser.objects.filter(level=None)
+    for user in user_list:
+        html_message = loader.render_to_string(
+            'account/email/level_reminder.html',
+            {
+                'level_url': reverse('level'),
+                'current_site': Site.objects.get_current()
+            }
+        )
+        user_email = EmailAddress.objects.filter(
+            user=user
+        ).filter(verified=True, primary=True).get().email
+        send_mail(
+            '[Agapeer] Action required',
+            "Hello {0}, \n You're on your way to something great! Follow the link or click the button below and enroll. \n {1}".format(user.name, reverse('level')),
+            'no-reply@agapeer.me',
+            [user_email],
+            fail_silently=False,
+        )
