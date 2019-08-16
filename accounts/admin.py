@@ -14,9 +14,9 @@ class CustomUserAdmin(UserAdmin):
 
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
-    list_display = ['username', 'email', 'phone_number', 'can_merge']
+    list_display = ['username', 'email', 'phone_number', 'level', 'can_merge']
     # list_editable = ['phone_number']
-    list_filter = ['date_joined', 'last_login', 'is_active', 'is_staff', 'can_merge']
+    list_filter = ['date_joined', 'last_login', 'is_active', 'is_staff', 'can_merge', 'level']
     search_fields = ['username', 'email', 'phone_number']
     fieldsets = UserAdmin.fieldsets + (
         ('KYC', {'fields': ('phone_number', 'gender', 'date_of_birth')}),

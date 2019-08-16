@@ -204,6 +204,7 @@ class LevelEnrollmentForm(forms.Form):
         try:
             user = CustomUser.objects.get(pk=self.request.user.id)
             user.level = self.get_entry_level()
+            user.can_merge = True
             user.save()
             messages.success(self.request, verbs.ENROL)
         except CustomUser.DoesNotExist:
@@ -214,6 +215,7 @@ class LevelEnrollmentForm(forms.Form):
             try:
                 user = CustomUser.objects.get(pk=self.request.user.id)
                 user.level = None
+                user.can_merge = False
                 user.save()
                 messages.success(self.request, verbs.UN_ENROL)
             except CustomUser.DoesNotExist:
