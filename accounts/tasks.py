@@ -9,6 +9,7 @@ from celery import task
 from celery.utils.log import get_task_logger
 from notifications.signals import notify
 from allauth.account.models import EmailAddress
+from allauth.account.utils import user_display
 from accounts.models import Level, Peer, CustomUser, Remerge
 from accounts import verbs
 from recharge.utils import humanizer
@@ -183,25 +184,37 @@ def auto_purge_task():
             )
             peer.delete()
 
-
+@task(
+    ignore_result=True
+)
 def reminder_level():
     # get all user without level
     user_list = CustomUser.objects.filter(level=None)
+    # user_list = CustomUser.objects.all()
+    site = Site.objects.get_current()
+    url = 'https://{domain}{path}'.format(domain=site.domain, path=reverse('level'))
     for user in user_list:
         html_message = loader.render_to_string(
             'account/email/level_reminder.html',
             {
-                'level_url': reverse('level'),
-                'current_site': Site.objects.get_current()
+                'level_url': url,
+                'current_site': site,
+                'user': user
             }
         )
-        user_email = EmailAddress.objects.filter(
+        try:
+            user_email = EmailAddress.objects.filter(
             user=user
-        ).filter(verified=True, primary=True).get().email
-        send_mail(
-            '[Agapeer] Action required',
-            "Hello {0}, \n You're on your way to something great! Follow the link or click the button below and enroll. \n {1}".format(user.name, reverse('level')),
-            'no-reply@agapeer.me',
-            [user_email],
-            fail_silently=False,
-        )
+            ).filter(verified=True, primary=True).get().email
+            logger.info(msg='sending mail to {}'.format(user_email))
+            print('sending mail to {}'.format(user_email))
+            send_mail(
+                '[Agapeer] Merging starts Monday, 19 August',
+                "Hello {0}, \n You're on your way to something great! Follow the link or click the button below and enroll. \n {1}".format(user_display(user), url),
+                'support@agapeer.me',
+                [user_email],
+                fail_silently=False,
+                html_message=html_message
+            )
+        except EmailAddress.DoesNotExist:
+            continue
