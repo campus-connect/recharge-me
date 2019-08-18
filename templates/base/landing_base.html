@@ -27,30 +27,30 @@
     <meta name="msapplication-TileImage" content="{% static 'favicon/ms-icon-144x144.png' %}">
     <meta name="theme-color" content="#ffffff">
     <!--bootstrap.min.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+    <link rel="stylesheet" async href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" crossorigin="anonymous" />
     <!--bootstrap-grid.min.css-->
-    <link rel="stylesheet"
+    <link rel="stylesheet" async
         href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap-grid.min.css"
         integrity="sha256-vl+0p/Z28RcVvC+cofUiIeYusGdOc4CXk/taqgQ2/XU=" crossorigin="anonymous" />
     <!--owl.carousel.min.css-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+    <link rel="stylesheet" async href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
         integrity="sha256-UhQQ4fxEeABh4JrcmAJ1+16id/1dnlOEVCFOxDef9Lw=" crossorigin="anonymous" />
     <!--owl.theme.default.min.css-->
-    <link rel="stylesheet"
+    <link rel="stylesheet" async
         href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
         integrity="sha256-kksNxjDRxd/5+jGurZUJd1sdR2v+ClrCl3svESBaJqw=" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
+    <link rel="stylesheet" async href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css"
         integrity="sha256-RdH19s+RN0bEXdaXsajztxnALYs/Z43H/Cdm1U4ar24=" crossorigin="anonymous" />
     <!--magnific-popup.cs-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+    <link rel="stylesheet" async href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
         integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
     <!--fontawesome 5-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"
+    <link rel="stylesheet" async href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"
         integrity="sha256-PF6MatZtiJ8/c9O9HQ8uSUXr++R9KBYu4gbNG5511WE=" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css?family=Heebo:300,400,500,700,800,900&amp;display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Morphext/2.4.4/morphext.css"
+    <link rel="stylesheet" async href="https://cdnjs.cloudflare.com/ajax/libs/Morphext/2.4.4/morphext.css"
         integrity="sha256-iwSnUqgAndMlZnwFWAAzto9R/6Un2RBguZEITMb0Olk=" crossorigin="anonymous" />
     <!--style.css-->
     <link rel="stylesheet" href="{% static 'landing/assets/css/style.css' %}">
@@ -110,11 +110,11 @@
                         <div class="com-item">
                             <ul class="f-item">
 
-                                <li><a href="{% url 'about_page' %}" title="about">About</a></li>
+                                <li><a href="{% url 'about_page' %}" title="About">About</a></li>
 
-                                <li><a href="{% url 'contact_page' %}" title="contact">Contact</a></li>
+                                <li><a href="{% url 'contact_page' %}" title="Contact">Contact</a></li>
 
-                                <li><a href="{% url 'dashboard' %}" title="dashboard">My Account</a></li>
+                                <li><a href="{% url 'dashboard' %}" title="Dashboard">My Account</a></li>
 
                             </ul>
                         </div>
@@ -148,13 +148,13 @@
                         <div class="sup-item">
                             <ul class="f-item">
 
-                                <li><a href="#!">Terms of service</a></li>
+                                <li><a href="{% url 'tos' %}" title="Terms of service">Terms of service</a></li>
 
 
-                                <li><a href="#!">Disclaimer</a></li>
+                                <li><a href="{% url 'policies' %}" title="Privacy Policy">Privacy Policy</a></li>
 
 
-                                <li><a href="{% url 'spirit:index' %}" title="forum">Forum</a></li>
+                                <li><a href="{% url 'spirit:index' %}" title="Agapeer Forum">Forum</a></li>
 
                             </ul>
                         </div>

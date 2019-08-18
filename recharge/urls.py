@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
 from .sitemaps import StaticViewSitemap, TopicSitemap, StaticAuthViewSitemap, CategorySitemap
-from .views import LandingView, AboutView, ContactView
+from .views import LandingView, AboutView, ContactView, PrivacyView, TosView
 
 sitemaps = {
     'static': StaticViewSitemap,
@@ -17,6 +17,8 @@ urlpatterns = [
     path('', LandingView.as_view(), name='landing_page'),
     path('about', AboutView.as_view(), name='about_page'),
     path('contact', ContactView.as_view(), name='contact_page'),
+    path('policies', PrivacyView.as_view(), name='policies'),
+    path('terms', TosView.as_view(), name='tos'),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('accounts/', include('accounts.urls')),

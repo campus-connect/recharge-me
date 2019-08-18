@@ -33,4 +33,24 @@ class ContactView(TemplateView, SeoMixin):
         context["page"] = 'contact'
         context["title"] = 'Contact Us'
         return context
+
+
+class PrivacyView(TemplateView):
     
+    template_name = "landing/privacy.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page"] = 'policies'
+        context["title"] = 'Agapeer Privacy Policy'
+        return context
+
+class TosView(TemplateView):
+    
+    template_name = "landing/tos.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["page"] = 'tos'
+        context["title"] = 'Agapeer Terms of service'
+        return context
