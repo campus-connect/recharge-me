@@ -189,8 +189,8 @@ def auto_purge_task():
 )
 def reminder_level():
     # get all user without level
-    user_list = CustomUser.objects.filter(level=None)
-    # user_list = CustomUser.objects.all()
+    # user_list = CustomUser.objects.filter(level=None)
+    user_list = CustomUser.objects.all()
     site = Site.objects.get_current()
     url = 'https://{domain}{path}'.format(domain=site.domain, path=reverse('level'))
     for user in user_list:
@@ -205,11 +205,11 @@ def reminder_level():
         try:
             user_email = EmailAddress.objects.filter(
             user=user
-            ).filter(verified=True, primary=True).get().email
+            ).filter(primary=True).get().email
             logger.info(msg='sending mail to {}'.format(user_email))
             print('sending mail to {}'.format(user_email))
             send_mail(
-                '[Agapeer] Merging starts Monday, 19 August',
+                '[Agapeer] {}, Merging starts Tomorrow by 10am'.format(user_display(user),
                 "Hello {0}, \n You're on your way to something great! Follow the link or click the button below and enroll. \n {1}".format(user_display(user), url),
                 'support@agapeer.me',
                 [user_email],
