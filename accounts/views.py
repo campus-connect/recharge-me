@@ -164,7 +164,7 @@ class PeerListView(LoginRequiredMixin, FormView, ListView, SeoMixin):
             _peer_re_merge_count = Remerge.objects.filter(
                 user=self.request.user
             ).count()
-            messages.success(request, verbs.CONFIRMATION_MESSAGE)
+            messages.success(self.request, verbs.CONFIRMATION_MESSAGE)
             if (_peer_count == 0) and (_peer_re_merge_count == 0):
                 # update user Level/task
                 r_user = CustomUser.objects.get(pk=self.request.user.id)
