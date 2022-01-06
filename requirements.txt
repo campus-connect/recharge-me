@@ -4,7 +4,7 @@ Babel==2.7.0
 beautifulsoup4==4.8.0
 billiard==3.6.0.0
 Brotli==1.0.7
-celery==4.3.0
+celery==5.2.2
 certifi==2019.6.16
 chardet==3.0.4
 defusedxml==0.6.0
