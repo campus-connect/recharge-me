@@ -42,7 +42,7 @@ html5lib==1.0.1
 idna==2.8
 jsonfield==2.0.2
 kombu==4.6.3
-mistune==0.8.4
+mistune==2.0.3
 model-mommy==1.6.0
 oauthlib==3.0.1
 olefile==0.46
